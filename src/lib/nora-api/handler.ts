@@ -1,15 +1,17 @@
+type InjectResult = {
+  statusCode: number
+  headers: Record<string, string | string[] | undefined>
+  body: string
+  rawPayload?: Buffer
+}
+
 type NoraApiApp = {
   inject: (opts: {
-    method: string
+    method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'HEAD'
     url: string
     headers: Record<string, string>
     payload?: Buffer
-  }) => Promise<{
-    statusCode: number
-    headers: Record<string, string | string[] | undefined>
-    body: string
-    rawPayload?: Buffer
-  }>
+  }) => Promise<InjectResult>
 }
 
 const globalForApi = globalThis as unknown as {
@@ -18,7 +20,9 @@ const globalForApi = globalThis as unknown as {
 
 async function getApp(): Promise<NoraApiApp> {
   if (!globalForApi.noraApiApp) {
-    globalForApi.noraApiApp = import('@nora/server/app').then((m) => m.buildApp())
+    globalForApi.noraApiApp = import('@nora/server/app').then((m) =>
+      m.buildApp(),
+    ) as Promise<NoraApiApp>
   }
   return globalForApi.noraApiApp
 }
@@ -84,8 +88,6 @@ export async function handleNoraApiRequest(
 
   return new Response(body, {
     status: result.statusCode,
-    headers: toResponseHeaders(
-      result.headers as Record<string, string | string[] | undefined>,
-    ),
+    headers: toResponseHeaders(result.headers),
   })
 }
