@@ -101,10 +101,6 @@ export function RouteGroupSection({
         </p>
       </div>
 
-      <p className="mt-1.5 text-[10px] text-[var(--nora-text-muted)]">
-        {t('routeBuilder.groupHint')}
-      </p>
-
       <p className="mt-2 text-[10px] font-medium text-[var(--nora-text-muted)]">
         {t('routeBuilder.groupSize')}
       </p>
@@ -164,14 +160,6 @@ export function RouteGroupSection({
             </p>
           )}
 
-          {analysis.guestCount > 0 ? (
-            <p className="mt-2 text-[10px] text-[var(--nora-text-muted)]">
-              {t('routeBuilder.guestsNote', {
-                count: String(analysis.guestCount),
-              })}
-            </p>
-          ) : null}
-
           <div className="mt-3 rounded-lg border border-sky-400/20 bg-sky-400/8 p-2.5">
             <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-600 dark:text-sky-300">
               {t('routeBuilder.groupBudgetTitle')}
@@ -197,15 +185,8 @@ export function RouteGroupSection({
                 </li>
               ))}
             </ul>
-            <p className="mt-2 text-[11px] leading-snug text-[var(--nora-text)]">
-              {t('routeBuilder.groupBudgetAvg', {
-                label: budgetSummary.avgLabel,
-              })}
-            </p>
-            <p className="mt-1 text-[11px] leading-snug text-sky-700 dark:text-sky-200">
-              {t('routeBuilder.groupBudgetEffective', {
-                label: budgetSummary.effectiveLabel,
-              })}
+            <p className="mt-2 text-[11px] font-medium text-sky-700 dark:text-sky-200">
+              {budgetSummary.effectiveLabel}
             </p>
           </div>
         </>
@@ -227,11 +208,6 @@ export function RouteGroupSection({
           value={organizerBudgetIdx}
           onValueChange={onOrganizerBudgetChange}
         />
-        {isGroup ? (
-          <p className="mt-1 text-[9px] text-[var(--nora-text-muted)]">
-            {t('routeBuilder.yourBudgetCapHint')}
-          </p>
-        ) : null}
       </div>
     </section>
   )

@@ -154,18 +154,6 @@ export function RouteBuilderForm({
         />
       </label>
 
-      <div className="mt-2 border-b border-[var(--nora-border-subtle)] pb-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-500 dark:text-sky-400">
-          {t('routeBuilder.title')}
-        </p>
-        <p className="mt-0.5 text-xs text-[var(--nora-text-muted)]">
-          {t('routeBuilder.subtitle')}
-        </p>
-        <p className="mt-1 text-[10px] leading-snug text-sky-600/90 dark:text-sky-400/80">
-          {t('routeBuilder.plannerNote')}
-        </p>
-      </div>
-
       <section className="mt-3">
         <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
           {t('routeBuilder.vibeTitle')}
@@ -196,9 +184,6 @@ export function RouteBuilderForm({
             </li>
           ))}
         </ul>
-        <p className="mt-1.5 text-[10px] text-[var(--nora-text-muted)]">
-          {vibeMeta[vibe].hint}
-        </p>
       </section>
 
       <RouteGroupSection
@@ -234,9 +219,6 @@ export function RouteBuilderForm({
               <span className="block text-[11px] font-medium">
                 {periodMeta[period].label}
               </span>
-              <span className="mt-0.5 block text-[9px] opacity-80">
-                {periodMeta[period].hint}
-              </span>
             </button>
           ))}
         </div>
@@ -263,9 +245,6 @@ export function RouteBuilderForm({
             </button>
           ))}
         </div>
-        <p className="mt-1 text-[10px] text-[var(--nora-text-muted)]">
-          {t('routeBuilder.placesCountHint', { count: String(stopCount) })}
-        </p>
       </section>
 
       <section className="mt-3">
@@ -320,13 +299,6 @@ export function RouteBuilderForm({
           />
         ) : null}
       </section>
-
-      {mbti ? (
-        <p className="mt-2 flex items-center gap-1 text-[11px] text-[var(--nora-text-muted)]">
-          <Sparkles className="h-3 w-3 text-sky-400" aria-hidden />
-          {t('routeBuilder.mbtiHint', { mbti })}
-        </p>
-      ) : null}
 
       {error ? (
         <p className="mt-2 text-center text-xs text-amber-600 dark:text-amber-300">

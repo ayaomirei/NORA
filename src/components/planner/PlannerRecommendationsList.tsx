@@ -8,7 +8,6 @@ import { useI18n } from '@/hooks/useI18n'
 import {
   budgetLabelForTier,
   fitsUserBudget,
-  getPlannerMoodMeta,
   recommendationInsight,
   type PlannerMood,
   type PlannerRecommendation,
@@ -49,15 +48,10 @@ export function PlannerRecommendationsList({
     user?.id,
     mbti,
   )
-  const moodMeta = getPlannerMoodMeta(locale)[mood]
-
   return (
     <section>
       <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
         {t('planner.whereToGo')}
-      </p>
-      <p className="mb-2 text-[11px] leading-snug text-[var(--nora-text-muted)]">
-        {moodMeta.hint}
       </p>
       <AnimatePresence mode="sync" initial={false}>
         <motion.ul

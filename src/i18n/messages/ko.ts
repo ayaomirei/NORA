@@ -48,7 +48,7 @@ export const ko: Messages = {
     subtitle: '기분, 예산, 어디로 갈지',
     createDayRoute: '하루 경로 만들기',
     state: '기분',
-    personality: '성격 유형',
+    personality: '성격 유형:',
     personalityHint: '정확한 추천을 위해 패스포트에 설정하세요',
     whereToGo: '어디로 갈까',
     route: '경로',

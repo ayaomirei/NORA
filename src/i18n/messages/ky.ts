@@ -48,7 +48,7 @@ export const ky: Messages = {
     subtitle: 'Абал, бюджет жана кайда баруу керек',
     createDayRoute: 'Күнүк маршрут түзүү',
     state: 'Абал',
-    personality: 'Инсан типи',
+    personality: 'Инсан типи:',
     personalityHint: 'Так сунуштар үчүн паспортто көрсөтүңүз',
     whereToGo: 'Кайда баруу керек',
     route: 'Маршрут',

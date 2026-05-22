@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { CalendarDays, Coins, Route, Sparkles, X } from 'lucide-react'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { MbtiHelpDialog } from '@/components/MbtiHelpDialog'
 import { SavedRoutesList } from '@/components/map/SavedRoutesList'
@@ -14,7 +13,6 @@ import { MAP_MOODS } from '@/components/map/map-moods'
 import { useI18n } from '@/hooks/useI18n'
 import { getDailyBudgetLabels } from '@/lib/daily-budget'
 import { getMbtiAccentHex, mbtiTitleColor } from '@/lib/mbti-colors'
-import { MBTI_TYPES } from '@/lib/mbti'
 import {
   getPlannerMoodMeta,
   normalizePlannerMood,
@@ -69,7 +67,6 @@ export function PlannerHubPanel({
   const budgetLabels = getDailyBudgetLabels(locale)
 
   const plannerMood = normalizePlannerMood(mood)
-  const mbtiMeta = MBTI_TYPES.find((type) => type.id === mbti)
   const mbtiHex = getMbtiAccentHex(mbti)
 
   function setPanelOpen(next: boolean) {
@@ -160,9 +157,6 @@ export function PlannerHubPanel({
                   >
                     {t('planner.title')}
                   </p>
-                  <p className="mt-0.5 text-xs text-[var(--nora-text-muted)]">
-                    {t('planner.subtitle')}
-                  </p>
                 </div>
                 <button
                   type="button"
@@ -242,45 +236,21 @@ export function PlannerHubPanel({
                 </section>
 
                 <section className="mt-3 rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2.5">
-                  <div className="flex items-center gap-1.5">
-                    <Sparkles
-                      className="h-3.5 w-3.5 shrink-0 text-sky-500 dark:text-sky-400"
-                      aria-hidden
-                    />
-                    <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
-                      {t('planner.personality')}
-                    </p>
-                  </div>
+                  <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
+                    {t('planner.personality')}
+                  </p>
                   {mbti ? (
-                    <p className="mt-1.5 text-xs text-[var(--nora-text)]">
-                      <span
-                        className="font-semibold"
-                        style={mbtiHex ? mbtiTitleColor(mbtiHex) : undefined}
-                      >
-                        {mbti}
-                      </span>
-                      {mbtiMeta ? (
-                        <span className="text-[var(--nora-text-muted)]">
-                          {' '}
-                          · {mbtiMeta.subtitle}
-                        </span>
-                      ) : null}
+                    <p
+                      className="mt-1.5 text-sm font-semibold"
+                      style={mbtiHex ? mbtiTitleColor(mbtiHex) : undefined}
+                    >
+                      {mbti}
                     </p>
                   ) : (
-                    <div className="mt-1.5 space-y-1">
-                      <p className="text-[11px] text-[var(--nora-text-muted)]">
-                        {t('planner.personalityHint')}
-                      </p>
-                      <MbtiHelpDialog triggerClassName="text-[11px]" />
-                    </div>
+                    <MbtiHelpDialog
+                      triggerClassName="mt-1.5 text-[11px]"
+                    />
                   )}
-                  <Link
-                    href="/passport"
-                    className="mt-1.5 inline-block text-[11px] text-sky-600 hover:underline dark:text-sky-400"
-                    onClick={() => setPanelOpen(false)}
-                  >
-                    {t('planner.editPassport')}
-                  </Link>
                 </section>
 
                 {onSelectSavedRoute && onDeleteSavedRoute ? (

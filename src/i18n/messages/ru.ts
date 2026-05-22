@@ -46,7 +46,7 @@ export const ru = {
     subtitle: 'Состояние, бюджет и куда сходить',
     createDayRoute: 'Создать маршрут на день',
     state: 'Состояние',
-    personality: 'Тип личности',
+    personality: 'Тип личности:',
     personalityHint: 'Укажите в паспорте для точных подсказок',
     whereToGo: 'Куда сходить',
     route: 'Маршрут',

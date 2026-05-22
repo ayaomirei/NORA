@@ -48,7 +48,7 @@ export const en: Messages = {
     subtitle: 'Mood, budget, and where to go',
     createDayRoute: 'Create a day route',
     state: 'Mood',
-    personality: 'Personality type',
+    personality: 'Personality type:',
     personalityHint: 'Set it in your passport for better tips',
     whereToGo: 'Where to go',
     route: 'Route',

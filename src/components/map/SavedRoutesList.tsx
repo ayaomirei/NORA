@@ -28,21 +28,14 @@ export function SavedRoutesList({
   const vibeMeta = getRouteVibeMeta(locale)
   const periodMeta = getRoutePeriodMeta(locale)
 
+  if (routes.length === 0) return null
+
   return (
     <section className="mt-3 rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2.5">
       <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
         {t('planner.savedRoutes')}
       </p>
-      <p className="mt-0.5 text-[11px] text-[var(--nora-text-muted)]">
-        {t('planner.savedRoutesHint')}
-      </p>
-
-      {routes.length === 0 ? (
-        <p className="mt-2 text-[11px] text-[var(--nora-text-muted)]">
-          {t('planner.noSavedRoutes')}
-        </p>
-      ) : (
-        <ul className="mt-2 space-y-1.5">
+      <ul className="mt-2 space-y-1.5">
           {routes.map((route) => {
             const active = route.id === activeRouteId
             const duration = formatRouteDuration(route.totalDurationMin, locale)
@@ -103,8 +96,7 @@ export function SavedRoutesList({
               </li>
             )
           })}
-        </ul>
-      )}
+      </ul>
     </section>
   )
 }
