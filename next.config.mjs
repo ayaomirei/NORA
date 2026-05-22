@@ -1,4 +1,5 @@
 import withPWAInit from '@ducanh2912/next-pwa'
+import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin'
 
 const withPWA = withPWAInit({
   dest: 'public',
@@ -22,12 +23,17 @@ const nextConfig = {
       '/api/[[...path]]': [
         './server/data/**/*',
         './server/prisma/**/*',
-        './server/node_modules/.prisma/**/*',
+        './server/node_modules/.prisma/client/**/*',
         './server/node_modules/@prisma/client/**/*',
+        './server/node_modules/prisma/libquery_engine-rhel-openssl-3.0.x.so.node',
+        './server/node_modules/@prisma/engines/**/*',
       ],
     },
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      config.plugins.push(new PrismaPlugin())
+    }
     config.resolve.extensionAlias = {
       '.js': ['.ts', '.tsx', '.js'],
       '.mjs': ['.mts', '.mjs'],
