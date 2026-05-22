@@ -208,6 +208,14 @@ export const en: Messages = {
       'Location only works on HTTPS or localhost — use https://… or http://localhost:3000',
     geolocateUnavailable: 'This browser does not support geolocation',
   },
+  geoPermission: {
+    title: 'Location access',
+    description:
+      'NORA can show you on the map and center routes from your position. Data stays on your device.',
+    hint: 'After Allow, your browser may show its own prompt. You can turn this off in app settings.',
+    allow: 'Allow',
+    deny: 'Not now',
+  },
   auth: {
     loginTitle: 'Sign in to NORA',
     loginSubtitle: 'Local demo auth — data is stored in your browser.',
@@ -272,6 +280,18 @@ export const en: Messages = {
     avatarOpenDesc: 'Others tap the avatar to view it large',
     avatarPreview: 'Thumbnail only',
     avatarPreviewDesc: 'Visible on profile, but cannot be opened full size',
+    geoTitle: 'Location',
+    geoDesc: 'Show your position on the map and center routes',
+    geoAllow: 'Use my location',
+    geoAllowDesc:
+      'On — NORA may request coordinates on the map. Off — search and routes without your position.',
+    geoBrowserStatus: 'In browser',
+    geoBrowserGranted: 'allowed',
+    geoBrowserDenied: 'blocked',
+    geoBrowserPrompt: 'ask when needed',
+    geoBrowserUnknown: 'unknown',
+    geoDeniedHint:
+      'To turn location back on, enable the switch above and allow access in browser settings (lock icon in the address bar) if needed.',
   },
   passport: {
     title: 'Profile',

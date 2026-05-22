@@ -35,6 +35,12 @@ import {
 } from '@/lib/place-coordinates'
 import { useMapRoutePath } from '@/hooks/useMapRoutePath'
 import { useUserGeolocation } from '@/hooks/useUserGeolocation'
+import { GeolocationPermissionDialog } from '@/components/map/GeolocationPermissionDialog'
+import {
+  getGeoPermission,
+  isGeoAllowed,
+  setGeoPermission,
+} from '@/lib/geo-permission'
 import { useAuth } from '@/contexts/useAuth'
 import { useI18n } from '@/hooks/useI18n'
 import type { PlannerRecommendation } from '@/lib/planner-recommendations'
@@ -142,12 +148,39 @@ export default function MapHubClient() {
     return out
   }, [focusPlace, dayRoute, placeCoordsEpoch])
 
+  const [geoPromptOpen, setGeoPromptOpen] = useState(false)
+
+  useEffect(() => {
+    if (getGeoPermission() === 'unset') setGeoPromptOpen(true)
+  }, [])
+
   const geo = useUserGeolocation({
     mapRef: mapRef as RefObject<MapLibreMap | null>,
+    autoStart: isGeoAllowed(),
     centerOnFirstFix: !routeNavActive,
     navigationMode: routeNavActive,
     navigationStops: dayRoute?.stops,
   })
+
+  const handleGeoRecenter = useCallback(() => {
+    if (!isGeoAllowed()) {
+      setGeoPromptOpen(true)
+      return 'warning' as const
+    }
+    return geo.recenter()
+  }, [geo])
+
+  const onAllowGeo = useCallback(() => {
+    setGeoPermission('granted')
+    setGeoPromptOpen(false)
+    geo.startTracking()
+  }, [geo])
+
+  const onDenyGeo = useCallback(() => {
+    setGeoPermission('denied')
+    setGeoPromptOpen(false)
+    geo.stopTracking()
+  }, [geo])
 
   const routePath = useMapRoutePath(
     dayRoute?.stops,
@@ -440,7 +473,14 @@ export default function MapHubClient() {
         status={geo.status}
         hasLocation={geo.hasLocation}
         isLocating={geo.isLocating}
-        onRecenter={geo.recenter}
+        onRecenter={handleGeoRecenter}
+      />
+
+      <GeolocationPermissionDialog
+        open={geoPromptOpen}
+        onOpenChange={setGeoPromptOpen}
+        onAllow={onAllowGeo}
+        onDeny={onDenyGeo}
       />
 
       <MapTopBar

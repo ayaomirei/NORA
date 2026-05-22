@@ -201,6 +201,14 @@ export const ko: Messages = {
     geolocateInsecure: 'HTTPS 또는 localhost에서만 동작합니다.',
     geolocateUnavailable: '이 브라우저는 위치를 지원하지 않습니다',
   },
+  geoPermission: {
+    title: '위치 접근',
+    description:
+      'NORA가 지도에 내 위치를 표시하고 경로를 내 위치 기준으로 맞출 수 있습니다. 데이터는 기기에만 남습니다.',
+    hint: '「허용」 후 브라우저에서 별도 요청이 뜰 수 있습니다. 앱 설정에서 끌 수 있습니다.',
+    allow: '허용',
+    deny: '나중에',
+  },
   auth: {
     loginTitle: 'NORA 로그인',
     loginSubtitle: '로컬 데모 인증 — 데이터는 브라우저에 저장됩니다.',
@@ -264,6 +272,18 @@ export const ko: Messages = {
     avatarOpenDesc: '다른 사람이 아바타를 눌러 크게 볼 수 있음',
     avatarPreview: '썸네일만',
     avatarPreviewDesc: '프로필에만 보이고 전체 보기는 불가',
+    geoTitle: '위치',
+    geoDesc: '지도에 내 위치 표시 및 경로 중심 맞추기',
+    geoAllow: '내 위치 사용',
+    geoAllowDesc:
+      '켜짐 — 지도에서 좌표를 요청할 수 있습니다. 꺼짐 — 내 위치 없이 검색·경로만.',
+    geoBrowserStatus: '브라우저',
+    geoBrowserGranted: '허용됨',
+    geoBrowserDenied: '차단됨',
+    geoBrowserPrompt: '필요 시 요청',
+    geoBrowserUnknown: '알 수 없음',
+    geoDeniedHint:
+      '다시 켜려면 위 스위치를 켜고, 필요하면 브라우저 설정(주소창 자물쇠)에서 위치를 허용하세요.',
   },
   passport: {
     title: '프로필',

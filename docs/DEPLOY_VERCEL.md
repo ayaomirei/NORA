@@ -26,7 +26,9 @@ npx prisma db push
 | `JWT_SECRET` | длинная случайная строка |
 | `NEXT_PUBLIC_API_SAME_ORIGIN` | `1` (уже в `vercel.json`) |
 | `DGIS_API_KEY` | по желанию — геокодинг и маршруты по дорогам |
-| `OPENAI_API_KEY` | по желанию — ИИ «опиши день» |
+| `GEMINI_API_KEY` | по желанию — ИИ «опиши день» (Google AI Studio) |
+| `GEMINI_MODEL` | `gemini-2.5-flash` (по умолчанию; у `2.0-flash` часто 429 на free tier) |
+| `OPENAI_API_KEY` | альтернатива Gemini для того же ИИ |
 
 **Не задавайте** `NEXT_PUBLIC_API_URL` на Vercel — API на том же домене (`/api/...`).
 

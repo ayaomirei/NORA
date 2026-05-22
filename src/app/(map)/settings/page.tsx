@@ -11,6 +11,7 @@ import { SettingsBlock } from '@/components/settings/SettingsBlock'
 import { SettingsToggleRow } from '@/components/settings/SettingsToggleRow'
 import { LanguagePicker } from '@/components/settings/LanguagePicker'
 import { AvatarPrivacyPicker } from '@/components/settings/AvatarPrivacyPicker'
+import { GeolocationSettings } from '@/components/settings/GeolocationSettings'
 import { ThemePicker } from '@/components/settings/ThemePicker'
 import { useI18n } from '@/hooks/useI18n'
 import { SettingsSection } from '@/components/SettingsSection'
@@ -228,6 +229,13 @@ function SettingsContent() {
           description={t('settings.avatarPrivacyDesc')}
         >
           <AvatarPrivacyPicker />
+        </SettingsBlock>
+
+        <SettingsBlock
+          title={t('settings.geoTitle')}
+          description={t('settings.geoDesc')}
+        >
+          <GeolocationSettings />
         </SettingsBlock>
 
         <SettingsBlock

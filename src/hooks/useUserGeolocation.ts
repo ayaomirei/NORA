@@ -13,6 +13,7 @@ import {
   pickNavigationTarget,
   resolveNavigationBearing,
 } from '@/lib/navigation-camera'
+import { isGeoAllowed, subscribeGeoPermission } from '@/lib/geo-permission'
 
 export type UserGeoSnapshot = {
   lng: number
@@ -117,7 +118,7 @@ function mapGeoError(err: GeolocationPositionError): GeolocationStatus {
 
 export function useUserGeolocation({
   mapRef,
-  autoStart = true,
+  autoStart = false,
   centerOnFirstFix = false,
   navigationMode = false,
   navigationStops,
@@ -304,7 +305,21 @@ export function useUserGeolocation({
     [onFirstFix, scheduleWatchRetry],
   )
 
+  const stopTracking = useCallback(() => {
+    clearWatch()
+    clearRetry()
+    triedLowAccuracyRef.current = false
+    pendingRecenterRef.current = false
+    setSnapshot(null)
+    setStatus('idle')
+  }, [clearRetry, clearWatch])
+
   const startTracking = useCallback(() => {
+    if (!isGeoAllowed()) {
+      stopTracking()
+      return
+    }
+
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
       setStatus('unsupported')
       return
@@ -321,7 +336,7 @@ export function useUserGeolocation({
     setStatus('locating')
 
     requestPosition(GET_HIGH_ACCURACY)
-  }, [clearRetry, clearWatch, requestPosition])
+  }, [clearRetry, clearWatch, requestPosition, stopTracking])
 
   const recenter = useCallback((): RecenterResult => {
     const current = snapshotRef.current
@@ -341,7 +356,7 @@ export function useUserGeolocation({
   }, [centerMap, startTracking, status])
 
   useEffect(() => {
-    if (!autoStart) return
+    if (!autoStart || !isGeoAllowed()) return
     startTracking()
     return () => {
       clearWatch()
@@ -350,6 +365,21 @@ export function useUserGeolocation({
     // eslint-disable-next-line react-hooks/exhaustive-deps -- один запуск при монтировании
   }, [autoStart])
 
+  useEffect(() => {
+    return subscribeGeoPermission(() => {
+      if (isGeoAllowed()) {
+        if (
+          statusRef.current === 'idle' ||
+          statusRef.current === 'denied'
+        ) {
+          startTracking()
+        }
+      } else {
+        stopTracking()
+      }
+    })
+  }, [startTracking, stopTracking])
+
   return {
     snapshot,
     status,
@@ -357,6 +387,7 @@ export function useUserGeolocation({
     hasLocation: snapshot != null,
     recenter,
     startTracking,
+    stopTracking,
     flushInitialCenter,
   }
 }

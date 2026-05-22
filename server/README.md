@@ -36,7 +36,7 @@ npm run dev
 | GET/POST/PUT | `/places/*` | Отзывы и предпочтения мест |
 | GET | `/map/places/coords` | Кэш координат (JSON) |
 | GET | `/map/places/catalog` | Каталог POI с координатами |
-| GET | `/ai/status` | Доступен ли LLM (`OPENAI_API_KEY`) |
+| GET | `/ai/status` | LLM: `provider` (`gemini` / `openai`), `model` |
 | POST | `/ai/parse-day-intent` | Разбор «опиши день» → JSON для конструктора маршрута |
 | POST | `/map/route` | Пешеходная геометрия (2GIS → OSRM → прямая) |
 | POST | `/map/places/refresh` | Прогон геокодера (dev) |
