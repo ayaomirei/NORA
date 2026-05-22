@@ -1,7 +1,9 @@
 'use client'
 
 import { Clock, MapPin, Sparkles } from 'lucide-react'
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
+import { DayIntentAssistant } from '@/components/map/DayIntentAssistant'
 import { RouteGroupSection } from '@/components/map/RouteGroupSection'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/contexts/useAuth'
@@ -26,6 +28,7 @@ import {
   type RouteVibe,
 } from '@/lib/route-intents'
 import { getFriendIds } from '@/lib/social-storage'
+import type { DayIntentParseResult } from '@/lib/day-intent'
 import { cn } from '@/lib/utils'
 
 type RouteBuilderFormProps = {
@@ -76,6 +79,21 @@ export function RouteBuilderForm({
       groupSize,
     })
   }, [user, organizerBudgetIdx, friendParticipantIds, groupSize])
+
+  function applyDayIntent(intent: DayIntentParseResult) {
+    setVibe(intent.vibe)
+    setDayPeriod(intent.dayPeriod)
+    setStopCount(intent.stopCount)
+    setAreaKey(intent.areaKey)
+    setAreaCustom(intent.areaCustom)
+    if (intent.budgetIdx !== undefined) {
+      setOrganizerBudgetIdx(intent.budgetIdx)
+    }
+    if (intent.routeName) {
+      setRouteName(intent.routeName)
+    }
+    setError(null)
+  }
 
   function handleBuild() {
     if (!user) return
@@ -137,11 +155,28 @@ export function RouteBuilderForm({
     onBuilt(route)
   }
 
-  if (!user) return null
+  if (!user) {
+    return (
+      <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-3 pb-3 pt-2">
+        <DayIntentAssistant onApply={() => {}} />
+        <p className="mt-3 text-[12px] leading-snug text-[var(--nora-text-muted)]">
+          {t('routeBuilder.loginToBuild')}
+        </p>
+        <Link
+          href="/login"
+          className="mt-2 inline-flex w-fit rounded-xl border border-sky-400/35 bg-sky-400/10 px-3 py-2 text-sm font-medium text-sky-700 hover:bg-sky-400/16 dark:text-sky-200"
+        >
+          {t('auth.login')}
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-3 pb-3 pt-2">
-      <label className="block border-b border-[var(--nora-border-subtle)] pb-2">
+      <DayIntentAssistant onApply={applyDayIntent} />
+
+      <label className="mt-3 block border-b border-[var(--nora-border-subtle)] pb-2">
         <span className="text-[10px] font-semibold uppercase tracking-wide text-sky-500 dark:text-sky-400">
           {t('routeBuilder.routeNameLabel')}
         </span>

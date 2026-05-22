@@ -9,7 +9,7 @@
     "lng": 74.607609,
     "lat": 42.877162,
     "query": "Бишкек, парк Дубовый, бульвар Эркиндик",
-    "geocodedAt": "2026-05-18T20:05:54.139Z"
+    "geocodedAt": "2026-05-22T10:38:50.633Z"
   },
   "calm-3": {
     "lng": 74.600572,
@@ -21,7 +21,7 @@
     "lng": 74.603667,
     "lat": 42.875426,
     "query": "Бишкек, площадь Ала-Тоо",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "energy-1": {
     "lng": 74.539168,
@@ -33,13 +33,13 @@
     "lng": 74.603667,
     "lat": 42.875426,
     "query": "Бишкек, площадь Ала-Тоо",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "energy-3": {
     "lng": 74.60316,
     "lat": 42.82432,
     "query": "Бишкек, парк Победы",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "energy-4": {
     "lng": 74.628552,
@@ -63,7 +63,7 @@
     "lng": 74.60657,
     "lat": 42.86905,
     "query": "Бишкек, бульвар Эркиндик",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "tired-3": {
     "lng": 74.587035,
@@ -81,7 +81,7 @@
     "lng": 74.59928,
     "lat": 42.87996,
     "query": "Бишкек, парк им. Панфилова",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "anxious-2": {
     "lng": 74.587525,
@@ -93,7 +93,7 @@
     "lng": 74.59047,
     "lat": 42.85899,
     "query": "Бишкек, ботанический сад, ул. Коенкозова",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "anxious-4": {
     "lng": 74.598011,
@@ -105,97 +105,97 @@
     "lng": 74.52376,
     "lat": 42.63765,
     "query": "Кыргызстан, этнокомплекс Дордой, Кашка-Суу",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "event-energy-1": {
     "lng": 74.59624,
     "lat": 42.80645,
     "query": "Бишкек, Орто-Сай, проспект Чуй",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-panfilov": {
     "lng": 74.59928,
     "lat": 42.87996,
     "query": "Бишкек, парк им. Панфилова",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-pobedy": {
     "lng": 74.60316,
     "lat": 42.82432,
     "query": "Бишкек, парк Победы",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-dubovy": {
     "lng": 74.60761,
     "lat": 42.87716,
     "query": "Бишкек, парк Дубовый",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-ata-turk": {
     "lng": 74.59575,
     "lat": 42.83953,
     "query": "Бишкек, парк Ататюрка",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-botanic": {
     "lng": 74.59047,
     "lat": 42.85899,
     "query": "Бишкек, ботанический сад",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-molodezhny": {
     "lng": 74.57487,
     "lat": 42.88583,
     "query": "Бишкек, парк Молодёжный",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-ak-keme": {
     "lng": 74.5825,
     "lat": 42.83875,
     "query": "Бишкек, парк Ак-Кеме, проспект Манаса 8",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bulvar-erkendik": {
     "lng": 74.60657,
     "lat": 42.86905,
     "query": "Бишкек, бульвар Эркиндик",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-skver-toktogul": {
     "lng": 74.57461,
     "lat": 42.87374,
     "query": "Бишкек, сквер им. Токтогула",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-ploshchad-ala-too": {
     "lng": 74.603667,
     "lat": 42.875426,
     "query": "Бишкек, площадь Ала-Тоо",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-park-yuzhny": {
     "lng": 74.63346,
     "lat": 42.87223,
     "query": "Бишкек, Южный парк, микрорайон Восток-5",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-zoo": {
     "lng": 74.55124,
     "lat": 42.81456,
     "query": "Бишкек, зоопарк, проспект Молодёжный 3",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-hotel-hyatt": {
     "lng": 74.60209,
     "lat": 42.87256,
     "query": "Бишкек, Hyatt Regency Bishkek, ул. Токтогула 107",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-hotel-orion": {
     "lng": 74.58617,
     "lat": 42.889,
     "query": "Бишкек, Orion Hotel, проспект Манаса 158",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-hotel-plaza": {
     "lng": 74.585579,
@@ -207,7 +207,7 @@
     "lng": 74.64229,
     "lat": 42.90489,
     "query": "Бишкек, Ambassador Hotel, пр. Молодёжная 113",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-hotel-smart": {
     "lng": 74.603282,
@@ -225,7 +225,7 @@
     "lng": 74.5825,
     "lat": 42.83875,
     "query": "Бишкек, отель Ак-Кеме, проспект Манаса 8",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-hotel-solutel": {
     "lng": 74.598375,
@@ -267,7 +267,7 @@
     "lng": 74.56127,
     "lat": 42.81891,
     "query": "Бишкек, Casa Coffee, ул. Абдрахманова 144",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-cafe-coffee-mood": {
     "lng": 74.599621,
@@ -279,13 +279,13 @@
     "lng": 74.58721,
     "lat": 42.87628,
     "query": "Бишкек, Gap Food, пр. Чуй 164",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-cafe-teplo": {
     "lng": 74.6069,
     "lat": 42.84325,
     "query": "Бишкек, кафе Тепло, ул. Ахунбаева 113",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-rest-supara": {
     "lng": 74.628552,
@@ -309,7 +309,7 @@
     "lng": 74.58847,
     "lat": 42.87488,
     "query": "Бишкек, ресторан Navigator, проспект Манаса 57",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-rest-chicken-star": {
     "lng": 74.621407,
@@ -327,7 +327,7 @@
     "lng": 74.61808,
     "lat": 42.85467,
     "query": "Бишкек, этно-комплекс Алай, ул. Карасаева 51",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-rest-mughal": {
     "lng": 74.621407,
@@ -339,13 +339,13 @@
     "lng": 74.61328,
     "lat": 42.87526,
     "query": "Бишкек, Navat, проспект Чуй 96",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-rest-old-bukhara": {
     "lng": 74.61752,
     "lat": 42.87793,
     "query": "Бишкек, ресторан Old Bukhara, ул. Ибраимова",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bar-12": {
     "lng": 74.602537,
@@ -357,79 +357,79 @@
     "lng": 74.58323,
     "lat": 42.87103,
     "query": "Бишкек, Save the Ales, ул. Московская 189",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bar-ipub": {
     "lng": 74.57652,
     "lat": 42.87587,
     "query": "Бишкек, I-Pub, ул. Киевская 107",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bar-metro-pub": {
     "lng": 74.60019,
     "lat": 42.8682,
     "query": "Бишкек, Metro Pub, ул. Панфилова 148",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bar-pinta": {
     "lng": 74.59422,
     "lat": 42.8793,
     "query": "Бишкек, Pinta Pub, ул. Коенкозова 75",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bar-garage": {
     "lng": 74.6006,
     "lat": 42.87507,
     "query": "Бишкек, Garage Pub, ул. Киевская 87",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bar-klub-kvartira": {
     "lng": 74.57652,
     "lat": 42.87587,
     "query": "Бишкек, клуб Квартира, ул. Киевская 109",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-bar-promzona": {
     "lng": 74.61194,
     "lat": 42.90383,
     "query": "Бишкек, Promzona, ул. Щербакова 1",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-mall-bishkek-park": {
     "lng": 74.59017,
     "lat": 42.87461,
     "query": "Бишкек, торговый центр Bishkek Park, проспект Чуй",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-mall-asia-mall": {
     "lng": 74.585,
     "lat": 42.85558,
     "query": "Бишкек, Asia Mall, проспект Манаса 62",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-mall-tsum": {
     "lng": 74.61453,
     "lat": 42.87662,
     "query": "Бишкек, ЦУМ",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-mall-dordoi-plaza": {
     "lng": 74.61802,
     "lat": 42.87421,
     "query": "Бишкек, Dordoi Plaza",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-mall-globus": {
     "lng": 74.59017,
     "lat": 42.87461,
     "query": "Бишкек, торговый центр Globus",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-mall-vesna": {
     "lng": 74.5769,
     "lat": 42.87379,
     "query": "Бишкек, торговый центр Весна",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-market-osh": {
     "lng": 74.539168,
@@ -441,73 +441,73 @@
     "lng": 74.62151,
     "lat": 42.93837,
     "query": "Бишкек, рынок Дордой, село Сокулук",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-market-ortosai": {
     "lng": 74.59624,
     "lat": 42.80645,
     "query": "Бишкек, Орто-Сай, проспект Чуй",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-culture-philharmonic": {
     "lng": 74.58752,
     "lat": 42.8781,
     "query": "Бишкек, Кыргызская национальная филармония",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-culture-opera": {
     "lng": 74.6125,
     "lat": 42.87804,
     "query": "Бишкек, театр оперы и балета",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-culture-history-museum": {
     "lng": 74.60363,
     "lat": 42.87774,
     "query": "Бишкек, Государственный исторический музей",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-culture-art-museum": {
     "lng": 74.61074,
     "lat": 42.87881,
     "query": "Бишкек, музей изобразительных искусств",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-culture-russian-theatre": {
     "lng": 74.6027,
     "lat": 42.87896,
     "query": "Бишкек, русский драматический театр",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-culture-manas": {
     "lng": 74.6366,
     "lat": 42.8552,
     "query": "Бишкек, памятник Манаса, площадь Манаса",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-fun-aquapark": {
     "lng": 74.5825,
     "lat": 42.83875,
     "query": "Бишкек, аквапарк Ак-Кеме, проспект Манаса 8",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-fun-ice-palace": {
     "lng": 74.62651,
     "lat": 42.8883,
     "query": "Бишкек, ледовый дворец, ул. Юргенева 11",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-fun-spartak-stadium": {
     "lng": 74.59797,
     "lat": 42.88005,
     "query": "Бишкек, стадион Спартак",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-fun-dordoi-ethno": {
     "lng": 74.52376,
     "lat": 42.63765,
     "query": "Кыргызстан, этнокомплекс Дордой, Кашка-Суу",
-    "geocodedAt": "2026-05-18T20:05:54.140Z"
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   },
   "poi-work-kitap": {
     "lng": 74.600572,
@@ -526,5 +526,377 @@
     "lat": 42.875739,
     "query": "Бишкек, FabLab KG, пр. Чуй 124",
     "geocodedAt": "2026-05-18T19:47:10.090Z"
+  },
+  "poi-park-borboruk": {
+    "lng": 74.60543,
+    "lat": 42.8782,
+    "query": "Бишкек, парк Борбордук",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-futuro": {
+    "lng": 74.65443,
+    "lat": 42.87642,
+    "query": "Бишкек, Futuro Hotel, ул. Боконбаева 94",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-garden": {
+    "lng": 74.55963,
+    "lat": 42.83008,
+    "query": "Бишкек, Garden Hotel & SPA, ул. Медерова 20",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-king": {
+    "lng": 74.62156,
+    "lat": 42.86486,
+    "query": "Бишкек, King Hotel, ул. Боконбаева 96",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-ala-too": {
+    "lng": 74.5606,
+    "lat": 42.8832,
+    "query": "Бишкек, Ala-Too Hotel, ул. Боконбаева 98",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-golden-dragon": {
+    "lng": 74.61291,
+    "lat": 42.8512,
+    "query": "Бишкек, Golden Dragon Hotel, ул. Токтогула 110",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-umai": {
+    "lng": 74.60093,
+    "lat": 42.89449,
+    "query": "Бишкек, Umai Hotel, ул. Боконбаева 94",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-city": {
+    "lng": 74.5898,
+    "lat": 42.87264,
+    "query": "Бишкек, City Hotel Bishkek, ул. Токтогула 106",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-guest-apple": {
+    "lng": 74.565128,
+    "lat": 42.8859944,
+    "query": "Бишкек, Apple Hostel, ул. Киевская 64",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-guest-center": {
+    "lng": 74.5898,
+    "lat": 42.87264,
+    "query": "Бишкек, Center Hostel, ул. Ибраимова 30",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-guest-bishkek-house": {
+    "lng": 74.57109,
+    "lat": 42.8789,
+    "query": "Бишкек, Bishkek Guest House, ул. Киевская 28",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-cafe-sierra-chui": {
+    "lng": 74.5885652,
+    "lat": 42.8745766,
+    "query": "Бишкек, Sierra Coffee, проспект Чуй 126",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-adriano": {
+    "lng": 74.62192,
+    "lat": 42.87555,
+    "query": "Бишкек, Adriano Coffee, ул. Ахунбаева 105",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-club-studio9": {
+    "lng": 74.61208,
+    "lat": 42.83569,
+    "query": "Бишкек, Studio 9, ул. Киевская 109",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-mall-vefa": {
+    "lng": 74.60959,
+    "lat": 42.85751,
+    "query": "Бишкек, Vefa Center, ул. Горького 1",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-mall-frunze": {
+    "lng": 74.65471,
+    "lat": 42.88128,
+    "query": "Бишкек, торговый центр Фрунзе, пр. Чуй",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-fun-circus": {
+    "lng": 74.61164,
+    "lat": 42.88017,
+    "query": "Бишкек, цирк, ул. Фрунзе 109",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-fun-happy-city": {
+    "lng": 74.59501,
+    "lat": 42.87084,
+    "query": "Бишкек, Happy City, торговый центр Bishkek Park",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-park-family": {
+    "lng": 74.592,
+    "lat": 42.862,
+    "query": "Бишкек, Семейный парк, ул. Коенкозова",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-park-sverdlov": {
+    "lng": 74.60282,
+    "lat": 42.82507,
+    "query": "Бишкек, парк им. Свердлова",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-park-toktogul": {
+    "lng": 74.60181,
+    "lat": 42.87246,
+    "query": "Бишкек, парк им. Токтогула, ул. Токтогула",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bulvar-kok-jar": {
+    "lng": 74.612,
+    "lat": 42.808,
+    "query": "Бишкек, бульвар Кок-Жар",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bulvar-moskovskaya": {
+    "lng": 74.60507,
+    "lat": 42.86943,
+    "query": "Бишкек, бульвар на Московской, ул. Московская",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bulvar-molodezhny": {
+    "lng": 74.55124,
+    "lat": 42.81456,
+    "query": "Бишкек, бульвар Молодёжный, проспект Молодёжный",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-jannat": {
+    "lng": 74.62411,
+    "lat": 42.85132,
+    "query": "Бишкек, Jannat Regency Bishkek, ул. Медерова 6",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-guest-art": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Art Hostel, ул. Киевская 86",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-cafe-ololo": {
+    "lng": 74.594137,
+    "lat": 42.875351,
+    "query": "Бишкек, O!Kroshka, ул. Киевская 107",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-cafe-latte": {
+    "lng": 74.62103,
+    "lat": 42.87559,
+    "query": "Бишкек, Latte, пр. Чуй 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-cafe-coffee-island": {
+    "lng": 74.62192,
+    "lat": 42.87555,
+    "query": "Бишкек, Coffee Island, пр. Чуй 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-bon": {
+    "lng": 74.594137,
+    "lat": 42.875351,
+    "query": "Бишкек, Bon! Coffee, ул. Киевская 107",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-bublik": {
+    "lng": 74.594137,
+    "lat": 42.875351,
+    "query": "Бишкек, Bublik Coffee, ул. Киевская 107",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-sens": {
+    "lng": 74.594137,
+    "lat": 42.875351,
+    "query": "Бишкек, Sens Coffee, ул. Киевская 107",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-corretto": {
+    "lng": 74.59952,
+    "lat": 42.87572,
+    "query": "Бишкек, Corretto, проспект Чуй 126",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bar-twelve": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Twelve Bar, ул. Киевская 77",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bar-monkey": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Monkey Bar, ул. Киевская 77",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bar-timeout": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Time Out Bar, ул. Киевская 77",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bar-buddha": {
+    "lng": 74.58323,
+    "lat": 42.87103,
+    "query": "Бишкек, Buddha Bar, ул. Московская 189",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-club-platinum": {
+    "lng": 74.58323,
+    "lat": 42.87103,
+    "query": "Бишкек, Platinum Night Club, ул. Московская",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-club-rubicon": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Rubicon Club, ул. Киевская",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-fun-kidburg": {
+    "lng": 74.61328,
+    "lat": 42.87526,
+    "query": "Бишкек, Kidburg, пр. Чуй 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-fun-karting": {
+    "lng": 74.59017,
+    "lat": 42.87461,
+    "query": "Бишкек, Karting Club, пр. Чуй 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-park-alamedin": {
+    "lng": 74.6069,
+    "lat": 42.84325,
+    "query": "Бишкек, парк у реки Аламедин, ул. Ахунбаева",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-kapital": {
+    "lng": 74.61453,
+    "lat": 42.87662,
+    "query": "Бишкек, Kapital Hotel, ул. Токтогула 136",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-tehran": {
+    "lng": 74.60209,
+    "lat": 42.87256,
+    "query": "Бишкек, Tehran Hotel, ул. Токтогула 94",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-hotel-pinberry": {
+    "lng": 74.594137,
+    "lat": 42.875351,
+    "query": "Бишкек, Pinberry Hotel, ул. Киевская 107",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-guest-nomad": {
+    "lng": 74.568,
+    "lat": 42.884,
+    "query": "Бишкек, Nomad Hostel, ул. Киевская 22",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-guest-sakura": {
+    "lng": 74.61453,
+    "lat": 42.87662,
+    "query": "Бишкек, Sakura Guest House, ул. Токтогула 136",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-cafe-kapuchino": {
+    "lng": 74.58721,
+    "lat": 42.87628,
+    "query": "Бишкек, кофейня Капучино, пр. Чуй 126",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-twelve-horses": {
+    "lng": 74.594137,
+    "lat": 42.875351,
+    "query": "Бишкек, Twelve Horses Coffee, ул. Киевская 107",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-q": {
+    "lng": 74.565128,
+    "lat": 42.8859944,
+    "query": "Бишкек, Q Coffee, ул. Киевская 64",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-wilton": {
+    "lng": 74.594137,
+    "lat": 42.875351,
+    "query": "Бишкек, Wilton Cafe, ул. Киевская 107",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-specialty-craft": {
+    "lng": 74.591213,
+    "lat": 42.874154,
+    "query": "Бишкек, Craft Coffee, ул. Ахунбаева 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-bar-old-school": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Old School Bar, ул. Киевская 77",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-club-gagarin": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Gagarin Night Club, ул. Киевская",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-club-retro": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, Retro Club, ул. Киевская 77",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-club-zhara": {
+    "lng": 74.57652,
+    "lat": 42.87587,
+    "query": "Бишкек, ночной клуб Жара, ул. Киевская",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-club-eshak": {
+    "lng": 74.61208,
+    "lat": 42.83569,
+    "query": "Бишкек, Eshak Club, ул. Киевская 109",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-mall-umai": {
+    "lng": 74.60093,
+    "lat": 42.89449,
+    "query": "Бишкек, Umai Center, ул. Боконбаева",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-mall-12-mega": {
+    "lng": 74.58847,
+    "lat": 42.87488,
+    "query": "Бишкек, 12 Mega, проспект Манаса 57",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-fun-galaxy": {
+    "lng": 74.61328,
+    "lat": 42.87526,
+    "query": "Бишкек, Galaxy Entertainment, пр. Чуй 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-fun-bowling-strike": {
+    "lng": 74.59017,
+    "lat": 42.87461,
+    "query": "Бишкек, Strike Bowling, пр. Чуй 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
+  },
+  "poi-fun-cinema-olimp": {
+    "lng": 74.61328,
+    "lat": 42.87526,
+    "query": "Бишкек, кинотеатр Олимп, пр. Чуй 127",
+    "geocodedAt": "2026-05-22T10:38:50.634Z"
   }
 }

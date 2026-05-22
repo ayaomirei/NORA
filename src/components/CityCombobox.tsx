@@ -5,12 +5,12 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import {
-  Command,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command'
+  ComboboxEmpty,
+  ComboboxGroupHeading,
+  ComboboxOption,
+  ComboboxScrollList,
+  ComboboxSearchField,
+} from '@/components/ComboboxList'
 import {
   Popover,
   PopoverContent,
@@ -62,12 +62,11 @@ export function CityCombobox({
   const trimmed = search.trim()
   const matches = searchCitiesList(cities, trimmed, 8)
   const exact = trimmed ? findCityInList(cities, trimmed) : undefined
-  const showSimilar =
-    trimmed.length > 0 && !exact && matches.length > 0
+  const showSimilar = trimmed.length > 0 && !exact && matches.length > 0
   const showCustom =
-    trimmed.length >= 2 && !exact && !matches.some(
-      (c) => c.name.toLowerCase() === trimmed.toLowerCase(),
-    )
+    trimmed.length >= 2 &&
+    !exact &&
+    !matches.some((c) => c.name.toLowerCase() === trimmed.toLowerCase())
 
   function pick(city: City) {
     onChange(city.name)
@@ -95,12 +94,13 @@ export function CityCombobox({
   }
 
   return (
-    <div className="relative z-20">
+    <div className={cn('relative', open && 'z-[200]')}>
       <Popover open={open} onOpenChange={setOpen} modal={false}>
         <PopoverTrigger
           id={id}
           role="combobox"
           aria-expanded={open}
+          aria-haspopup="listbox"
           className={cn(
             buttonVariants({ variant: 'secondary', size: 'default' }),
             'h-12 w-full justify-between rounded-glass border border-[var(--nora-border-subtle)] px-3 font-normal shadow-glass hover:shadow-glass-lg',
@@ -112,89 +112,91 @@ export function CityCombobox({
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-60" />
         </PopoverTrigger>
         <PopoverContent
-          className="p-0"
+          className="flex max-h-[min(360px,50dvh)] flex-col p-0"
           align="start"
+          sideOffset={6}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <Command shouldFilter={false}>
-            <span className="sr-only">{label}</span>
-            <CommandInput
-              placeholder={t('combobox.searchCity')}
-              value={search}
-              onValueChange={setSearch}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault()
-                  handleEnter()
-                }
-              }}
-            />
-            <CommandList>
-              {trimmed.length === 0 ? (
-                <CommandGroup heading={t('combobox.popular')}>
-                  {searchCitiesList(cities, '', 10).map((c) => (
-                    <CityItem
-                      key={c.id}
-                      city={c}
-                      selected={selectedCityId === c.id}
-                      onPick={() => pick(c)}
-                    />
-                  ))}
-                </CommandGroup>
-              ) : null}
-
-              {exact ? (
-                <CommandGroup heading={t('combobox.exactMatch')}>
-                  <CityItem
-                    city={exact}
-                    selected={selectedCityId === exact.id}
-                    onPick={() => pick(exact)}
+          <span className="sr-only">{label}</span>
+          <ComboboxSearchField
+            value={search}
+            onChange={setSearch}
+            placeholder={t('combobox.searchCity')}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                handleEnter()
+              }
+            }}
+          />
+          <ComboboxScrollList aria-label={label}>
+            {trimmed.length === 0 ? (
+              <>
+                <ComboboxGroupHeading>{t('combobox.popular')}</ComboboxGroupHeading>
+                {searchCitiesList(cities, '', 24).map((c) => (
+                  <CityRow
+                    key={c.id}
+                    city={c}
+                    selected={selectedCityId === c.id}
+                    onPick={() => pick(c)}
                   />
-                </CommandGroup>
-              ) : null}
+                ))}
+              </>
+            ) : null}
 
-              {showSimilar ? (
-                <CommandGroup heading={t('combobox.didYouMean')}>
-                  {matches.map((c) => (
-                    <CityItem
-                      key={c.id}
-                      city={c}
-                      selected={selectedCityId === c.id}
-                      onPick={() => pick(c)}
-                    />
-                  ))}
-                </CommandGroup>
-              ) : null}
+            {exact ? (
+              <>
+                <ComboboxGroupHeading>
+                  {t('combobox.exactMatch')}
+                </ComboboxGroupHeading>
+                <CityRow
+                  city={exact}
+                  selected={selectedCityId === exact.id}
+                  onPick={() => pick(exact)}
+                />
+              </>
+            ) : null}
 
-              {showCustom ? (
-                <CommandGroup>
-                  <CommandItem
-                    value={`custom-${trimmed}`}
-                    onSelect={() => pickCustom(trimmed)}
-                    className="text-sky-300"
-                  >
-                    {t('combobox.useCustom', { value: trimmed })}
-                  </CommandItem>
-                </CommandGroup>
-              ) : null}
+            {showSimilar ? (
+              <>
+                <ComboboxGroupHeading>
+                  {t('combobox.didYouMean')}
+                </ComboboxGroupHeading>
+                {matches.map((c) => (
+                  <CityRow
+                    key={c.id}
+                    city={c}
+                    selected={selectedCityId === c.id}
+                    onPick={() => pick(c)}
+                  />
+                ))}
+              </>
+            ) : null}
 
-              {trimmed.length > 0 &&
-              !exact &&
-              matches.length === 0 &&
-              trimmed.length < 2 ? (
-                <p className="px-3 py-4 text-center text-sm text-[var(--nora-text-muted)]">
-                  {t('combobox.cityTypeMore')}
-                </p>
-              ) : null}
-            </CommandList>
-          </Command>
+            {showCustom ? (
+              <ComboboxOption
+                selected={false}
+                onPick={() => pickCustom(trimmed)}
+                className="text-sky-600 dark:text-sky-300"
+              >
+                {t('combobox.useCustom', { value: trimmed })}
+              </ComboboxOption>
+            ) : null}
+          </ComboboxScrollList>
+
+          {trimmed.length > 0 &&
+          !exact &&
+          matches.length === 0 &&
+          trimmed.length < 2 ? (
+            <ComboboxEmpty>{t('combobox.cityTypeMore')}</ComboboxEmpty>
+          ) : null}
         </PopoverContent>
       </Popover>
     </div>
   )
 }
 
-function CityItem({
+function CityRow({
   city,
   selected,
   onPick,
@@ -204,23 +206,17 @@ function CityItem({
   onPick: () => void
 }) {
   return (
-    <CommandItem
-      value={city.id}
-      onSelect={onPick}
-      onMouseDown={(e) => {
-        e.preventDefault()
-        onPick()
-      }}
-    >
+    <ComboboxOption selected={selected} onPick={onPick}>
       <Check
-        className={cn('mr-2 h-4 w-4', selected ? 'opacity-100' : 'opacity-0')}
+        className={cn('mr-2 h-4 w-4 shrink-0', selected ? 'opacity-100' : 'opacity-0')}
+        aria-hidden
       />
-      <span className="flex flex-col">
+      <span className="flex min-w-0 flex-col">
         <span>{city.name}</span>
         <span className="text-[11px] text-[var(--nora-text-muted)]">
           {city.country}
         </span>
       </span>
-    </CommandItem>
+    </ComboboxOption>
   )
 }

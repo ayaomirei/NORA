@@ -41,6 +41,20 @@ export const ko: Messages = {
     hint: '미성년자에게 바, 클럽, 위험한 장소를 추천하지 않기 위해 필요합니다',
     invalid: '올바른 날짜를 입력하세요 (13–100세)',
   },
+  ai: {
+    intentTitle: '하루를 말로 설명',
+    intentHint:
+      'NORA가 분위기, 시간, 지역, 예산을 채웁니다. 경로는 기존 규칙으로 조립됩니다.',
+    intentPlaceholder:
+      '예: 조용한 저녁 도심, 장소 2곳, 저렴하게, 붐비지 않게',
+    intentParse: '이해하기',
+    intentApply: '폼에 적용',
+    intentTooShort: '몇 마디 이상 적어 주세요',
+    intentFailed: '요청을 이해하지 못했습니다',
+    intentSourceLlm: 'AI로 다듬음',
+    intentSourceRules: '키워드 규칙',
+    intentOfflineNote: '서버 없음 — 규칙만',
+  },
   planner: {
     open: '플래너 열기: 기분과 경로',
     close: '플래너 닫기',
@@ -89,6 +103,7 @@ export const ko: Messages = {
   },
   routeBuilder: {
     createAria: '하루 경로 만들기',
+    loginToBuild: '요청을 폼에 적용하고 경로를 만들려면 로그인하세요.',
     title: '하루 경로',
     subtitle: '미리 계획: 어떻게 보낼지, 예산, 시간, 지역',
     plannerNote:
@@ -286,6 +301,10 @@ export const ko: Messages = {
     wrongPassword: '현재 비밀번호가 올바르지 않습니다',
     wrongDeletePassword: '비밀번호가 올바르지 않습니다',
     registerFailed: '회원가입에 실패했습니다',
+    apiOffline:
+      'NORA API에 연결할 수 없습니다. npm run dev:api(포트 3001)를 실행하거나 .env.local에서 NEXT_PUBLIC_API_URL을 제거하세요.',
+    apiWrongPort:
+      '3001 포트에 API가 아닌 다른 프로세스(보통 Next.js)가 실행 중입니다. 중지 후 npm run dev:api를 실행하세요.',
   },
   passportForm: {
     photoSection: '사진 및 소개',

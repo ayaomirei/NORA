@@ -1,6 +1,5 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
 export type PlaceCoordRecord = {
   lng: number
@@ -11,8 +10,10 @@ export type PlaceCoordRecord = {
 
 export type PlaceCoordsFile = Record<string, PlaceCoordRecord>
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const CACHE_PATH = path.join(__dirname, '../../data/place-coords.json')
+/** cwd на Vercel — корень репо; локально — то же при запуске из корня. */
+const CACHE_PATH =
+  process.env.PLACE_COORDS_PATH ??
+  path.join(process.cwd(), 'server/data/place-coords.json')
 
 /** Запись с тем же адресом запроса (другой id). */
 export function findPlaceCoordByQuery(

@@ -41,6 +41,20 @@ export const ky: Messages = {
     hint: 'Барларды, клубдарды жана коркунучтуу жерлерди жаштарга сунуштамайбыз',
     invalid: 'Туура датаны көрсөтүңүз (13–100 жаш)',
   },
+  ai: {
+    intentTitle: 'Күнү сөз менен сүрөттөңүз',
+    intentHint:
+      'NORA формат, убакыт, аймак жана бюджетти толтурат. Маршрут эски эрежелер менен түзүлөт.',
+    intentPlaceholder:
+      'Мисалы: тынч кечки борбор, 2 жай, арзан, ызы-чуу жок',
+    intentParse: 'Түшүнүү',
+    intentApply: 'Формага колдонуу',
+    intentTooShort: 'Бир нече сөз жазыңыз',
+    intentFailed: 'Сурамды түшүнбөй калдык',
+    intentSourceLlm: 'ИИ менен такталды',
+    intentSourceRules: 'Ачкыч сөздөр',
+    intentOfflineNote: 'серверсиз — эрежелер гана',
+  },
   planner: {
     open: 'Планерди ачуу: абал жана маршруттар',
     close: 'Планерди жабуу',
@@ -89,6 +103,8 @@ export const ky: Messages = {
   },
   routeBuilder: {
     createAria: 'Күнгө маршрут түзүү',
+    loginToBuild:
+      'Суроону формага колдонуп маршрут түзүү үчүн аккаунтка кириңиз.',
     title: 'Күнгө маршрут',
     subtitle: 'Күнүңүздү алдын ала: кантип өткөрөсүз, бюджет, качан жана кайда',
     plannerNote:
@@ -286,6 +302,10 @@ export const ky: Messages = {
     wrongPassword: 'Учурдагы сырсөз туура эмес',
     wrongDeletePassword: 'Сырсөз туура эмес',
     registerFailed: 'Катталуу катасы',
+    apiOffline:
+      'NORA API жооп бербейт. Иштетүү: npm run dev:api (порт 3001). Же .env.localдан NEXT_PUBLIC_API_URL өчүрүңүз.',
+    apiWrongPort:
+      '3001 портунда API эмес, башка процесс иштеп жатат. Аны токтотуп, npm run dev:api иштетиңиз.',
   },
   passportForm: {
     photoSection: 'Сүрөт жана сыпаттама',

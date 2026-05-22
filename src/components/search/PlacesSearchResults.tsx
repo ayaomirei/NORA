@@ -3,11 +3,7 @@
 import { MapPin } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { useI18n } from '@/hooks/useI18n'
-import {
-  getVenueCatalog,
-  loadVenueCatalog,
-  searchPlaces,
-} from '@/lib/venue-catalog'
+import { loadVenueCatalog, searchPlaces } from '@/lib/venue-catalog'
 import type { PlannerRecommendation } from '@/lib/planner-recommendations'
 
 type PlacesSearchResultsProps = {
@@ -20,16 +16,16 @@ export function PlacesSearchResults({
   onSelect,
 }: PlacesSearchResultsProps) {
   const { locale, t } = useI18n()
-  const [ready, setReady] = useState(() => getVenueCatalog().length > 0)
+  const [catalogRev, setCatalogRev] = useState(0)
 
   useEffect(() => {
-    void loadVenueCatalog().then(() => setReady(true))
+    void loadVenueCatalog().then(() => setCatalogRev((n) => n + 1))
   }, [])
 
-  const results = useMemo(() => {
-    if (!ready) return []
-    return searchPlaces(query, locale, { limit: query.trim() ? 10 : 8 })
-  }, [query, locale, ready])
+  const results = useMemo(
+    () => searchPlaces(query, locale, { limit: query.trim() ? 10 : 8 }),
+    [query, locale, catalogRev],
+  )
 
   const suggested = query.trim() ? [] : results.slice(0, 6)
   const matched = query.trim() ? results : []
@@ -45,13 +41,13 @@ export function PlacesSearchResults({
         </p>
       </div>
 
-      {!ready ? (
-        <p className="px-3 py-3 text-xs text-[var(--nora-text-muted)]">
+      {catalogRev === 0 ? (
+        <p className="px-3 py-1.5 text-[10px] text-[var(--nora-text-muted)]">
           {t('search.placesLoading')}
         </p>
       ) : null}
 
-      {ready && suggested.length > 0 ? (
+      {suggested.length > 0 ? (
         <section className="px-1 pb-1">
           <p className="px-2 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
             {t('search.placesSuggested')}
@@ -64,7 +60,7 @@ export function PlacesSearchResults({
         </section>
       ) : null}
 
-      {ready && query.trim() ? (
+      {query.trim() ? (
         <section className="px-1 pb-2">
           {matched.length > 0 ? (
             <ul className="space-y-0.5">

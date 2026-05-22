@@ -19,9 +19,12 @@ export type PopularPlaceCatalogItem = {
 type CategoryKey =
   | 'park'
   | 'hotel'
+  | 'guest'
   | 'cafe'
+  | 'specialty'
   | 'rest'
   | 'bar'
+  | 'club'
   | 'mall'
   | 'market'
   | 'culture'
@@ -57,11 +60,27 @@ const CATEGORY_META: Record<
     venueTags: ['culture'],
     moods: ['calm', 'tired'],
   },
+  guest: {
+    titlePrefix: 'Гостиница',
+    duration: '1 ч',
+    budgetTier: 1,
+    badge: 'Бюджетное размещение в центре',
+    venueTags: ['culture'],
+    moods: ['calm', 'tired'],
+  },
   cafe: {
     titlePrefix: 'Кофе в',
     duration: '50 мин',
     budgetTier: 1,
     badge: 'Уютная пауза в течение дня',
+    venueTags: ['cafe', 'food'],
+    moods: ['calm', 'tired', 'anxious'],
+  },
+  specialty: {
+    titlePrefix: 'Спешелти в',
+    duration: '45 мин',
+    budgetTier: 2,
+    badge: 'Авторский кофе и обжарка',
     venueTags: ['cafe', 'food'],
     moods: ['calm', 'tired', 'anxious'],
   },
@@ -79,6 +98,15 @@ const CATEGORY_META: Record<
     budgetTier: 2,
     badge: 'Живая атмосфера и общение',
     venueTags: ['bar', 'nightlife'],
+    moods: ['energy'],
+    minAge: 18,
+  },
+  club: {
+    titlePrefix: 'Клуб',
+    duration: '2 ч',
+    budgetTier: 3,
+    badge: 'Ночная жизнь и танцпол',
+    venueTags: ['club', 'nightlife'],
     moods: ['energy'],
     minAge: 18,
   },

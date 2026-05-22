@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { Plus, Search, X } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { RouteBuilderForm } from '@/components/map/RouteBuilderForm'
 import { PeopleSearchResults } from '@/components/search/PeopleSearchResults'
 import { PlacesSearchResults } from '@/components/search/PlacesSearchResults'
@@ -39,6 +39,29 @@ const PANEL_MAX_H =
   'max-h-[min(58dvh,calc(100dvh_-_5.5rem_-_env(safe-area-inset-bottom,0px)))]' as const
 
 const openCloseTransition = tween.medium
+
+/** Блокирует жесты карты под панелью поиска. */
+function SearchPanelScroll({
+  children,
+  className,
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={cn(
+        'min-h-0 touch-pan-y overflow-y-auto overscroll-contain [touch-action:pan-y] [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] [scrollbar-color:color-mix(in_srgb,var(--nora-accent)_40%,transparent)_transparent]',
+        className,
+      )}
+      onPointerDown={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
+    >
+      {children}
+    </div>
+  )
+}
 
 /** Верхняя панель: поиск людей и создание маршрута на день. */
 export function MapTopBar({
@@ -148,7 +171,7 @@ export function MapTopBar({
 
       <div
         className={cn(
-          'pointer-events-none fixed inset-x-0 top-0 z-[45] flex justify-center px-3',
+          'pointer-events-none fixed inset-x-0 top-0 z-[50] flex justify-center px-3',
           SEARCH_TOP,
         )}
       >
@@ -159,33 +182,41 @@ export function MapTopBar({
             shellExpanded && PANEL_MAX_H,
           )}
         >
-          <div className={cn('flex gap-2', searchExpanded && 'min-h-0 flex-1')}>
+          <div
+            className={cn(
+              'flex gap-2',
+              searchExpanded && 'min-h-0 flex-1 overflow-hidden',
+            )}
+          >
             <div
               className={cn(
                 'flex min-w-0 flex-1 flex-col overflow-hidden rounded-2xl border shadow-glass backdrop-blur-xl',
                 searchExpanded && 'min-h-0',
+                searchOpen && 'min-h-0 flex-1',
                 searchExpanded && PANEL_MAX_H,
                 searchOpen
                   ? 'border-sky-400/40 glass-panel-strong'
                   : 'border-[var(--nora-border-strong)] glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_38%,transparent)]',
               )}
             >
-              <div className="flex shrink-0 items-center gap-2.5 px-3.5 py-2.5">
+              <div className="flex min-w-0 shrink-0 items-center gap-2.5 px-3.5 py-2.5">
                 <Search
                   className="h-4 w-4 shrink-0 text-sky-400"
                   strokeWidth={1.75}
                   aria-hidden
                 />
                 {searchOpen ? (
-                  <input
-                    ref={inputRef}
-                    type="search"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder={t('search.placeholder')}
-                    aria-label={t('nav.search')}
-                    className="min-w-0 flex-1 bg-transparent text-sm text-[var(--nora-text)] outline-none placeholder:text-[var(--nora-text-muted)]"
-                  />
+                  <div className="min-w-0 flex-1 overflow-x-auto [-webkit-overflow-scrolling:touch]">
+                    <input
+                      ref={inputRef}
+                      type="search"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder={t('search.placeholder')}
+                      aria-label={t('nav.search')}
+                      className="block w-full min-w-[8rem] bg-transparent text-sm text-[var(--nora-text)] outline-none placeholder:text-[var(--nora-text-muted)]"
+                    />
+                  </div>
                 ) : (
                   <button
                     type="button"
@@ -211,25 +242,29 @@ export function MapTopBar({
                 {searchOpen ? (
                   <motion.div
                     key="search-panel"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={openCloseTransition}
-                    onExitComplete={() => setSearchLeaving(false)}
-                    className={cn(
-                      'motion-gpu flex min-h-0 flex-col overflow-hidden border-t border-[var(--nora-border-subtle)]',
-                      motionGpuClass,
-                    )}
+                    className="flex min-h-0 flex-1 flex-col overflow-hidden border-t border-[var(--nora-border-subtle)]"
                   >
-                    <div className="max-h-[min(50dvh,calc(100dvh_-_8rem))] min-h-0 overflow-y-auto overscroll-contain [scrollbar-width:thin] [scrollbar-color:color-mix(in_srgb,var(--nora-accent)_40%,transparent)_transparent]">
-                      <PlacesSearchResults
-                        query={query}
-                        onSelect={(place) => {
-                          onSelectPlace?.(place)
-                          closePanel()
-                        }}
-                      />
-                      <PeopleSearchResults query={query} compact />
+                    <div
+                      className="min-h-0 flex-1 overflow-hidden"
+                      style={{
+                        maxHeight:
+                          'min(48dvh, calc(100dvh - 6.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)))',
+                      }}
+                    >
+                      <SearchPanelScroll className="h-full max-h-full">
+                        <PlacesSearchResults
+                          query={query}
+                          onSelect={(place) => {
+                            onSelectPlace?.(place)
+                            closePanel()
+                          }}
+                        />
+                        <PeopleSearchResults query={query} compact />
+                      </SearchPanelScroll>
                     </div>
                   </motion.div>
                 ) : null}

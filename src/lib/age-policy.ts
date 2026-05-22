@@ -36,7 +36,7 @@ function isRealCalendarDate(day: number, month: number, year: number): boolean {
 }
 
 function looksLikeAdultVenue(rec: PlannerRecommendation): boolean {
-  if (/^poi-bar-/.test(rec.id)) return true
+  if (/^poi-(bar|club)-/.test(rec.id)) return true
   const hay = `${rec.title} ${rec.place} ${rec.badge ?? ''}`.toLowerCase()
   return ADULT_TEXT.test(hay)
 }

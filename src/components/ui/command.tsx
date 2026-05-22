@@ -40,16 +40,18 @@ const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-  <div className="flex items-center border-b border-[var(--nora-border)] px-3">
+  <div className="flex min-w-0 items-center border-b border-[var(--nora-border)] px-3">
     <Search className="mr-2 h-4 w-4 shrink-0 text-[var(--nora-text-muted)]" />
-    <CommandPrimitive.Input
-      ref={ref}
-      className={cn(
-        'flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-[var(--nora-text-muted)] disabled:cursor-not-allowed disabled:opacity-50',
-        className,
-      )}
-      {...props}
-    />
+    <div className="min-w-0 flex-1 overflow-x-auto [-webkit-overflow-scrolling:touch]">
+      <CommandPrimitive.Input
+        ref={ref}
+        className={cn(
+          'flex h-11 w-full min-w-0 rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-[var(--nora-text-muted)] disabled:cursor-not-allowed disabled:opacity-50',
+          className,
+        )}
+        {...props}
+      />
+    </div>
   </div>
 ))
 
@@ -58,10 +60,17 @@ CommandInput.displayName = CommandPrimitive.Input.displayName
 const CommandList = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
->(({ className, ...props }, ref) => (
+>(({ className, onWheel, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn('max-h-[280px] overflow-y-auto overflow-x-hidden p-1', className)}
+    className={cn(
+      'min-h-0 flex-1 touch-pan-y overflow-y-auto overflow-x-hidden overscroll-contain p-1 [-webkit-overflow-scrolling:touch] [scrollbar-width:thin] [scrollbar-color:color-mix(in_srgb,var(--nora-accent)_40%,transparent)_transparent]',
+      className,
+    )}
+    onWheel={(e) => {
+      e.stopPropagation()
+      onWheel?.(e)
+    }}
     {...props}
   />
 ))
@@ -88,7 +97,7 @@ const CommandGroup = React.forwardRef<
   <CommandPrimitive.Group
     ref={ref}
     className={cn(
-      'overflow-hidden p-1 text-[var(--nora-text)] [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-[var(--nora-text-muted)]',
+      'overflow-visible p-1 text-[var(--nora-text)] [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-[var(--nora-text-muted)]',
       className,
     )}
     {...props}
@@ -100,13 +109,14 @@ CommandGroup.displayName = CommandPrimitive.Group.displayName
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ className, ...props }, ref) => (
+>(({ className, onSelect, ...props }, ref) => (
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
       'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-2 text-sm outline-none aria-selected:bg-sky-400/15 aria-selected:text-[var(--nora-text)] data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className,
     )}
+    onSelect={onSelect}
     {...props}
   />
 ))

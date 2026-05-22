@@ -1,0 +1,29 @@
+import { z } from 'zod'
+
+export const dayIntentBodySchema = z.object({
+  text: z.string().min(3).max(600),
+  locale: z.enum(['ru', 'en', 'ky', 'ko']).default('ru'),
+})
+
+export const dayIntentResponseSchema = z.object({
+  source: z.enum(['rules', 'llm']),
+  vibe: z.enum(['calm', 'social', 'romantic', 'family', 'active', 'cozy']),
+  dayPeriod: z.enum(['morning', 'afternoon', 'evening', 'night']),
+  stopCount: z.number().int().min(1).max(5),
+  areaKey: z.enum([
+    'center',
+    'osh',
+    'countryside',
+    'parks',
+    'north',
+    'south',
+    'custom',
+  ]),
+  areaCustom: z.string().max(120).optional().default(''),
+  budgetIdx: z.number().int().min(0).max(3).optional(),
+  routeName: z.string().max(80).optional(),
+  summary: z.string().max(240),
+  confidence: z.number().min(0).max(1).optional().default(0.8),
+})
+
+export type DayIntentResponse = z.infer<typeof dayIntentResponseSchema>

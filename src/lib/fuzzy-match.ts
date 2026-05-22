@@ -6,6 +6,61 @@ function normalize(s: string): string {
     .replace(/\s+/g, ' ')
 }
 
+/** Частые пары RU/Latin для поиска мест (Bar 12 vs «бар»). */
+const SEARCH_ALIASES: [string, string][] = [
+  ['бар', 'bar'],
+  ['кафе', 'cafe'],
+  ['клуб', 'club'],
+  ['парк', 'park'],
+  ['паб', 'pub'],
+  ['рынок', 'market'],
+  ['кофе', 'coffee'],
+  ['ресторан', 'restaurant'],
+  ['отель', 'hotel'],
+  ['музей', 'museum'],
+  ['театр', 'theater'],
+  ['пицца', 'pizza'],
+  ['фуд', 'food'],
+  ['молл', 'mall'],
+]
+
+function expandQueryVariants(query: string): string[] {
+  const base = normalize(query)
+  if (!base) return []
+  const out = new Set<string>([base])
+  for (const [ru, en] of SEARCH_ALIASES) {
+    if (base.includes(ru)) out.add(base.replaceAll(ru, en))
+    if (base.includes(en)) out.add(base.replaceAll(en, ru))
+  }
+  return [...out]
+}
+
+function labelParts(label: string): string[] {
+  const parts = new Set<string>()
+  for (const chunk of label.split(/[,/]/)) {
+    const trimmed = chunk.trim()
+    if (trimmed) parts.add(trimmed)
+    for (const word of trimmed.split(/\s+/)) {
+      const w = word.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')
+      if (w.length >= 2) parts.add(w)
+    }
+  }
+  return [...parts]
+}
+
+function scoreAgainstLabel(query: string, label: string): number {
+  const variants = expandQueryVariants(query)
+  const parts = labelParts(label)
+  let best = 0
+  for (const q of variants) {
+    best = Math.max(best, fuzzyScore(q, label))
+    for (const part of parts) {
+      best = Math.max(best, fuzzyScore(q, part))
+    }
+  }
+  return best
+}
+
 /** Расстояние Левенштейна. */
 function levenshtein(a: string, b: string): number {
   if (a === b) return 0
@@ -57,12 +112,7 @@ export function fuzzySearch<T>(
   return items
     .map((item) => ({
       item,
-      score: Math.max(
-        fuzzyScore(q, getLabel(item)),
-        ...getLabel(item)
-          .split(/[,/]/)
-          .map((part) => fuzzyScore(q, part.trim())),
-      ),
+      score: scoreAgainstLabel(q, getLabel(item)),
     }))
     .filter((x) => x.score >= minScore)
     .sort((a, b) => b.score - a.score)

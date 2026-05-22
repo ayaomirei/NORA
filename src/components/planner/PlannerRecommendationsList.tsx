@@ -5,10 +5,10 @@ import { Coins, MapPin, Sparkles } from 'lucide-react'
 import { PlaceFeedbackPanel } from '@/components/planner/PlaceFeedbackPanel'
 import { useAuth } from '@/contexts/useAuth'
 import { useI18n } from '@/hooks/useI18n'
+import { explainPlaceWhy } from '@/lib/explain-place'
 import {
   budgetLabelForTier,
   fitsUserBudget,
-  recommendationInsight,
   type PlannerMood,
   type PlannerRecommendation,
 } from '@/lib/planner-recommendations'
@@ -102,7 +102,7 @@ export function PlannerRecommendationsList({
                   </span>
                   <span className="inline-flex items-center gap-0.5 rounded-full bg-sky-400/10 px-1.5 py-0.5 text-[10px] text-sky-700 dark:text-sky-200">
                     <Sparkles className="h-3 w-3" aria-hidden />
-                    {recommendationInsight(r, mbti, budgetIdx, locale)}
+                    {explainPlaceWhy(r, mood, budgetIdx, mbti, locale)}
                   </span>
                 </div>
                 <p className="mt-1.5 inline-flex items-center gap-1 text-[10px] font-medium text-sky-600 dark:text-sky-400">

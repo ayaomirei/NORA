@@ -113,6 +113,12 @@ npm run geocode:places
 | 1 | `npm run dev:api` |
 | 2 | `npm run dev` |
 
+### Деплой full-stack на Vercel
+
+Фронт + API в одном проекте (`/api/*` → Fastify). Нужен **PostgreSQL** (Neon / Vercel Postgres), не SQLite.
+
+Подробно: [docs/DEPLOY_VERCEL.md](docs/DEPLOY_VERCEL.md)
+
 ---
 
 ## Переменные окружения

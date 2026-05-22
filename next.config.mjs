@@ -15,6 +15,21 @@ const withPWA = withPWAInit({
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['maplibre-gl'],
+  serverExternalPackages: ['@prisma/client', 'bcryptjs'],
+  experimental: {
+    externalDir: true,
+    outputFileTracingIncludes: {
+      '/api/[[...path]]': ['./server/data/**/*', './server/prisma/**/*'],
+    },
+  },
+  webpack: (config) => {
+    config.resolve.extensionAlias = {
+      '.js': ['.ts', '.tsx', '.js'],
+      '.mjs': ['.mts', '.mjs'],
+      '.cjs': ['.cts', '.cjs'],
+    }
+    return config
+  },
 }
 
 export default withPWA(nextConfig)

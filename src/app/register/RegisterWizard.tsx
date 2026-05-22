@@ -153,7 +153,7 @@ export function RegisterWizard() {
     (step === 2 && !canFinish)
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-[var(--nora-bg)] px-4 py-8 text-[var(--nora-text)]">
+    <div className="relative min-h-dvh overflow-x-hidden overflow-y-auto bg-[var(--nora-bg)] px-4 py-8 text-[var(--nora-text)]">
       <div className="pointer-events-none fixed inset-0 -z-10">
         <motion.div
           className="absolute -left-24 top-24 h-80 w-80 rounded-full bg-sky-500/25 blur-3xl"
@@ -197,7 +197,7 @@ export function RegisterWizard() {
             exit={{ opacity: 0, y: -8, scale: 0.99 }}
             transition={tween.enter}
             className={cn(
-              'motion-gpu rounded-2xl border border-[var(--nora-border)] glass-panel-strong p-6 shadow-2xl',
+              'motion-gpu overflow-visible rounded-2xl border border-[var(--nora-border)] glass-panel-strong p-6 shadow-2xl',
               motionGpuClass,
             )}
           >

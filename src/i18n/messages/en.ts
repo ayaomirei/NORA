@@ -41,6 +41,20 @@ export const en: Messages = {
     hint: 'Used to hide bars, clubs, and risky places for minors',
     invalid: 'Enter a valid date (age 13–100)',
   },
+  ai: {
+    intentTitle: 'Describe your day',
+    intentHint:
+      'NORA fills in vibe, time, area and budget. The route is still built by your rules — predictable and safe.',
+    intentPlaceholder:
+      'e.g. quiet evening downtown, 2 places, budget-friendly, no crowds',
+    intentParse: 'Understand',
+    intentApply: 'Apply to form',
+    intentTooShort: 'Write at least a few words',
+    intentFailed: 'Could not parse your request',
+    intentSourceLlm: 'Refined with AI',
+    intentSourceRules: 'Keyword rules',
+    intentOfflineNote: 'no server — rules only',
+  },
   planner: {
     open: 'Open planner: mood and routes',
     close: 'Close planner',
@@ -89,6 +103,7 @@ export const en: Messages = {
   },
   routeBuilder: {
     createAria: 'Create a day route',
+    loginToBuild: 'Sign in to apply your request to the form and build a route.',
     title: 'Day route',
     subtitle: 'Plan ahead: how you want to spend the day, budget, when and where',
     plannerNote:
@@ -294,6 +309,10 @@ export const en: Messages = {
     wrongPassword: 'Incorrect current password',
     wrongDeletePassword: 'Incorrect password',
     registerFailed: 'Registration failed',
+    apiOffline:
+      'NORA API is not reachable. Run: npm run dev:api (port 3001). Or remove NEXT_PUBLIC_API_URL from .env.local for offline mode.',
+    apiWrongPort:
+      'Port 3001 is not the NORA API (often a second Next.js). Stop it and run: npm run dev:api',
   },
   passportForm: {
     photoSection: 'Photo and bio',

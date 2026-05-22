@@ -24,6 +24,26 @@ import { normalizeBudgetIndex } from '@/lib/daily-budget'
 import type { MbtiId } from '@/lib/mbti'
 import { withPlaceCoordinates } from '@/lib/place-coordinates'
 
+const VENUE_TAG_LABELS: Partial<Record<VenueTag, string>> = {
+  bar: 'бар',
+  cafe: 'кафе',
+  club: 'клуб',
+  park: 'парк',
+  food: 'еда ресторан',
+  culture: 'культура музей',
+  market: 'рынок',
+  family: 'семья дети',
+  wellness: 'спорт wellness',
+  nightlife: 'ночь клуб бар',
+}
+
+function placeSearchLabel(p: PlannerRecommendation): string {
+  const tagText = (p.venueTags ?? [])
+    .flatMap((tag) => [tag, VENUE_TAG_LABELS[tag] ?? ''])
+    .join(' ')
+  return `${p.title} ${p.place} ${p.address} ${p.badge ?? ''} ${tagText}`.trim()
+}
+
 let catalog: PlannerRecommendation[] | null = null
 let loadPromise: Promise<PlannerRecommendation[]> | null = null
 
@@ -107,12 +127,10 @@ export function searchPlaces(
   if (!q) {
     return pool.slice(0, options?.limit ?? 8)
   }
-  return fuzzySearch(
-    pool,
-    q,
-    (p) => `${p.title} ${p.place} ${p.address}`,
-    { limit: options?.limit ?? 12, minScore: 24 },
-  ).map(withPlaceCoordinates)
+  return fuzzySearch(pool, q, placeSearchLabel, {
+    limit: options?.limit ?? 12,
+    minScore: 22,
+  }).map(withPlaceCoordinates)
 }
 
 export function findRecommendation(

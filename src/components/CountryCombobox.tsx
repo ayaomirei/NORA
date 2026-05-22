@@ -5,12 +5,12 @@ import { Check, ChevronsUpDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import {
-  Command,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command'
+  ComboboxEmpty,
+  ComboboxGroupHeading,
+  ComboboxOption,
+  ComboboxScrollList,
+  ComboboxSearchField,
+} from '@/components/ComboboxList'
 import {
   Popover,
   PopoverContent,
@@ -70,19 +70,17 @@ export function CountryCombobox({
       pick(exact.code)
       return
     }
-    if (matches[0]) {
-      pick(matches[0].code)
-      return
-    }
+    if (matches[0]) pick(matches[0].code)
   }
 
   return (
-    <div className="relative z-20">
+    <div className={cn('relative', open && 'z-[200]')}>
       <Popover open={open} onOpenChange={setOpen} modal={false}>
         <PopoverTrigger
           id={id}
           role="combobox"
           aria-expanded={open}
+          aria-haspopup="listbox"
           className={cn(
             buttonVariants({ variant: 'secondary', size: 'default' }),
             'h-12 w-full justify-between rounded-glass border border-[var(--nora-border-subtle)] px-3 font-normal shadow-glass hover:shadow-glass-lg',
@@ -94,74 +92,75 @@ export function CountryCombobox({
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-60" />
         </PopoverTrigger>
         <PopoverContent
-          className="p-0"
+          className="flex max-h-[min(360px,50dvh)] flex-col p-0"
           align="start"
+          sideOffset={6}
           onOpenAutoFocus={(e) => e.preventDefault()}
         >
-          <Command shouldFilter={false}>
-            <span className="sr-only">{label}</span>
-            <CommandInput
-              placeholder={t('combobox.searchCountry')}
-              value={search}
-              onValueChange={setSearch}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault()
-                  handleEnter()
-                }
-              }}
-            />
-            <CommandList>
-              {trimmed.length === 0 ? (
-                <CommandGroup>
-                  {pool.slice(0, 12).map((c) => (
-                    <CountryItem
-                      key={c.code}
-                      country={c}
-                      selected={value === c.code}
-                      onPick={() => pick(c.code)}
-                    />
-                  ))}
-                </CommandGroup>
-              ) : null}
-
-              {exactInPool && exact ? (
-                <CommandGroup heading={t('combobox.exactMatch')}>
-                  <CountryItem
-                    country={exact}
-                    selected={value === exact.code}
-                    onPick={() => pick(exact.code)}
+          <span className="sr-only">{label}</span>
+          <ComboboxSearchField
+            value={search}
+            onChange={setSearch}
+            placeholder={t('combobox.searchCountry')}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                handleEnter()
+              }
+            }}
+          />
+          <ComboboxScrollList aria-label={label}>
+            {trimmed.length === 0
+              ? pool.map((c) => (
+                  <CountryRow
+                    key={c.code}
+                    country={c}
+                    selected={value === c.code}
+                    onPick={() => pick(c.code)}
                   />
-                </CommandGroup>
-              ) : null}
+                ))
+              : null}
 
-              {showSimilar ? (
-                <CommandGroup heading={t('combobox.didYouMean')}>
-                  {matches.map((c) => (
-                    <CountryItem
-                      key={c.code}
-                      country={c}
-                      selected={value === c.code}
-                      onPick={() => pick(c.code)}
-                    />
-                  ))}
-                </CommandGroup>
-              ) : null}
+            {exactInPool && exact ? (
+              <>
+                <ComboboxGroupHeading>
+                  {t('combobox.exactMatch')}
+                </ComboboxGroupHeading>
+                <CountryRow
+                  country={exact}
+                  selected={value === exact.code}
+                  onPick={() => pick(exact.code)}
+                />
+              </>
+            ) : null}
 
-              {trimmed.length > 0 && !exactInPool && matches.length === 0 ? (
-                <p className="px-3 py-4 text-center text-sm text-[var(--nora-text-muted)]">
-                  {t('combobox.countryNotFound')}
-                </p>
-              ) : null}
-            </CommandList>
-          </Command>
+            {showSimilar ? (
+              <>
+                <ComboboxGroupHeading>
+                  {t('combobox.didYouMean')}
+                </ComboboxGroupHeading>
+                {matches.map((c) => (
+                  <CountryRow
+                    key={c.code}
+                    country={c}
+                    selected={value === c.code}
+                    onPick={() => pick(c.code)}
+                  />
+                ))}
+              </>
+            ) : null}
+          </ComboboxScrollList>
+
+          {trimmed.length > 0 && !exactInPool && matches.length === 0 ? (
+            <ComboboxEmpty>{t('combobox.countryNotFound')}</ComboboxEmpty>
+          ) : null}
         </PopoverContent>
       </Popover>
     </div>
   )
 }
 
-function CountryItem({
+function CountryRow({
   country,
   selected,
   onPick,
@@ -171,18 +170,12 @@ function CountryItem({
   onPick: () => void
 }) {
   return (
-    <CommandItem
-      value={country.code}
-      onSelect={onPick}
-      onMouseDown={(e) => {
-        e.preventDefault()
-        onPick()
-      }}
-    >
+    <ComboboxOption selected={selected} onPick={onPick}>
       <Check
-        className={cn('mr-2 h-4 w-4', selected ? 'opacity-100' : 'opacity-0')}
+        className={cn('mr-2 h-4 w-4 shrink-0', selected ? 'opacity-100' : 'opacity-0')}
+        aria-hidden
       />
       {country.name}
-    </CommandItem>
+    </ComboboxOption>
   )
 }
