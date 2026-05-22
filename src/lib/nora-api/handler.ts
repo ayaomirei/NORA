@@ -58,7 +58,21 @@ export async function handleNoraApiRequest(
   request: Request,
   pathSegments: string[],
 ): Promise<Response> {
-  const app = await getApp()
+  let app: NoraApiApp
+  try {
+    app = await getApp()
+  } catch (err) {
+    console.error('[nora-api] buildApp failed', err)
+    return Response.json(
+      {
+        code: 'API_BOOT_ERROR',
+        message:
+          err instanceof Error ? err.message : 'API failed to start',
+      },
+      { status: 503 },
+    )
+  }
+
   const url = new URL(request.url)
   const pathname =
     pathSegments.length > 0 ? `/${pathSegments.join('/')}` : '/health'
@@ -72,12 +86,24 @@ export async function handleNoraApiRequest(
     headers[key] = value
   })
 
-  const result = await app.inject({
-    method: request.method as 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'HEAD',
-    url: injectUrl,
-    headers,
-    payload: payload ? Buffer.from(payload) : undefined,
-  })
+  let result: InjectResult
+  try {
+    result = await app.inject({
+      method: request.method as 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'HEAD',
+      url: injectUrl,
+      headers,
+      payload: payload ? Buffer.from(payload) : undefined,
+    })
+  } catch (err) {
+    console.error('[nora-api] inject failed', injectUrl, err)
+    return Response.json(
+      {
+        code: 'API_REQUEST_ERROR',
+        message: err instanceof Error ? err.message : 'Request failed',
+      },
+      { status: 500 },
+    )
+  }
 
   const body =
     typeof result.body === 'string'

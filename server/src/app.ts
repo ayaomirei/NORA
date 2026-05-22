@@ -31,7 +31,15 @@ export async function buildApp(): Promise<FastifyInstance> {
   await app.register(jwt, { secret: JWT_SECRET })
   registerAuthenticate(app)
 
-  await ensureSeedData()
+  if (process.env.DATABASE_URL?.trim()) {
+    try {
+      await ensureSeedData()
+    } catch (err) {
+      app.log.warn({ err }, 'ensureSeedData failed — API starts without demo seed')
+    }
+  } else {
+    app.log.warn('DATABASE_URL is not set — auth and DB routes will fail')
+  }
 
   await app.register(healthRoutes)
   await app.register(authRoutes, { prefix: '/auth' })

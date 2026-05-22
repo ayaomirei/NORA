@@ -9,7 +9,7 @@
     "dev:restart": "sh -c 'lsof -ti :3000,:3001 2>/dev/null | xargs kill -9 2>/dev/null; rm -rf .next && next dev'",
     "dev:api": "npm run dev --prefix server",
     "postinstall": "cd server && npm install && npx prisma generate",
-    "vercel-build": "cd server && npx prisma generate && cd .. && next build",
+    "vercel-build": "cd server && npx prisma generate && npx prisma db push && cd .. && next build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
