@@ -39,8 +39,8 @@ npx prisma db push
 
 Проверка после деплоя:
 
-- `https://ваш-проект.vercel.app` — приложение  
-- `https://ваш-проект.vercel.app/api/health` — JSON `{"ok":true}`  
+- [https://nora-red.vercel.app](https://nora-red.vercel.app) — приложение (текущий деплой)
+- [https://nora-red.vercel.app/api/health](https://nora-red.vercel.app/api/health) — JSON `{"ok":true}` (нужны `DATABASE_URL` и `JWT_SECRET` в Vercel)
 
 ## 4. Локальная разработка (как раньше)
 

@@ -1,5 +1,7 @@
 # NORA — Navigation Organized Route Assistant
 
+**Демо (Vercel):** [https://nora-red.vercel.app](https://nora-red.vercel.app) · API health: [/api/health](https://nora-red.vercel.app/api/health)
+
 Адаптивный городской помощник для Бишкека и окрестностей: интерактивная карта, подбор мест и пешеходных маршрутов с учётом настроения, бюджета, MBTI, возраста и района. Есть социальный слой (поиск людей, друзья, чат), партнёрские заведения и ментальный паспорт.
 
 Фронтенд — **Next.js 14** (PWA). Бэкенд — **Fastify + Prisma** (отдельный процесс). Карта рендерится на **MapLibre GL** (тайлы OpenFreeMap / CARTO); геокодинг и пешеходная геометрия маршрутов — через **2GIS API** на сервере (с запасным **OSRM**).
@@ -116,6 +118,8 @@ npm run geocode:places
 ### Деплой full-stack на Vercel
 
 Фронт + API в одном проекте (`/api/*` → Fastify). Нужен **PostgreSQL** (Neon / Vercel Postgres), не SQLite.
+
+**Продакшен:** [https://nora-red.vercel.app](https://nora-red.vercel.app) (проект Vercel `nora`, команда `keyybes-projects`).
 
 Подробно: [docs/DEPLOY_VERCEL.md](docs/DEPLOY_VERCEL.md)
 
