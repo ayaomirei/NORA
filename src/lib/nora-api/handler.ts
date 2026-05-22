@@ -1,14 +1,24 @@
-import { buildApp } from '@nora/server/app'
-
-type NoraApiApp = Awaited<ReturnType<typeof buildApp>>
+type NoraApiApp = {
+  inject: (opts: {
+    method: string
+    url: string
+    headers: Record<string, string>
+    payload?: Buffer
+  }) => Promise<{
+    statusCode: number
+    headers: Record<string, string | string[] | undefined>
+    body: string
+    rawPayload?: Buffer
+  }>
+}
 
 const globalForApi = globalThis as unknown as {
   noraApiApp?: Promise<NoraApiApp>
 }
 
-function getApp(): Promise<NoraApiApp> {
+async function getApp(): Promise<NoraApiApp> {
   if (!globalForApi.noraApiApp) {
-    globalForApi.noraApiApp = buildApp()
+    globalForApi.noraApiApp = import('@nora/server/app').then((m) => m.buildApp())
   }
   return globalForApi.noraApiApp
 }
