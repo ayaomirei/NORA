@@ -33,3 +33,7 @@ out
 # TypeScript
 tsconfig.tsbuildinfo
 .vercel
+
+# PWA (генерируется next-pwa при build)
+public/sw.js
+public/workbox-*.js
