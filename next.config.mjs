@@ -12,11 +12,14 @@ if (process.env.NODE_ENV !== 'production') {
 const withPWA = withPWAInit({
   dest: 'public',
   cacheOnFrontEndNav: true,
-  aggressiveFrontEndNavCaching: true,
+  /** false — иначе браузер долго держит старый UI после деплоя */
+  aggressiveFrontEndNavCaching: false,
   reloadOnOnline: true,
   disable: process.env.NODE_ENV === 'development',
   workboxOptions: {
     disableDevLogs: true,
+    skipWaiting: true,
+    clientsClaim: true,
   },
 })
 
