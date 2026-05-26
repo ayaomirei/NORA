@@ -66,7 +66,7 @@ export function PlannerRecommendationsList({
             <li key={r.id}>
               <div
                 className={cn(
-                  'w-full rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] text-left transition-smooth hover:border-sky-400/35',
+                  'nora-surface-card w-full rounded-xl text-left transition-smooth hover:bg-[color-mix(in_srgb,var(--nora-accent)_8%,var(--nora-surface-veil))]',
                   compact ? 'p-2.5' : 'p-3',
                 )}
               >
@@ -110,7 +110,7 @@ export function PlannerRecommendationsList({
                   {t('common.showOnMap')}
                 </p>
               </button>
-              <div className="mt-2 border-t border-[var(--nora-border-subtle)] pt-2">
+              <div className="nora-divider mt-2 pt-2">
                 <PlaceFeedbackPanel placeId={r.id} compact />
               </div>
               </div>

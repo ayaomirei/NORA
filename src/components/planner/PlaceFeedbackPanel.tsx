@@ -126,7 +126,7 @@ export function PlaceFeedbackPanel({
       </div>
 
       {!compact ? (
-        <div className="space-y-2 border-t border-[var(--nora-border-subtle)] pt-3">
+        <div className="nora-divider space-y-2 pt-3">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
             {t('places.reviews')}
           </p>
@@ -139,7 +139,7 @@ export function PlaceFeedbackPanel({
               {reviews.map((r) => (
                 <li
                   key={r.id}
-                  className="rounded-lg border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] px-2.5 py-2"
+                  className="nora-surface-card rounded-lg px-2.5 py-2"
                 >
                   <p className="flex items-center justify-between gap-2 text-[11px]">
                     <span className="font-medium text-[var(--nora-text)]">

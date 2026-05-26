@@ -36,7 +36,7 @@ export default function LoginPageClient() {
   return (
     <div className="relative min-h-dvh bg-[var(--nora-bg)] px-4 py-10 text-[var(--nora-text)]">
       <div className="mx-auto w-full max-w-md pt-[max(0.5rem,env(safe-area-inset-top))]">
-        <div className="rounded-2xl border border-[var(--nora-border-strong)] glass-panel-strong p-6 shadow-2xl">
+        <div className="rounded-2xl glass-panel-strong p-6 shadow-2xl">
           <h1 className="text-xl font-semibold">{t('auth.loginTitle')}</h1>
           <p className="mt-2 text-sm text-[var(--nora-text-muted)]">
             {t('auth.loginSubtitle')}

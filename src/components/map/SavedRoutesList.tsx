@@ -31,7 +31,7 @@ export function SavedRoutesList({
   if (routes.length === 0) return null
 
   return (
-    <section className="mt-3 rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2.5">
+    <section className="nora-surface-card mt-3 rounded-xl p-2.5">
       <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
         {t('planner.savedRoutes')}
       </p>
@@ -52,10 +52,10 @@ export function SavedRoutesList({
                   aria-label={t('planner.selectSavedRoute', { title })}
                   aria-pressed={active}
                   className={cn(
-                    'flex min-w-0 flex-1 items-start gap-2 rounded-xl border px-2.5 py-2 text-left transition-colors',
+                    'flex min-w-0 flex-1 items-start gap-2 rounded-xl px-2.5 py-2 text-left transition-colors',
                     active
-                      ? 'border-amber-400/55 bg-amber-400/12 ring-1 ring-amber-400/35'
-                      : 'border-[var(--nora-border-subtle)] bg-[var(--nora-surface)] hover:border-sky-400/35',
+                      ? 'nora-choice-active bg-amber-400/12 ring-1 ring-amber-400/25'
+                      : 'nora-choice hover:bg-[color-mix(in_srgb,var(--nora-accent)_6%,var(--nora-surface-veil))]',
                   )}
                 >
                   <Route
@@ -88,7 +88,7 @@ export function SavedRoutesList({
                 <button
                   type="button"
                   onClick={() => onDelete(route.id)}
-                  className="flex shrink-0 items-center justify-center rounded-xl border border-[var(--nora-border-subtle)] px-2 text-[var(--nora-text-muted)] hover:border-red-400/40 hover:bg-red-400/10 hover:text-red-600 dark:hover:text-red-300"
+                  className="nora-choice flex shrink-0 items-center justify-center rounded-xl px-2 text-[var(--nora-text-muted)] hover:bg-red-400/10 hover:text-red-600 dark:hover:text-red-300"
                   aria-label={t('planner.deleteSavedRoute')}
                 >
                   <Trash2 className="h-3.5 w-3.5" aria-hidden />

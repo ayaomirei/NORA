@@ -20,7 +20,7 @@ export function FaqList() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...tween.fast, delay: i * 0.035 }}
         >
-          <details className="group rounded-2xl border border-[var(--nora-border)] glass-panel">
+          <details className="group rounded-2xl glass-panel">
             <summary
               className={cn(
                 'flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-medium text-[var(--nora-text)]',
@@ -30,7 +30,7 @@ export function FaqList() {
               <span>{item.question}</span>
               <ChevronDown className="h-5 w-5 shrink-0 text-sky-400 transition-transform duration-300 ease-nora group-open:rotate-180" />
             </summary>
-            <p className="border-t border-[var(--nora-border)] px-4 py-3 text-sm leading-relaxed text-[var(--nora-text-muted)]">
+            <p className="nora-divider px-4 py-3 text-sm leading-relaxed text-[var(--nora-text-muted)]">
               {item.answer}
             </p>
           </details>

@@ -40,7 +40,7 @@ const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-  <div className="flex min-w-0 items-center border-b border-[var(--nora-border)] px-3">
+  <div className="nora-divider flex min-w-0 items-center px-3">
     <Search className="mr-2 h-4 w-4 shrink-0 text-[var(--nora-text-muted)]" />
     <div className="min-w-0 flex-1 overflow-x-auto [-webkit-overflow-scrolling:touch]">
       <CommandPrimitive.Input

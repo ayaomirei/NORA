@@ -42,7 +42,7 @@ export function ProfileSocialSection() {
     tab === 'friends' ? friends : tab === 'incoming' ? incoming : outgoing
 
   return (
-    <section className="mb-6 rounded-2xl border border-[var(--nora-border)] glass-panel p-4">
+    <section className="mb-6 rounded-2xl glass-panel p-4">
       <h2 className="text-sm font-semibold text-[var(--nora-text)]">
         {t('social.title')}
       </h2>
@@ -57,10 +57,10 @@ export function ProfileSocialSection() {
             type="button"
             onClick={() => setTab(item.id)}
             className={cn(
-              'shrink-0 rounded-full border px-3 py-1.5 text-sm transition-colors',
+              'shrink-0 rounded-full px-3 py-1.5 text-sm transition-colors',
               tab === item.id
-                ? 'border-sky-400/70 bg-sky-400/15 text-sky-100'
-                : 'border-[var(--nora-border)] text-[var(--nora-text-muted)]',
+                ? 'nora-choice-active'
+                : 'nora-choice text-[var(--nora-text-muted)]',
             )}
           >
             {item.label}

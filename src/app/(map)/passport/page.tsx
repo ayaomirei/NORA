@@ -138,7 +138,7 @@ function PassportContent() {
         </Button>
       </header>
 
-      <section className="mb-6 rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-4">
+      <section className="mb-6 rounded-2xl glass-panel p-4">
         <h2 className="text-sm font-semibold text-[var(--nora-text)]">
           {t('passportForm.photoSection')}
         </h2>
@@ -238,7 +238,7 @@ function PassportContent() {
 
       <ProfileSocialSection />
 
-      <section className="mb-6 space-y-4 rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-4">
+      <section className="mb-6 space-y-4 rounded-2xl glass-panel p-4">
         <h2 className="text-sm font-semibold text-[var(--nora-text)]">
           {t('passportForm.locationsTitle')}
         </h2>
@@ -291,10 +291,10 @@ function PassportContent() {
                 type="button"
                 onClick={() => setStatus(s.id)}
                 className={cn(
-                  'rounded-full border px-3 py-1.5 text-sm transition-colors',
+                  'rounded-full px-3 py-1.5 text-sm transition-colors',
                   status === s.id
-                    ? 'border-sky-400/70 bg-sky-400/15 text-sky-100 shadow-neon'
-                    : 'border-[var(--nora-border)] text-[var(--nora-text-muted)] hover:border-sky-400/35',
+                    ? 'nora-choice-active shadow-neon'
+                    : 'nora-choice text-[var(--nora-text-muted)]',
                 )}
               >
                 {s.label}
@@ -304,7 +304,7 @@ function PassportContent() {
         </div>
       </section>
 
-      <section className="mb-6 rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-4">
+      <section className="mb-6 rounded-2xl glass-panel p-4">
         <h2 className="text-sm font-semibold text-[var(--nora-text)]">
           {t('passportForm.mbtiTitle')}
         </h2>
@@ -313,7 +313,7 @@ function PassportContent() {
         </div>
       </section>
 
-      <section className="mb-6 rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-4">
+      <section className="mb-6 rounded-2xl glass-panel p-4">
         <BirthDateFields
           day={birthDay}
           month={birthMonth}

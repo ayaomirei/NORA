@@ -230,7 +230,7 @@
 
   .glass-panel {
     border-radius: var(--nora-radius);
-    border: 1px solid color-mix(in srgb, white 42%, var(--nora-border-strong));
+    border: none;
     background: linear-gradient(
       165deg,
       var(--nora-glass-highlight) 0%,
@@ -242,13 +242,12 @@
     -webkit-backdrop-filter: blur(var(--nora-blur)) saturate(132%);
     transition:
       background 0.35s ease,
-      border-color 0.35s ease,
       box-shadow 0.35s ease;
   }
 
   .glass-panel-strong {
     border-radius: var(--nora-radius-lg);
-    border: 1px solid color-mix(in srgb, white 38%, var(--nora-border-strong));
+    border: none;
     background: linear-gradient(
       168deg,
       var(--nora-glass-highlight) 0%,
@@ -261,7 +260,7 @@
   }
 
   .glass-nav {
-    border-top: 1px solid color-mix(in srgb, white 28%, var(--nora-border-strong));
+    border: none;
     background: linear-gradient(
       180deg,
       var(--nora-glass-highlight) 0%,
@@ -275,25 +274,26 @@
 
   .glass-chip {
     border-radius: 0.8125rem;
-    border: 1px solid color-mix(in srgb, white 35%, var(--nora-border-subtle));
+    border: none;
     background: var(--nora-surface);
     backdrop-filter: blur(16px) saturate(128%);
     -webkit-backdrop-filter: blur(16px) saturate(128%);
     box-shadow:
       inset 0 1px 0 var(--nora-glass-highlight),
-      0 1px 2px rgba(42, 40, 38, 0.04);
+      0 1px 3px rgba(42, 40, 38, 0.05);
   }
 
   .glass-input {
     border-radius: 0.8125rem;
-    border: 1px solid color-mix(in srgb, white 30%, var(--nora-border-strong));
+    border: none;
     background: var(--nora-surface-strong);
     color: var(--nora-text);
     backdrop-filter: blur(18px) saturate(128%);
     -webkit-backdrop-filter: blur(18px) saturate(128%);
-    box-shadow: inset 0 1px 2px rgba(42, 40, 38, 0.04);
+    box-shadow:
+      inset 0 1px 2px rgba(42, 40, 38, 0.05),
+      0 1px 2px rgba(42, 40, 38, 0.03);
     transition:
-      border-color 0.2s ease,
       box-shadow 0.2s ease,
       background 0.2s ease;
   }
@@ -305,29 +305,78 @@
 
   .glass-input:focus {
     outline: none;
-    border-color: color-mix(in srgb, var(--nora-accent) 60%, transparent);
     background: var(--nora-surface-strong);
     box-shadow:
-      0 0 0 3px color-mix(in srgb, var(--nora-accent) 20%, transparent),
-      inset 0 1px 2px rgba(15, 23, 42, 0.04);
+      0 0 0 3px color-mix(in srgb, var(--nora-accent) 18%, transparent),
+      inset 0 1px 2px rgba(42, 40, 38, 0.04);
   }
 
   .dark .glass-input:focus {
     box-shadow:
-      0 0 0 3px color-mix(in srgb, var(--nora-accent) 16%, transparent),
+      0 0 0 3px color-mix(in srgb, var(--nora-accent) 14%, transparent),
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  /** Кнопки выбора (вайб, район, время…) — без рамок */
+  .nora-choice {
+    border: none;
+    background: var(--nora-surface-veil);
+    box-shadow:
+      inset 0 1px 0 var(--nora-glass-highlight),
+      0 1px 2px rgba(42, 40, 38, 0.04);
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .nora-choice:hover {
+    background: color-mix(in srgb, var(--nora-accent) 6%, var(--nora-surface-veil));
+  }
+
+  .nora-choice-active {
+    border: none;
+    background: color-mix(in srgb, var(--nora-accent) 14%, var(--nora-surface-strong));
+    color: var(--nora-text);
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--nora-accent) 22%, transparent),
+      0 4px 14px -6px var(--nora-glow),
+      inset 0 1px 0 var(--nora-glass-highlight);
+  }
+
+  /** Активная панель / вкладка — лёгкий акцент без цветной обводки */
+  .nora-surface-active {
+    background: color-mix(in srgb, var(--nora-accent) 9%, var(--nora-surface-strong));
+    box-shadow:
+      var(--nora-shadow-glass-lg),
+      0 0 0 1px color-mix(in srgb, var(--nora-accent) 14%, transparent);
+  }
+
+  .nora-divider {
+    border: none;
+    box-shadow: inset 0 1px 0 var(--nora-border-subtle);
+  }
+
+  .nora-surface-card {
+    border: none;
+    background: var(--nora-surface-veil);
+    box-shadow:
+      inset 0 1px 0 var(--nora-glass-highlight),
+      0 2px 10px -4px rgba(42, 40, 38, 0.06);
   }
 
   .chat-bubble-mine {
     background: var(--nora-bubble-mine);
     color: var(--nora-bubble-mine-text);
-    border: 1px solid color-mix(in srgb, var(--nora-accent) 25%, transparent);
+    border: none;
+    box-shadow: 0 1px 4px rgba(42, 40, 38, 0.06);
   }
 
   .chat-bubble-theirs {
     background: var(--nora-bubble-theirs);
     color: var(--nora-bubble-theirs-text);
-    border: 1px solid var(--nora-border-subtle);
+    border: none;
+    box-shadow: 0 1px 4px rgba(42, 40, 38, 0.05);
   }
 
   .text-gradient-sky {
@@ -342,8 +391,9 @@
   }
 
   .neon-ring {
+    border: none;
     box-shadow:
-      0 0 0 1px color-mix(in srgb, var(--nora-accent-2) 38%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--nora-accent-2) 28%, transparent),
       0 8px 28px -6px var(--nora-glow),
       inset 0 1px 0 var(--nora-glass-highlight);
   }

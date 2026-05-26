@@ -126,7 +126,7 @@ export function RouteEditSection({ route, onChange }: RouteEditSectionProps) {
         {route.stops.map((stop, i) => (
           <li
             key={stop.id}
-            className="flex items-start gap-1.5 rounded-lg border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2"
+            className="nora-surface-card flex items-start gap-1.5 rounded-lg p-2"
           >
             <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-400/90 text-[10px] font-bold text-slate-900">
               {i + 1}
@@ -164,14 +164,14 @@ export function RouteEditSection({ route, onChange }: RouteEditSectionProps) {
               setAddOpen((v) => !v)
               setCustomOpen(false)
             }}
-            className="flex w-full items-center justify-center gap-1 rounded-xl border border-dashed border-sky-400/40 px-2 py-2 text-[11px] font-medium text-sky-700 hover:bg-sky-400/10 dark:text-sky-200"
+            className="nora-choice flex w-full items-center justify-center gap-1 rounded-xl border border-dashed border-sky-400/25 px-2 py-2 text-[11px] font-medium text-sky-700 hover:bg-sky-400/10 dark:text-sky-200"
           >
             <Plus className="h-3.5 w-3.5" aria-hidden />
             {t('routeBuilder.addFromCatalog')}
           </button>
 
           {addOpen ? (
-            <div className="max-h-[10rem] overflow-y-auto rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface)]">
+            <div className="max-h-[10rem] overflow-y-auto rounded-xl bg-[var(--nora-surface)] shadow-[inset_0_1px_2px_rgba(42,40,38,0.05)]">
               <input
                 type="search"
                 value={catalogQuery}
@@ -192,7 +192,7 @@ export function RouteEditSection({ route, onChange }: RouteEditSectionProps) {
               setCustomOpen((v) => !v)
               setAddOpen(false)
             }}
-            className="flex w-full items-center justify-center gap-1 rounded-xl border border-dashed border-emerald-400/40 px-2 py-2 text-[11px] font-medium text-emerald-800 hover:bg-emerald-400/10 dark:text-emerald-200"
+            className="nora-choice flex w-full items-center justify-center gap-1 rounded-xl border border-dashed border-emerald-400/25 px-2 py-2 text-[11px] font-medium text-emerald-800 hover:bg-emerald-400/10 dark:text-emerald-200"
           >
             <MapPin className="h-3.5 w-3.5" aria-hidden />
             {t('routeBuilder.addCustomPlace')}
@@ -201,7 +201,7 @@ export function RouteEditSection({ route, onChange }: RouteEditSectionProps) {
           {customOpen ? (
             <form
               onSubmit={handleAddCustom}
-              className="space-y-2 rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2.5"
+              className="nora-surface-card space-y-2 rounded-xl p-2.5"
             >
               <input
                 type="text"

@@ -50,7 +50,7 @@ export function DayIntentAssistant({ onApply }: DayIntentAssistantProps) {
   }
 
   return (
-    <section className="border-b border-[var(--nora-border-subtle)] pb-3">
+    <section className="nora-divider pb-3">
       <div className="mb-1.5 flex items-center gap-1.5">
         <Sparkles className="h-3.5 w-3.5 text-sky-500 dark:text-sky-400" aria-hidden />
         <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-500 dark:text-sky-400">
@@ -95,10 +95,10 @@ export function DayIntentAssistant({ onApply }: DayIntentAssistantProps) {
       {preview ? (
         <p
           className={cn(
-            'mt-2 rounded-lg border px-2.5 py-2 text-[11px] leading-snug',
+            'mt-2 rounded-lg px-2.5 py-2 text-[11px] leading-snug',
             preview.source === 'llm'
-              ? 'border-violet-400/35 bg-violet-400/8 text-[var(--nora-text)]'
-              : 'border-sky-400/30 bg-sky-400/8 text-[var(--nora-text)]',
+              ? 'bg-violet-400/10 text-[var(--nora-text)] shadow-[0_0_0_1px_color-mix(in_srgb,violet_30%,transparent)]'
+              : 'bg-sky-400/8 text-[var(--nora-text)]',
           )}
         >
           {preview.summary}

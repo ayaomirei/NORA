@@ -27,8 +27,7 @@ export function IslandDock() {
       <div
         className={cn(
           'pointer-events-auto flex w-full max-w-md items-stretch',
-          'rounded-[1.375rem] border border-[color-mix(in_srgb,white_38%,var(--nora-border-strong))]',
-          'glass-panel p-1 shadow-glass-lg backdrop-blur-xl',
+          'rounded-[1.375rem] glass-panel p-1 shadow-glass-lg backdrop-blur-xl',
         )}
       >
         {tabKeys.map(({ href, key, icon: Icon }, index) => {
@@ -46,7 +45,7 @@ export function IslandDock() {
               href={href}
               className={cn(
                 'relative flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-[1.1rem] py-2 transition-smooth',
-                index > 0 && 'border-l border-[var(--nora-border-subtle)]',
+                index > 0 && 'shadow-[inset_1px_0_0_var(--nora-border-subtle)]',
                 active
                   ? 'bg-[color-mix(in_srgb,var(--nora-accent-2)_14%,transparent)] text-[var(--nora-text)]'
                   : 'text-[var(--nora-text-muted)] hover:bg-[var(--nora-surface-veil)] hover:text-[var(--nora-text)]',
@@ -57,7 +56,7 @@ export function IslandDock() {
                 <motion.span
                   layoutId="island-tab-glow"
                   className={cn(
-                    'absolute inset-0.5 rounded-[1rem] ring-1 ring-[color-mix(in_srgb,var(--nora-accent-2)_42%,transparent)] motion-gpu',
+                    'absolute inset-0.5 rounded-[1rem] bg-[color-mix(in_srgb,var(--nora-accent-2)_12%,transparent)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)] motion-gpu',
                     motionGpuClass,
                   )}
                   aria-hidden
@@ -65,7 +64,7 @@ export function IslandDock() {
                 />
               ) : active ? (
                 <span
-                  className="absolute inset-0.5 rounded-[1rem] ring-1 ring-[color-mix(in_srgb,var(--nora-accent-2)_42%,transparent)]"
+                  className="absolute inset-0.5 rounded-[1rem] bg-[color-mix(in_srgb,var(--nora-accent-2)_12%,transparent)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)]"
                   aria-hidden
                 />
               ) : null}

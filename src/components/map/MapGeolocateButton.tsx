@@ -88,7 +88,7 @@ export function MapGeolocateButton({
           >
             <motion.div
               className={cn(
-                'rounded-2xl border border-amber-400/40',
+                'rounded-2xl ring-1 ring-amber-400/30',
                 'bg-[color-mix(in_srgb,var(--nora-surface-strong)_92%,#451a03)]',
                 'p-3 shadow-glass-lg backdrop-blur-xl',
               )}
@@ -122,8 +122,7 @@ export function MapGeolocateButton({
         title={label}
         className={cn(
           'pointer-events-auto flex h-11 w-11 items-center justify-center',
-          'rounded-[1.375rem] border border-[color-mix(in_srgb,white_38%,var(--nora-border-strong))]',
-          'glass-panel shadow-glass-lg backdrop-blur-xl transition-smooth',
+          'rounded-[1.375rem] glass-panel shadow-glass-lg backdrop-blur-xl transition-smooth',
           hasLocation
             ? 'text-sky-500 dark:text-sky-300'
             : 'text-[var(--nora-text-muted)] hover:text-[var(--nora-text)]',

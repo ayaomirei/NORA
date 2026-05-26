@@ -17,10 +17,10 @@ export function LanguagePicker() {
             type="button"
             onClick={() => setLocale(code as Locale)}
             className={cn(
-              'rounded-xl border px-3 py-2.5 text-left transition-all',
+              'rounded-xl px-3 py-2.5 text-left transition-all',
               active
-                ? 'border-sky-400/55 bg-sky-400/12 text-sky-700 dark:text-sky-200'
-                : 'border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] text-[var(--nora-text-muted)] hover:border-sky-400/30 hover:text-[var(--nora-text)]',
+                ? 'nora-choice-active text-[var(--nora-text)]'
+                : 'nora-choice text-[var(--nora-text-muted)] hover:text-[var(--nora-text)]',
             )}
           >
             <span className="block text-sm font-medium">

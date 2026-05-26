@@ -155,7 +155,7 @@ function ChatContent() {
           </Link>
         </div>
 
-        <div className="mb-20 flex min-h-[50vh] flex-1 flex-col gap-2 overflow-y-auto rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-3">
+        <div className="mb-20 flex min-h-[50vh] flex-1 flex-col gap-2 overflow-y-auto rounded-2xl glass-panel p-3">
           {(activeThread?.messages ?? []).map((m) => {
             const mine = m.fromId === user.id
             return (
@@ -174,7 +174,7 @@ function ChatContent() {
         </div>
 
         <form
-          className="fixed inset-x-0 bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] z-20 mx-auto flex max-w-lg gap-2 border-t border-[var(--nora-border-strong)] glass-panel-strong px-4 py-3"
+          className="nora-divider fixed inset-x-0 bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] z-20 mx-auto flex max-w-lg gap-2 glass-panel-strong px-4 py-3"
           onSubmit={(e) => {
             e.preventDefault()
             handleSend()
@@ -240,14 +240,14 @@ function ChatContent() {
       ) : null}
 
       {friendIds.length === 0 ? (
-        <div className="rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-6 text-center text-sm text-[var(--nora-text-muted)]">
+        <div className="rounded-2xl glass-panel p-6 text-center text-sm text-[var(--nora-text-muted)]">
           <p>{t('chat.noFriends')}</p>
           <Button asChild className="mt-4">
             <Link href="/?search=open">{t('chat.findPeople')}</Link>
           </Button>
         </div>
       ) : filteredFriendIds.length === 0 ? (
-        <div className="rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-6 text-center text-sm text-[var(--nora-text-muted)]">
+        <div className="rounded-2xl glass-panel p-6 text-center text-sm text-[var(--nora-text-muted)]">
           <p>{t('chat.noResults', { query: listQ })}</p>
         </div>
       ) : (
@@ -271,9 +271,9 @@ function ChatContent() {
                 <button
                   type="button"
                   onClick={() => setActivePeer(peerId)}
-                  className="flex w-full items-center gap-3 rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-4 text-left transition-colors hover:border-sky-400/40"
+                  className="flex w-full items-center gap-3 rounded-2xl glass-panel p-4 text-left transition-colors hover:border-sky-400/40"
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] text-lg">
+                  <span className="glass-chip flex h-11 w-11 items-center justify-center rounded-full text-lg">
                     {peer.avatarEmoji}
                   </span>
                   <div className="min-w-0 flex-1">

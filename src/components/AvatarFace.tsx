@@ -24,7 +24,7 @@ export function AvatarFace({
   return (
     <span
       className={cn(
-        'relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--nora-border)] bg-[var(--nora-surface-strong)] font-semibold text-[var(--nora-text)] shadow-inner',
+        'relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-[var(--nora-surface-strong)] font-semibold text-[var(--nora-text)] shadow-[inset_0_1px_2px_rgba(42,40,38,0.08)]',
         className,
       )}
       style={{ width: size, height: size, fontSize: size * 0.36 }}

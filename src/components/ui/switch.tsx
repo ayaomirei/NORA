@@ -21,11 +21,11 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       disabled={disabled}
       onClick={() => onCheckedChange(!checked)}
       className={cn(
-        'relative inline-flex h-7 w-12 shrink-0 rounded-full border transition-colors duration-200',
+        'relative inline-flex h-7 w-12 shrink-0 rounded-full border-0 transition-colors duration-200',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color-mix(in_srgb,var(--nora-accent)_50%,transparent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--nora-bg-base)]',
         checked
-          ? 'border-sky-400/50 bg-sky-500/35'
-          : 'border-[var(--nora-border-strong)] bg-[var(--nora-surface)]',
+          ? 'bg-sky-500/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]'
+          : 'bg-[var(--nora-surface)] shadow-[inset_0_1px_2px_rgba(42,40,38,0.08)]',
         disabled && 'cursor-not-allowed opacity-45',
         className,
       )}

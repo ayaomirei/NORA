@@ -44,10 +44,10 @@ export function AvatarPrivacyPicker() {
             type="button"
             onClick={() => select(id)}
             className={cn(
-              'flex flex-col items-start gap-1 rounded-xl border px-3 py-3 text-left transition-all',
+              'flex flex-col items-start gap-1 rounded-xl px-3 py-3 text-left transition-all',
               active
-                ? 'border-sky-400/55 bg-sky-500/12 text-[var(--nora-text)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)]'
-                : 'border-[var(--nora-border-subtle)] bg-[var(--nora-surface)] text-[var(--nora-text-muted)] hover:border-[var(--nora-border-strong)] hover:text-[var(--nora-text)]',
+                ? 'nora-choice-active text-[var(--nora-text)]'
+                : 'nora-choice text-[var(--nora-text-muted)] hover:text-[var(--nora-text)]',
             )}
           >
             <span className="flex items-center gap-2 text-sm font-medium">

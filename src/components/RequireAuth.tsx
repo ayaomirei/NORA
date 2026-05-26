@@ -24,7 +24,7 @@ export function RequireAuth({ children }: { children: React.ReactNode }) {
     const loginHref = `/login?next=${encodeURIComponent(pathname)}`
     return (
       <PageShell>
-        <div className="mx-auto max-w-md rounded-2xl border border-[var(--nora-border)] glass-panel p-6 text-center">
+        <div className="mx-auto max-w-md rounded-2xl glass-panel p-6 text-center">
           <h1 className="text-lg font-semibold text-[var(--nora-text)]">
             Нужен вход
           </h1>

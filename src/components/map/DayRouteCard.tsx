@@ -115,7 +115,7 @@ export function DayRouteCard({
       exit={{ opacity: 0, y: 8 }}
       transition={spring.sheet}
       className={cn(
-        'motion-gpu pointer-events-auto overflow-hidden rounded-2xl border border-amber-400/40 bg-[var(--nora-surface-strong)] shadow-glass-lg backdrop-blur-xl',
+        'motion-gpu pointer-events-auto overflow-hidden rounded-2xl bg-[var(--nora-surface-strong)] shadow-glass-lg backdrop-blur-xl ring-1 ring-amber-400/25',
         motionGpuClass,
         collapsed ? 'p-2' : 'p-3',
         className,
@@ -248,7 +248,7 @@ export function DayRouteCard({
                   <button
                     type="button"
                     onClick={() => onSelectStop(stop.id)}
-                    className="relative flex w-full items-start gap-2 rounded-lg border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2 text-left transition-colors hover:border-sky-400/35"
+                    className="nora-surface-card relative flex w-full items-start gap-2 rounded-lg p-2 text-left transition-colors hover:bg-[color-mix(in_srgb,var(--nora-accent)_8%,var(--nora-surface-veil))]"
                   >
                     <span
                       className="relative z-[1] flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold text-slate-900 ring-2 ring-white/90"
@@ -293,12 +293,12 @@ export function DayRouteCard({
                 onClick={handleNavigationPress}
                 disabled={!navigationActive && !canStartNavigation}
                 className={cn(
-                  'mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors',
+                  'mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2.5 text-xs font-semibold transition-colors',
                   navigationActive
-                    ? 'border-amber-400/50 bg-amber-400/15 text-amber-900 dark:text-amber-100'
+                    ? 'nora-choice-active bg-amber-400/15 text-amber-900 dark:text-amber-100'
                     : canStartNavigation
-                      ? 'border-emerald-400/45 bg-emerald-500/15 text-emerald-900 shadow-sm hover:bg-emerald-500/22 dark:text-emerald-100'
-                      : 'cursor-not-allowed border-[var(--nora-border)] bg-[var(--nora-surface-veil)] text-[var(--nora-text-muted)]',
+                      ? 'nora-choice-active bg-emerald-500/15 text-emerald-900 hover:bg-emerald-500/22 dark:text-emerald-100'
+                      : 'nora-choice cursor-not-allowed opacity-60',
                 )}
               >
                 <Navigation className="h-4 w-4" aria-hidden />
@@ -314,10 +314,10 @@ export function DayRouteCard({
                 onClick={handleSave}
                 disabled={isSaved && !hasUnsavedChanges && saveHint === 'idle'}
                 className={cn(
-                  'mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-medium transition-colors',
+                  'mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-medium transition-colors',
                   isSaved && saveHint === 'idle'
-                    ? 'border-amber-400/35 bg-amber-400/10 text-amber-700 dark:text-amber-200'
-                    : 'border-sky-400/40 bg-sky-400/10 text-sky-700 hover:bg-sky-400/16 dark:text-sky-200',
+                    ? 'nora-choice bg-amber-400/10 text-amber-700 dark:text-amber-200'
+                    : 'nora-choice-active bg-sky-400/10 text-[var(--nora-text)] hover:bg-sky-400/16',
                 )}
               >
                 <Bookmark className="h-3.5 w-3.5" aria-hidden />
@@ -343,7 +343,7 @@ export function DayRouteCard({
           animate={{ opacity: 1 }}
           transition={tween.fast}
           onClick={() => setCollapsed(false)}
-          className="mt-1.5 flex w-full items-center justify-center gap-1 rounded-lg border border-amber-400/35 bg-amber-400/10 px-2 py-1 text-[10px] font-medium text-amber-800 dark:text-amber-200"
+          className="nora-choice mt-1.5 flex w-full items-center justify-center gap-1 rounded-lg bg-amber-400/10 px-2 py-1 text-[10px] font-medium text-amber-800 dark:text-amber-200"
         >
           <Navigation className="h-3 w-3" aria-hidden />
           {t('routeBuilder.tapToExpandNav')}

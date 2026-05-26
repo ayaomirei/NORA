@@ -64,7 +64,7 @@ export function PeopleSearchResults({ query, compact }: PeopleSearchResultsProps
 
   return (
     <div className="flex flex-col">
-      <div className="border-b border-[var(--nora-border-subtle)] px-3 pb-2 pt-0.5">
+      <div className="nora-divider px-3 pb-2 pt-0.5">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-500 dark:text-sky-400">
           {compact ? t('search.peopleTitle') : t('search.community')}
         </p>
@@ -150,7 +150,7 @@ function SearchResultRow({
   const incoming = hasIncomingRequest(profile.id)
 
   return (
-    <li className="flex items-center gap-3 rounded-xl border border-[var(--nora-border)] glass-panel p-3">
+    <li className="flex items-center gap-3 rounded-xl glass-panel p-3">
       <Link
         href={`/user/${profile.id}`}
         className="flex min-w-0 flex-1 items-center gap-3"

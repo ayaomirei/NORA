@@ -83,7 +83,7 @@ export function CountryCombobox({
           aria-haspopup="listbox"
           className={cn(
             buttonVariants({ variant: 'secondary', size: 'default' }),
-            'h-12 w-full justify-between rounded-glass border border-[var(--nora-border-subtle)] px-3 font-normal shadow-glass hover:shadow-glass-lg',
+            'h-12 w-full justify-between rounded-glass border-0 px-3 font-normal shadow-glass hover:shadow-glass-lg',
           )}
         >
           <span className="truncate text-left">

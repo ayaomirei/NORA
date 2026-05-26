@@ -34,7 +34,7 @@ export function SettingsSection({
       ref={detailsRef}
       id={id}
       className={cn(
-        'group scroll-mt-24 rounded-2xl border border-[var(--nora-border-strong)] glass-panel',
+        'group scroll-mt-24 rounded-2xl glass-panel',
       )}
     >
       <summary
@@ -55,7 +55,7 @@ export function SettingsSection({
         </span>
         <ChevronDown className="h-5 w-5 shrink-0 text-sky-400 transition-transform group-open:rotate-180" />
       </summary>
-      <div className="border-t border-[var(--nora-border-subtle)] px-4 py-4">
+      <div className="nora-divider px-4 py-4">
         {children}
       </div>
     </details>

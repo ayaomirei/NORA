@@ -24,7 +24,7 @@ export function AvatarLightbox({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-md border-[var(--nora-border-strong)] bg-[var(--nora-surface)] p-2 sm:max-w-lg">
+      <DialogContent className="max-w-md border-0 bg-[var(--nora-surface)] p-2 shadow-glass-lg sm:max-w-lg">
         <DialogTitle className="sr-only">
           {t('avatar.viewTitle', { name: displayName })}
         </DialogTitle>

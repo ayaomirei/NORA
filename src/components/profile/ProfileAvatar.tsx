@@ -44,7 +44,7 @@ export function ProfileAvatar({
   ) : (
     <span
       className={cn(
-        'inline-flex shrink-0 items-center justify-center rounded-full border border-[var(--nora-border)] bg-sky-400/10 text-[var(--nora-text)]',
+        'inline-flex shrink-0 items-center justify-center rounded-full bg-sky-400/10 text-[var(--nora-text)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)]',
         className,
       )}
       style={{ width: size, height: size, fontSize: size * 0.45 }}

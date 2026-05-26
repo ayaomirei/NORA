@@ -64,7 +64,7 @@ export function PlaceMapDialog({
           </DialogHeader>
           <p className="mt-2 text-xs text-[var(--nora-text-muted)]">{place.badge}</p>
         </div>
-        <div className="h-[min(52vh,360px)] w-full border-y border-[var(--nora-border-subtle)]">
+        <div className="nora-divider h-[min(52vh,360px)] w-full">
           {open ? (
             <MapboxSurface
               className="h-full w-full"
@@ -79,7 +79,7 @@ export function PlaceMapDialog({
             />
           ) : null}
         </div>
-        <div className="border-t border-[var(--nora-border-subtle)] p-4">
+        <div className="nora-divider p-4">
           <PlaceFeedbackPanel placeId={place.id} />
         </div>
         <DialogFooter className="p-4 pt-0">

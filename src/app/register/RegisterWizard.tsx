@@ -197,7 +197,7 @@ export function RegisterWizard() {
             exit={{ opacity: 0, y: -8, scale: 0.99 }}
             transition={tween.enter}
             className={cn(
-              'motion-gpu overflow-visible rounded-2xl border border-[var(--nora-border)] glass-panel-strong p-6 shadow-2xl',
+              'motion-gpu overflow-visible rounded-2xl glass-panel-strong p-6 shadow-2xl',
               motionGpuClass,
             )}
           >
@@ -306,10 +306,10 @@ export function RegisterWizard() {
                         type="button"
                         onClick={() => setStatus(s.id)}
                         className={cn(
-                          'rounded-full border px-3 py-1.5 text-sm transition-colors',
+                          'rounded-full px-3 py-1.5 text-sm transition-colors',
                           status === s.id
-                            ? 'border-sky-400/70 bg-sky-400/15 text-sky-100 shadow-neon'
-                            : 'border-[var(--nora-border)] bg-transparent text-[var(--nora-text-muted)] hover:border-sky-400/35',
+                            ? 'nora-choice-active shadow-neon'
+                            : 'nora-choice text-[var(--nora-text-muted)]',
                         )}
                       >
                         {s.label}
@@ -350,10 +350,10 @@ export function RegisterWizard() {
                       type="button"
                       onClick={() => setMood(m.id)}
                       className={cn(
-                        'flex flex-col items-center gap-1 rounded-xl border px-2 py-3 text-sm transition-colors',
+                        'flex flex-col items-center gap-1 rounded-xl px-2 py-3 text-sm transition-colors',
                         mood === m.id
-                          ? 'border-sky-400/70 bg-sky-400/10 neon-ring'
-                          : 'border-[var(--nora-border)] glass-panel text-[var(--nora-text-muted)] hover:border-sky-400/35',
+                          ? 'nora-choice-active neon-ring'
+                          : 'nora-choice text-[var(--nora-text-muted)]',
                       )}
                     >
                       <span className="text-2xl">{m.emoji}</span>

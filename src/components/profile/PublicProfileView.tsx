@@ -89,7 +89,7 @@ export function PublicProfileView({ peerId }: PublicProfileViewProps) {
         </div>
       </header>
 
-      <section className="mb-6 rounded-2xl border border-[var(--nora-border-strong)] glass-panel p-5">
+      <section className="mb-6 rounded-2xl glass-panel p-5">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
           <div className="flex shrink-0 flex-col items-center gap-2 sm:items-start">
             <ProfileAvatar
@@ -128,7 +128,7 @@ export function PublicProfileView({ peerId }: PublicProfileViewProps) {
                 {profile.interests.map((tag: string) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-[var(--nora-border)] bg-[var(--nora-surface-veil)] px-2.5 py-0.5 text-[11px] text-[var(--nora-text-muted)]"
+                    className="glass-chip rounded-full px-2.5 py-0.5 text-[11px] text-[var(--nora-text-muted)]"
                   >
                     {tag}
                   </span>
@@ -157,7 +157,7 @@ export function PublicProfileView({ peerId }: PublicProfileViewProps) {
         </section>
       ) : null}
 
-      <section className="mb-6 rounded-2xl border border-[var(--nora-border)] glass-panel p-4">
+      <section className="mb-6 rounded-2xl glass-panel p-4">
         <dl className="grid gap-3 text-sm sm:grid-cols-2">
           {profile.userStatus ? (
             <div>

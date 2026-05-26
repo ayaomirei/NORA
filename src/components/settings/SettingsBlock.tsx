@@ -16,11 +16,11 @@ export function SettingsBlock({
   return (
     <section
       className={cn(
-        'overflow-hidden rounded-2xl border border-[var(--nora-border-strong)] glass-panel',
+        'overflow-hidden rounded-2xl glass-panel',
         className,
       )}
     >
-      <header className="border-b border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] px-4 py-3.5">
+      <header className="nora-divider bg-[var(--nora-surface-veil)] px-4 py-3.5">
         <h2 className="text-sm font-semibold text-[var(--nora-text)]">{title}</h2>
         {description ? (
           <p className="mt-0.5 text-xs leading-snug text-[var(--nora-text-muted)]">

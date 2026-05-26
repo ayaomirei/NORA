@@ -36,10 +36,8 @@ export function MbtiGrid({ value, onChange }: MbtiGridProps) {
               transition={spring.snappy}
               onClick={() => onChange(mbtiType.id)}
               className={cn(
-                'rounded-xl border px-2 py-3 text-left transition-smooth',
-                active
-                  ? 'ring-2'
-                  : 'border-[var(--nora-border-subtle)] glass-panel hover:border-[color-mix(in_srgb,var(--nora-accent)_35%,transparent)] hover:shadow-glass',
+                'rounded-xl px-2 py-3 text-left transition-smooth',
+                active ? 'ring-2' : 'nora-choice hover:shadow-glass',
               )}
               style={active ? mbtiActiveStyle(hex) : undefined}
             >

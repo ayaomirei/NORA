@@ -89,7 +89,7 @@ export function BudgetStepSlider({
         aria-valuenow={index}
         aria-label={t('budget.title')}
         className={cn(
-          'relative mx-2.5 h-2 touch-none rounded-full border border-[var(--nora-border-subtle)] bg-[var(--nora-surface)] shadow-[inset_0_1px_3px_rgba(15,23,42,0.08)]',
+          'relative mx-2.5 h-2 touch-none rounded-full border-0 bg-[var(--nora-surface)] shadow-[inset_0_1px_3px_rgba(15,23,42,0.08)]',
           dragging ? 'cursor-grabbing' : 'cursor-pointer',
         )}
         onPointerDown={onTrackPointerDown}
@@ -103,7 +103,7 @@ export function BudgetStepSlider({
         />
         <div
           className={cn(
-            'pointer-events-none absolute top-1/2 z-10 h-5 w-5 rounded-full border border-white/50 bg-gradient-to-b from-sky-300 to-sky-500 shadow-neon transition-[transform,box-shadow] duration-200 ease-nora',
+            'pointer-events-none absolute top-1/2 z-10 h-5 w-5 rounded-full border-0 bg-gradient-to-b from-sky-300 to-sky-500 shadow-neon transition-[transform,box-shadow] duration-200 ease-nora',
             dragging && 'ring-2 ring-[color-mix(in_srgb,var(--nora-accent)_40%,transparent)]',
           )}
           style={{

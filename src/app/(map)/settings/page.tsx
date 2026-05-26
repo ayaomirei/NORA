@@ -143,7 +143,7 @@ function SettingsContent() {
           title={t('settings.account')}
           description={t('settings.accountDesc')}
         >
-          <div className="rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] px-3 py-3">
+          <div className="nora-surface-card rounded-xl px-3 py-3">
             <p className="font-medium text-[var(--nora-text)]">{shown}</p>
             <p className="mt-0.5 text-sm text-[var(--nora-text-muted)]">
               @{user.nickname}
@@ -202,7 +202,7 @@ function SettingsContent() {
             </Button>
           </div>
 
-          <div className="mt-5 flex flex-col gap-2 border-t border-[var(--nora-border-subtle)] pt-4">
+          <div className="nora-divider mt-5 flex flex-col gap-2 pt-4">
             <Button type="button" variant="secondary" onClick={logout}>
               {t('settings.logout')}
             </Button>

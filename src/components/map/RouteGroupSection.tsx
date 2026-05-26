@@ -93,7 +93,7 @@ export function RouteGroupSection({
   const isGroup = groupSize > 1
 
   return (
-    <section className="mt-3 rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2.5">
+    <section className="nora-surface-card mt-3 rounded-xl p-2.5">
       <div className="flex items-center gap-2">
         <Users className="h-4 w-4 shrink-0 text-sky-500 dark:text-sky-400" aria-hidden />
         <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
@@ -117,10 +117,10 @@ export function RouteGroupSection({
               }
             }}
             className={cn(
-              'min-w-[2rem] rounded-full border px-2.5 py-1 text-[11px] font-semibold transition-colors',
+              'min-w-[2rem] rounded-full px-2.5 py-1 text-[11px] font-semibold transition-colors',
               groupSize === n
-                ? 'border-sky-400/55 bg-sky-400/12 text-sky-700 dark:text-sky-200'
-                : 'border-[var(--nora-border-subtle)] text-[var(--nora-text-muted)] hover:border-sky-400/30',
+                ? 'nora-choice-active text-[var(--nora-text)]'
+                : 'nora-choice text-[var(--nora-text-muted)]',
             )}
           >
             {n}
@@ -160,7 +160,7 @@ export function RouteGroupSection({
             </p>
           )}
 
-          <div className="mt-3 rounded-lg border border-sky-400/20 bg-sky-400/8 p-2.5">
+          <div className="mt-3 rounded-lg bg-sky-400/8 p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
             <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-600 dark:text-sky-300">
               {t('routeBuilder.groupBudgetTitle')}
             </p>
@@ -192,7 +192,7 @@ export function RouteGroupSection({
         </>
       ) : null}
 
-      <div className="mt-3 border-t border-[var(--nora-border-subtle)] pt-3">
+      <div className="nora-divider mt-3 pt-3">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
           {isGroup
             ? t('routeBuilder.yourBudgetCap')
@@ -234,10 +234,10 @@ function ParticipantChip({
       type="button"
       onClick={onToggle}
       className={cn(
-        'flex max-w-full items-center gap-1 rounded-full border px-2 py-1 text-left transition-colors',
+        'flex max-w-full items-center gap-1 rounded-full px-2 py-1 text-left transition-colors',
         selected
-          ? 'border-sky-400/55 bg-sky-400/12 text-sky-800 dark:text-sky-100'
-          : 'border-[var(--nora-border-subtle)] bg-[var(--nora-surface)] text-[var(--nora-text-muted)] hover:border-sky-400/30',
+          ? 'nora-choice-active text-[var(--nora-text)]'
+          : 'nora-choice text-[var(--nora-text-muted)]',
       )}
       aria-pressed={selected}
     >

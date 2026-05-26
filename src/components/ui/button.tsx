@@ -9,13 +9,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'border border-[color-mix(in_srgb,var(--nora-accent-2)_35%,transparent)] bg-gradient-to-b from-[color-mix(in_srgb,var(--nora-surface-strong)_95%,white)] to-[color-mix(in_srgb,var(--nora-accent)_18%,var(--nora-surface-strong))] text-[var(--nora-text)] shadow-glass hover:to-[color-mix(in_srgb,var(--nora-accent)_24%,var(--nora-surface-strong))] active:scale-[0.99] dark:from-[color-mix(in_srgb,var(--nora-surface-strong)_88%,white)] dark:to-[color-mix(in_srgb,var(--nora-accent)_22%,var(--nora-surface-strong))]',
+          'border-0 bg-gradient-to-b from-[color-mix(in_srgb,var(--nora-surface-strong)_95%,white)] to-[color-mix(in_srgb,var(--nora-accent)_16%,var(--nora-surface-strong))] text-[var(--nora-text)] shadow-glass hover:shadow-glass-lg hover:to-[color-mix(in_srgb,var(--nora-accent)_22%,var(--nora-surface-strong))] active:scale-[0.99] dark:from-[color-mix(in_srgb,var(--nora-surface-strong)_88%,white)] dark:to-[color-mix(in_srgb,var(--nora-accent)_20%,var(--nora-surface-strong))]',
         secondary:
-          'glass-panel text-[var(--nora-text)] hover:shadow-glass-lg active:scale-[0.98]',
+          'border-0 glass-panel text-[var(--nora-text)] hover:shadow-glass-lg active:scale-[0.98]',
         ghost:
-          'text-[var(--nora-text-muted)] hover:glass-chip hover:text-[var(--nora-text)]',
+          'border-0 text-[var(--nora-text-muted)] hover:bg-[var(--nora-surface-veil)] hover:text-[var(--nora-text)]',
         outline:
-          'glass-chip border-[var(--nora-border-subtle)] bg-transparent text-[var(--nora-text)] hover:shadow-glass',
+          'border-0 glass-chip bg-transparent text-[var(--nora-text)] hover:shadow-glass',
         link: 'text-[var(--nora-accent)] underline-offset-4 hover:underline',
       },
       size: {

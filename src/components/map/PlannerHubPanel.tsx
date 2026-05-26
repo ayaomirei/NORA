@@ -109,11 +109,11 @@ export function PlannerHubPanel({
           'pointer-events-auto fixed z-20 flex items-center justify-center',
           'right-[max(0.65rem,env(safe-area-inset-right))]',
           PLANNER_TOP,
-          'h-[3.35rem] w-[3.35rem] rounded-2xl border transition-smooth',
+          'h-[3.35rem] w-[3.35rem] rounded-2xl transition-smooth',
           'glass-panel shadow-glass backdrop-blur-xl',
           open
-            ? 'border-sky-400/55 bg-sky-400/14 text-sky-600 dark:text-sky-300'
-            : 'border-[var(--nora-border-strong)] text-[var(--nora-text)] hover:border-sky-400/35',
+            ? 'nora-surface-active text-sky-600 dark:text-sky-300'
+            : 'text-[var(--nora-text)] hover:shadow-glass-lg',
         )}
       >
         <CalendarDays className="h-5 w-5" strokeWidth={open ? 2.25 : 1.75} aria-hidden />
@@ -146,10 +146,10 @@ export function PlannerHubPanel({
                 'right-0',
                 PLANNER_TOP,
                 PLANNER_PANEL_BOTTOM,
-                'border-l border-[var(--nora-border-strong)] glass-panel-strong shadow-glass-lg',
+                'glass-panel-strong shadow-glass-lg',
               )}
             >
-              <header className="flex shrink-0 items-start justify-between gap-2 border-b border-[var(--nora-border-subtle)] px-3 py-3">
+              <header className="nora-divider flex shrink-0 items-start justify-between gap-2 px-3 py-3">
                 <div>
                   <p
                     id="planner-hub-title"
@@ -176,7 +176,7 @@ export function PlannerHubPanel({
                       onOpenRouteBuilder()
                       setPanelOpen(false)
                     }}
-                    className="mb-3 flex w-full items-center justify-center gap-2 rounded-xl border border-sky-400/45 bg-sky-400/12 px-3 py-2.5 text-xs font-semibold text-sky-800 shadow-sm transition-colors hover:bg-sky-400/18 dark:text-sky-100"
+                    className="nora-choice-active mb-3 flex w-full items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-xs font-semibold text-[var(--nora-text)] transition-colors"
                   >
                     <Route className="h-4 w-4 shrink-0" aria-hidden />
                     {t('planner.createDayRoute')}
@@ -193,13 +193,10 @@ export function PlannerHubPanel({
                         type="button"
                         onClick={() => onMoodChange(m.id)}
                         className={cn(
-                          'flex w-full flex-col items-center gap-0.5 rounded-xl border px-1 py-2 text-center transition-all',
+                          'flex w-full flex-col items-center gap-0.5 rounded-xl px-1 py-2 text-center transition-all',
                           mood === m.id
-                            ? cn(
-                                'border-sky-400/55 bg-sky-400/12 ring-2',
-                                m.ring,
-                              )
-                            : 'border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] hover:border-sky-400/30',
+                            ? cn('nora-choice-active ring-2', m.ring)
+                            : 'nora-choice',
                         )}
                       >
                         <span className="text-xl leading-none" aria-hidden>
@@ -213,7 +210,7 @@ export function PlannerHubPanel({
                   ))}
                 </ul>
 
-                <section className="mt-3 rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2.5">
+                <section className="nora-surface-card mt-3 rounded-xl p-2.5">
                   <div className="flex items-center gap-2">
                     <Coins
                       className="h-4 w-4 shrink-0 text-sky-500 dark:text-sky-400"
@@ -235,7 +232,7 @@ export function PlannerHubPanel({
                   />
                 </section>
 
-                <section className="mt-3 rounded-xl border border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] p-2.5">
+                <section className="nora-surface-card mt-3 rounded-xl p-2.5">
                   <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
                     {t('planner.personality')}
                   </p>
@@ -262,7 +259,7 @@ export function PlannerHubPanel({
                   />
                 ) : null}
 
-                <div className="mt-4 border-t border-[var(--nora-border-subtle)] pt-3 pb-1">
+                <div className="nora-divider mt-4 pt-3 pb-1">
                   <PlannerRecommendationsList
                     mood={plannerMood}
                     budgetIdx={budgetIdx}

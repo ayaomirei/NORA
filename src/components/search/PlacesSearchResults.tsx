@@ -31,8 +31,8 @@ export function PlacesSearchResults({
   const matched = query.trim() ? results : []
 
   return (
-    <div className="flex flex-col border-b border-[var(--nora-border-subtle)]">
-      <div className="border-b border-[var(--nora-border-subtle)] px-3 pb-2 pt-0.5">
+    <div className="nora-divider flex flex-col">
+      <div className="nora-divider px-3 pb-2 pt-0.5">
         <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">
           {t('search.placesTitle')}
         </p>

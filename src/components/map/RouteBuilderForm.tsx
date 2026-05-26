@@ -164,7 +164,7 @@ export function RouteBuilderForm({
         </p>
         <Link
           href="/login"
-          className="mt-2 inline-flex w-fit rounded-xl border border-sky-400/35 bg-sky-400/10 px-3 py-2 text-sm font-medium text-sky-700 hover:bg-sky-400/16 dark:text-sky-200"
+          className="nora-choice-active mt-2 inline-flex w-fit rounded-xl px-3 py-2 text-sm font-medium text-[var(--nora-text)]"
         >
           {t('auth.login')}
         </Link>
@@ -176,7 +176,7 @@ export function RouteBuilderForm({
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-3 pb-3 pt-2">
       <DayIntentAssistant onApply={applyDayIntent} />
 
-      <label className="mt-3 block border-b border-[var(--nora-border-subtle)] pb-2">
+      <label className="nora-divider mt-3 block pb-2">
         <span className="text-[10px] font-semibold uppercase tracking-wide text-sky-500 dark:text-sky-400">
           {t('routeBuilder.routeNameLabel')}
         </span>
@@ -203,10 +203,8 @@ export function RouteBuilderForm({
                   setError(null)
                 }}
                 className={cn(
-                  'flex w-full flex-col items-center gap-0.5 rounded-xl border px-1 py-2 text-center transition-colors',
-                  vibe === id
-                    ? 'border-sky-400/55 bg-sky-400/12 ring-2 ring-sky-400/25'
-                    : 'border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] hover:border-sky-400/30',
+                  'nora-choice flex w-full flex-col items-center gap-0.5 rounded-xl px-1 py-2 text-center',
+                  vibe === id && 'nora-choice-active',
                 )}
               >
                 <span className="text-xl leading-none" aria-hidden>
@@ -245,10 +243,10 @@ export function RouteBuilderForm({
               type="button"
               onClick={() => setDayPeriod(period)}
               className={cn(
-                'rounded-xl border px-2 py-2 text-left transition-colors',
+                'nora-choice rounded-xl px-2 py-2 text-left',
                 dayPeriod === period
-                  ? 'border-sky-400/55 bg-sky-400/12 text-sky-700 dark:text-sky-200'
-                  : 'border-[var(--nora-border-subtle)] bg-[var(--nora-surface-veil)] text-[var(--nora-text-muted)] hover:border-sky-400/30',
+                  ? 'nora-choice-active'
+                  : 'text-[var(--nora-text-muted)]',
               )}
             >
               <span className="block text-[11px] font-medium">
@@ -270,10 +268,8 @@ export function RouteBuilderForm({
               type="button"
               onClick={() => setStopCount(n)}
               className={cn(
-                'min-w-[2.25rem] rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-colors',
-                stopCount === n
-                  ? 'border-sky-400/55 bg-sky-400/12 text-sky-700 dark:text-sky-200'
-                  : 'border-[var(--nora-border-subtle)] text-[var(--nora-text-muted)] hover:border-sky-400/30',
+                'nora-choice min-w-[2.25rem] rounded-full px-3 py-1.5 text-[11px] font-semibold',
+                stopCount === n ? 'nora-choice-active' : 'text-[var(--nora-text-muted)]',
               )}
             >
               {n}
@@ -299,10 +295,8 @@ export function RouteBuilderForm({
                 setError(null)
               }}
               className={cn(
-                'rounded-full border px-2.5 py-1 text-[11px] transition-colors',
-                areaKey === key
-                  ? 'border-sky-400/55 bg-sky-400/12 text-sky-700 dark:text-sky-200'
-                  : 'border-[var(--nora-border-subtle)] text-[var(--nora-text-muted)] hover:border-sky-400/30',
+                'nora-choice rounded-full px-2.5 py-1 text-[11px]',
+                areaKey === key ? 'nora-choice-active' : 'text-[var(--nora-text-muted)]',
               )}
             >
               {areaMeta[key]}
@@ -312,10 +306,8 @@ export function RouteBuilderForm({
             type="button"
             onClick={() => setAreaKey('custom')}
             className={cn(
-              'rounded-full border px-2.5 py-1 text-[11px] transition-colors',
-              areaKey === 'custom'
-                ? 'border-sky-400/55 bg-sky-400/12 text-sky-700 dark:text-sky-200'
-                : 'border-[var(--nora-border-subtle)] text-[var(--nora-text-muted)] hover:border-sky-400/30',
+              'nora-choice rounded-full px-2.5 py-1 text-[11px]',
+              areaKey === 'custom' ? 'nora-choice-active' : 'text-[var(--nora-text-muted)]',
             )}
           >
             {areaMeta.custom}

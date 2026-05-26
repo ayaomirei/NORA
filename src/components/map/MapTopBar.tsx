@@ -190,13 +190,13 @@ export function MapTopBar({
           >
             <div
               className={cn(
-                'flex min-w-0 flex-1 flex-col overflow-hidden rounded-2xl border shadow-glass backdrop-blur-xl',
+                'flex min-w-0 flex-1 flex-col overflow-hidden rounded-2xl shadow-glass backdrop-blur-xl',
                 searchExpanded && 'min-h-0',
                 searchOpen && 'min-h-0 flex-1',
                 searchExpanded && PANEL_MAX_H,
                 searchOpen
-                  ? 'border-sky-400/40 glass-panel-strong'
-                  : 'border-[var(--nora-border-strong)] glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_38%,transparent)]',
+                  ? 'nora-surface-active glass-panel-strong'
+                  : 'glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_38%,transparent)]',
               )}
             >
               <div className="flex min-w-0 shrink-0 items-center gap-2.5 px-3.5 py-2.5">
@@ -246,7 +246,7 @@ export function MapTopBar({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={openCloseTransition}
-                    className="flex min-h-0 flex-1 flex-col overflow-hidden border-t border-[var(--nora-border-subtle)]"
+                    className="nora-divider flex min-h-0 flex-1 flex-col overflow-hidden"
                   >
                     <div
                       className="min-h-0 flex-1 overflow-hidden"
@@ -277,10 +277,10 @@ export function MapTopBar({
               aria-label={t('routeBuilder.createAria')}
               aria-expanded={routeOpen}
               className={cn(
-                'flex h-[2.75rem] w-[2.75rem] shrink-0 items-center justify-center rounded-2xl border shadow-glass backdrop-blur-xl transition-colors',
+                'flex h-[2.75rem] w-[2.75rem] shrink-0 items-center justify-center rounded-2xl shadow-glass backdrop-blur-xl transition-colors',
                 routeOpen
-                  ? 'border-sky-400/40 glass-panel-strong bg-sky-400/14 text-sky-600 dark:text-sky-300'
-                  : 'border-[var(--nora-border-strong)] glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_38%,transparent)] text-[var(--nora-text-muted)] hover:border-sky-400/35 hover:text-[var(--nora-text)]',
+                  ? 'nora-surface-active text-[var(--nora-accent)]'
+                  : 'glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_38%,transparent)] text-[var(--nora-text-muted)] hover:bg-[var(--nora-surface-veil)] hover:text-[var(--nora-text)]',
               )}
             >
               {routeOpen ? (
@@ -301,7 +301,7 @@ export function MapTopBar({
                 transition={openCloseTransition}
                 style={{ transformOrigin: 'top center' }}
                 className={cn(
-                  'motion-gpu flex min-h-0 flex-col overflow-hidden rounded-2xl border border-sky-400/40 glass-panel-strong shadow-glass backdrop-blur-xl',
+                  'motion-gpu flex min-h-0 flex-col overflow-hidden rounded-2xl glass-panel-strong shadow-glass backdrop-blur-xl',
                   motionGpuClass,
                   PANEL_MAX_H,
                 )}
