@@ -1,5 +1,13 @@
+import { config as loadEnv } from 'dotenv'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import withPWAInit from '@ducanh2912/next-pwa'
 import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin'
+
+/** Локально: DATABASE_URL, JWT, 2GIS, Gemini из server/.env для /api/* */
+if (process.env.NODE_ENV !== 'production') {
+  loadEnv({ path: resolve(dirname(fileURLToPath(import.meta.url)), 'server/.env') })
+}
 
 const withPWA = withPWAInit({
   dest: 'public',

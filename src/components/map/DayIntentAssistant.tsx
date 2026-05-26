@@ -18,6 +18,7 @@ export function DayIntentAssistant({ onApply }: DayIntentAssistantProps) {
   const [text, setText] = useState('')
   const [pending, setPending] = useState(false)
   const [preview, setPreview] = useState<DayIntentParseResult | null>(null)
+  const [usedLlmFallback, setUsedLlmFallback] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   async function handleParse() {
@@ -29,8 +30,12 @@ export function DayIntentAssistant({ onApply }: DayIntentAssistantProps) {
     setError(null)
     setPending(true)
     try {
-      const intent = await fetchDayIntent(trimmed, locale)
+      const { usedFallback, ...intent } = await fetchDayIntent(trimmed, locale)
       setPreview(intent)
+      setUsedLlmFallback(usedFallback)
+      if (usedFallback && isApiEnabled()) {
+        setError(t('ai.intentLlmFallback'))
+      }
     } catch {
       setError(t('ai.intentFailed'))
     } finally {
@@ -101,7 +106,11 @@ export function DayIntentAssistant({ onApply }: DayIntentAssistantProps) {
             {preview.source === 'llm'
               ? t('ai.intentSourceLlm')
               : t('ai.intentSourceRules')}
-            {!isApiEnabled() ? ` · ${t('ai.intentOfflineNote')}` : null}
+            {!isApiEnabled()
+              ? ` · ${t('ai.intentOfflineNote')}`
+              : usedLlmFallback
+                ? ` · ${t('ai.intentLlmFallbackShort')}`
+                : null}
           </span>
         </p>
       ) : null}

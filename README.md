@@ -84,20 +84,22 @@ npm run dev
 API: [http://localhost:3001](http://localhost:3001)  
 Проверка: `curl http://localhost:3001/health`
 
-### 3. Фронтенд
+### 3. Запуск (одна команда)
 
-В корне создайте `.env.local` (см. `.env.example`):
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3001
-```
+Настройте `server/.env` (скопируйте из `server/.env.example`, `npm run db:push`).
 
 ```bash
-# из корня репозитория
+# из корня — фронт + API на http://localhost:3000 (как на Vercel)
 npm run dev
 ```
 
-Приложение: [http://localhost:3000](http://localhost:3000)
+API: [http://localhost:3000/api/health](http://localhost:3000/api/health)
+
+| Команда | Когда |
+|---------|--------|
+| `npm run dev` | **Обычно** — один процесс, `/api/*` внутри Next |
+| `npm run dev:all` | Два процесса: API :3001 + фронт :3000 (нужен `.env.local` с `NEXT_PUBLIC_API_URL`) |
+| `npm run dev:api` | Только бэкенд на :3001 |
 
 ### 4. Координаты мест (один раз, с ключом 2GIS)
 
@@ -107,13 +109,6 @@ npm run geocode:places
 ```
 
 Скрипт заполняет `server/data/place-coords.json` (~1 запрос/с с паузой). Без ключа используются запасные координаты и прямые отрезки между точками.
-
-### Два терминала (удобно)
-
-| Терминал | Команда |
-|----------|---------|
-| 1 | `npm run dev:api` |
-| 2 | `npm run dev` |
 
 ### Деплой full-stack на Vercel
 

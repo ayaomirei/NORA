@@ -336,6 +336,37 @@ export function clampDayIntent(
   }
 }
 
+const LLM_NEUTRAL_DEFAULTS: Omit<DayIntentParseResult, 'summary'> = {
+  source: 'llm',
+  vibe: 'calm',
+  dayPeriod: 'afternoon',
+  stopCount: 3,
+  areaKey: 'center',
+  areaCustom: '',
+  confidence: 0.85,
+}
+
+/** Ответ API (Gemini): без смешивания с правилами. */
+export function dayIntentFromLlm(
+  data: unknown,
+  locale: Locale,
+): DayIntentParseResult | null {
+  if (!isValidDayIntentPayload(data)) return null
+  const partial = data as Partial<DayIntentParseResult>
+  const fallback: DayIntentParseResult = {
+    ...LLM_NEUTRAL_DEFAULTS,
+    summary: summaryFor(
+      locale,
+      LLM_NEUTRAL_DEFAULTS.vibe,
+      LLM_NEUTRAL_DEFAULTS.dayPeriod,
+      LLM_NEUTRAL_DEFAULTS.stopCount,
+      LLM_NEUTRAL_DEFAULTS.areaKey,
+      '',
+    ),
+  }
+  return clampDayIntent({ ...partial, source: 'llm' }, fallback, locale)
+}
+
 export function mergeDayIntent(
   local: DayIntentParseResult,
   remote: Partial<DayIntentParseResult> & { source?: DayIntentSource },

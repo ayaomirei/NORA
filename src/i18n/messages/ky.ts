@@ -51,8 +51,11 @@ export const ky: Messages = {
     intentApply: 'Формага колдонуу',
     intentTooShort: 'Бир нече сөз жазыңыз',
     intentFailed: 'Сурамды түшүнбөй калдык',
-    intentSourceLlm: 'ИИ менен такталды',
+    intentSourceLlm: 'ИИ менен такталды (Gemini)',
     intentSourceRules: 'Ачкыч сөздөр',
+    intentLlmFallback:
+      'ИИ жооп берген жок — ачкыч сөздөр боюнча толтурулду.',
+    intentLlmFallbackShort: 'запасной вариант',
     intentOfflineNote: 'серверсиз — эрежелер гана',
   },
   planner: {

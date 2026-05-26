@@ -51,8 +51,11 @@ export const ko: Messages = {
     intentApply: '폼에 적용',
     intentTooShort: '몇 마디 이상 적어 주세요',
     intentFailed: '요청을 이해하지 못했습니다',
-    intentSourceLlm: 'AI로 다듬음',
+    intentSourceLlm: 'AI로 다듬음 (Gemini)',
     intentSourceRules: '키워드 규칙',
+    intentLlmFallback:
+      'AI가 응답하지 않아 키워드 규칙으로 채웠습니다.',
+    intentLlmFallbackShort: '대체 분석',
     intentOfflineNote: '서버 없음 — 규칙만',
   },
   planner: {

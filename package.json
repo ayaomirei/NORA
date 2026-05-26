@@ -4,9 +4,12 @@
   "version": "0.0.0",
   "homepage": "https://nora-red.vercel.app",
   "scripts": {
-    "dev": "next dev",
-    "dev:clean": "rm -rf .next && next dev",
-    "dev:restart": "sh -c 'lsof -ti :3000,:3001 2>/dev/null | xargs kill -9 2>/dev/null; rm -rf .next && next dev'",
+    "dev": "npm run dev:one",
+    "dev:one": "sh -c 'lsof -ti :3000 2>/dev/null | xargs kill -9 2>/dev/null; NEXT_PUBLIC_API_SAME_ORIGIN=1 next dev'",
+    "dev:all": "concurrently -k -n api,web -c blue,green \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:web": "next dev",
+    "dev:clean": "rm -rf .next && npm run dev:one",
+    "dev:restart": "sh -c 'lsof -ti :3000,:3001 2>/dev/null | xargs kill -9 2>/dev/null; rm -rf .next && npm run dev:one'",
     "dev:api": "npm run dev --prefix server",
     "postinstall": "cd server && npm install && npx prisma generate",
     "vercel-build": "cd server && npx prisma generate && npx prisma db push && cd .. && next build",
@@ -34,6 +37,8 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
     "@prisma/nextjs-monorepo-workaround-plugin": "^7.8.0",
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.18",

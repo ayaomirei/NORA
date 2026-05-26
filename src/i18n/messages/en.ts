@@ -51,8 +51,10 @@ export const en: Messages = {
     intentApply: 'Apply to form',
     intentTooShort: 'Write at least a few words',
     intentFailed: 'Could not parse your request',
-    intentSourceLlm: 'Refined with AI',
+    intentSourceLlm: 'Refined with AI (Gemini)',
     intentSourceRules: 'Keyword rules',
+    intentLlmFallback: 'AI did not respond — filled in using keyword rules.',
+    intentLlmFallbackShort: 'fallback parse',
     intentOfflineNote: 'no server — rules only',
   },
   planner: {

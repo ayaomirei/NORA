@@ -49,8 +49,11 @@ export const ru = {
     intentApply: 'Применить к форме',
     intentTooShort: 'Напишите хотя бы несколько слов',
     intentFailed: 'Не удалось разобрать запрос',
-    intentSourceLlm: 'Уточнено с помощью ИИ',
+    intentSourceLlm: 'Уточнено с помощью ИИ (Gemini)',
     intentSourceRules: 'По ключевым словам',
+    intentLlmFallback:
+      'ИИ не ответил — подставлены настройки по ключевым словам.',
+    intentLlmFallbackShort: 'запасной разбор',
     intentOfflineNote: 'без сервера — только правила',
   },
   planner: {
