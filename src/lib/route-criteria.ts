@@ -261,6 +261,10 @@ export function scorePlaceForRoute(
   context?: {
     slotCategory?: ExperienceCategory | null
     categoryCounts?: Map<ExperienceCategory, number>
+    groupSize?: number
+    groupMbti?: MbtiId[]
+    recentStops?: Map<string, number>
+    variationSeed?: string
   },
 ): number {
   let score = 0
@@ -286,7 +290,32 @@ export function scorePlaceForRoute(
   score += tagScore(tags, period.boost, 1.5)
   score -= tagScore(tags, period.avoid, 2)
 
-  if (mbti && place.mbtiFit?.includes(mbti)) score += 2.5
+  if (mbti && place.mbtiFit?.includes(mbti)) score += 3.5
+  else if (mbti && place.mbtiFit?.length) score -= 1.5
+
+  if (context?.groupMbti?.length && place.mbtiFit?.length) {
+    const hits = context.groupMbti.filter((id) => place.mbtiFit?.includes(id)).length
+    if (hits > 0) score += Math.min(2.4, hits * 0.8)
+  }
+
+  const groupSize = context?.groupSize ?? 1
+  if (groupSize >= 3) {
+    if (category === 'family' || category === 'park' || category === 'culture') score += 1.8
+    if (category === 'wellness' && groupSize >= 5) score -= 1.2
+  }
+  if (groupSize <= 2 && category === 'family') score -= 0.8
+
+  const seenRecently = context?.recentStops?.get(place.id) ?? 0
+  if (seenRecently > 0) score -= Math.min(10, seenRecently * 3.2)
+
+  if (context?.variationSeed) {
+    const n = `${place.id}:${context.variationSeed}`
+      .split('')
+      .reduce((acc, ch) => (acc * 33 + ch.charCodeAt(0)) >>> 0, 5381)
+    const jitter = ((n % 2000) / 1000 - 1) * 0.9
+    score += jitter
+  }
+
   score += placePreferenceWeight(userId, place.id) * 2
 
   const dur = durationMinutes(place)
@@ -323,12 +352,23 @@ export function rankPlacesForRoute(
   mbti?: MbtiId | '',
   userId?: string,
   birth: BirthDateInput = null,
+  options?: {
+    groupSize?: number
+    groupMbti?: MbtiId[]
+    recentStops?: Map<string, number>
+    variationSeed?: string
+  },
 ): PlannerRecommendation[] {
   const eligible = filterPlacesForRoute(places, profile, birth)
   return [...eligible]
     .map((place) => ({
       place,
-      score: scorePlaceForRoute(place, profile, mbti, userId),
+      score: scorePlaceForRoute(place, profile, mbti, userId, {
+        groupSize: options?.groupSize,
+        groupMbti: options?.groupMbti,
+        recentStops: options?.recentStops,
+        variationSeed: options?.variationSeed,
+      }),
     }))
     .sort((a, b) => b.score - a.score)
     .map(({ place }) => place)
@@ -404,6 +444,12 @@ export function buildSaturatedRoute(
   mbti?: MbtiId | '',
   userId?: string,
   birth: BirthDateInput = null,
+  options?: {
+    groupSize?: number
+    groupMbti?: MbtiId[]
+    recentStops?: Map<string, number>
+    variationSeed?: string
+  },
 ): PlannerRecommendation[] {
   const pool = filterPlacesForRoute(candidates, profile, birth)
   const maxStops = effectiveStopCount(profile)
@@ -444,6 +490,10 @@ export function buildSaturatedRoute(
         scorePlaceForRoute(place, profile, mbti, userId, {
           slotCategory,
           categoryCounts,
+          groupSize: options?.groupSize,
+          groupMbti: options?.groupMbti,
+          recentStops: options?.recentStops,
+          variationSeed: options?.variationSeed,
         }) - distPenalty
 
       if (!best || score > best.score) {
@@ -465,6 +515,10 @@ export function buildSaturatedRoute(
         }
         const score = scorePlaceForRoute(place, profile, mbti, userId, {
           categoryCounts,
+          groupSize: options?.groupSize,
+          groupMbti: options?.groupMbti,
+          recentStops: options?.recentStops,
+          variationSeed: options?.variationSeed,
         })
         if (!best || score > best.score) best = { place, score }
       }

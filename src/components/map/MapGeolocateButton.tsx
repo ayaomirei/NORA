@@ -68,7 +68,7 @@ export function MapGeolocateButton({
     <div
       className={cn(
         'pointer-events-none fixed z-[18] flex flex-col items-center gap-2',
-        'left-1/2 bottom-[calc(5.15rem+env(safe-area-inset-bottom,0px))] -translate-x-1/2',
+        'left-1/2 bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] -translate-x-1/2',
         className,
       )}
     >

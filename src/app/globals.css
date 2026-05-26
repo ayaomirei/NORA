@@ -9,36 +9,38 @@
   --nora-bg-base: #f8f6f3;
   --nora-bg-gradient: linear-gradient(
     180deg,
-    #fcfbfa 0%,
-    #f8f6f3 45%,
-    #f2efe9 100%
+    #fdfcfa 0%,
+    #f9f5f0 45%,
+    #f0ebe4 100%
   );
-  --nora-mesh-a: rgba(212, 196, 168, 0.22);
-  --nora-mesh-b: rgba(196, 204, 214, 0.18);
-  --nora-mesh-c: rgba(255, 252, 248, 0.72);
+  --nora-mesh-a: rgba(218, 188, 152, 0.28);
+  --nora-mesh-b: rgba(188, 198, 220, 0.24);
+  --nora-mesh-c: rgba(255, 252, 248, 0.78);
   --nora-mesh-d: transparent;
 
   --nora-bg: #f8f6f3;
   --nora-text: #2a2826;
   --nora-text-muted: #8a8580;
-  --nora-accent: #8e9aae;
-  --nora-accent-2: #c4b5a0;
+  --nora-accent: #7a8eb8;
+  --nora-accent-2: #b8a488;
   --nora-border: rgba(42, 40, 38, 0.07);
   --nora-border-strong: rgba(42, 40, 38, 0.11);
   --nora-border-subtle: rgba(42, 40, 38, 0.05);
-  --nora-glow: rgba(196, 181, 160, 0.32);
-  --nora-progress: rgba(142, 154, 174, 0.88);
+  --nora-glow: rgba(184, 168, 148, 0.38);
+  --nora-progress: rgba(122, 142, 188, 0.92);
 
   --nora-glass-highlight: rgba(255, 255, 255, 0.82);
-  --nora-glass-shade: rgba(248, 246, 243, 0.42);
-  --nora-surface: rgba(255, 255, 255, 0.58);
-  --nora-surface-strong: rgba(255, 255, 255, 0.74);
-  --nora-surface-veil: rgba(255, 255, 255, 0.38);
-  --nora-nav-bg: rgba(255, 255, 255, 0.62);
+  --nora-glass-shade: rgba(244, 240, 234, 0.36);
+  --nora-liquid-specular: rgba(255, 255, 255, 0.9);
+  --nora-liquid-tint: rgba(196, 210, 232, 0.08);
+  --nora-surface: rgba(255, 255, 255, 0.34);
+  --nora-surface-strong: rgba(255, 255, 255, 0.48);
+  --nora-surface-veil: rgba(255, 255, 255, 0.2);
+  --nora-nav-bg: rgba(255, 255, 255, 0.38);
 
-  --nora-bubble-mine: rgba(232, 228, 220, 0.72);
+  --nora-bubble-mine: rgba(232, 228, 220, 0.66);
   --nora-bubble-mine-text: #4a4844;
-  --nora-bubble-theirs: rgba(255, 255, 255, 0.78);
+  --nora-bubble-theirs: rgba(255, 255, 255, 0.7);
   --nora-bubble-theirs-text: #2a2826;
 
   --nora-blur: 28px;
@@ -47,15 +49,15 @@
   --nora-radius-lg: 1.3125rem;
 
   --nora-shadow-glass:
-    0 1px 2px rgba(42, 40, 38, 0.04),
-    0 8px 28px -6px rgba(42, 40, 38, 0.07),
-    0 20px 48px -16px rgba(196, 181, 160, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+    0 18px 44px -24px rgba(34, 32, 30, 0.28),
+    0 4px 12px rgba(34, 32, 30, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.42);
   --nora-shadow-glass-lg:
-    0 2px 4px rgba(42, 40, 38, 0.05),
-    0 16px 40px -8px rgba(42, 40, 38, 0.09),
-    0 32px 64px -20px rgba(196, 181, 160, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.98);
+    0 28px 68px -30px rgba(34, 32, 30, 0.34),
+    0 8px 20px rgba(34, 32, 30, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.4);
   --nora-shadow-nav:
     0 -1px 0 rgba(255, 255, 255, 0.65) inset,
     0 -12px 36px -8px rgba(42, 40, 38, 0.06);
@@ -67,48 +69,52 @@
   --nora-bg-base: #141820;
   --nora-bg-gradient: linear-gradient(
     152deg,
-    #221e32 0%,
-    #1a1824 28%,
-    #181716 52%,
-    #121a24 78%,
+    #2a2440 0%,
+    #1e1a2c 28%,
+    #1a1718 52%,
+    #141c28 78%,
     #0e141c 100%
   );
-  --nora-mesh-a: rgba(212, 196, 168, 0.16);
-  --nora-mesh-b: rgba(148, 172, 210, 0.14);
-  --nora-mesh-c: rgba(118, 92, 138, 0.12);
-  --nora-mesh-d: rgba(72, 118, 142, 0.1);
+  --nora-mesh-a: rgba(228, 198, 158, 0.22);
+  --nora-mesh-b: rgba(132, 168, 228, 0.2);
+  --nora-mesh-c: rgba(128, 98, 168, 0.16);
+  --nora-mesh-d: rgba(88, 128, 168, 0.14);
 
   --nora-bg: #181716;
   --nora-text: #f5f3f0;
   --nora-text-muted: #a39e98;
-  --nora-accent: #b8c4d4;
-  --nora-accent-2: #d4c4a8;
+  --nora-accent: #a8b8d8;
+  --nora-accent-2: #d8c0a0;
   --nora-border: rgba(255, 255, 255, 0.07);
   --nora-border-strong: rgba(255, 255, 255, 0.11);
   --nora-border-subtle: rgba(255, 255, 255, 0.05);
-  --nora-glow: rgba(212, 196, 168, 0.18);
-  --nora-progress: rgba(184, 196, 212, 0.88);
+  --nora-glow: rgba(220, 198, 158, 0.24);
+  --nora-progress: rgba(168, 188, 228, 0.92);
 
-  --nora-glass-highlight: rgba(255, 255, 255, 0.07);
-  --nora-glass-shade: rgba(12, 11, 10, 0.42);
-  --nora-surface: rgba(36, 34, 32, 0.52);
-  --nora-surface-strong: rgba(42, 40, 38, 0.72);
-  --nora-surface-veil: rgba(36, 34, 32, 0.38);
-  --nora-nav-bg: rgba(24, 23, 22, 0.62);
+  --nora-glass-highlight: rgba(255, 255, 255, 0.09);
+  --nora-glass-shade: rgba(10, 12, 16, 0.38);
+  --nora-liquid-specular: rgba(255, 255, 255, 0.15);
+  --nora-liquid-tint: rgba(168, 188, 228, 0.05);
+  --nora-surface: rgba(28, 30, 36, 0.3);
+  --nora-surface-strong: rgba(34, 36, 42, 0.42);
+  --nora-surface-veil: rgba(26, 28, 34, 0.19);
+  --nora-nav-bg: rgba(22, 24, 30, 0.36);
 
   --nora-bubble-mine: rgba(184, 196, 212, 0.16);
   --nora-bubble-mine-text: #e8e6e2;
-  --nora-bubble-theirs: rgba(42, 40, 38, 0.82);
+  --nora-bubble-theirs: rgba(42, 40, 38, 0.74);
   --nora-bubble-theirs-text: #f5f3f0;
 
   --nora-shadow-glass:
-    0 2px 8px rgba(0, 0, 0, 0.22),
-    0 16px 40px -12px rgba(0, 0, 0, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    0 20px 46px -24px rgba(0, 0, 0, 0.52),
+    0 5px 14px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
   --nora-shadow-glass-lg:
-    0 4px 12px rgba(0, 0, 0, 0.26),
-    0 24px 56px -16px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+    0 32px 74px -32px rgba(0, 0, 0, 0.58),
+    0 10px 22px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
   --nora-shadow-nav:
     0 -1px 0 rgba(255, 255, 255, 0.06) inset,
     0 -16px 40px -10px rgba(0, 0, 0, 0.28);
@@ -231,15 +237,26 @@
   .glass-panel {
     border-radius: var(--nora-radius);
     border: none;
-    background: linear-gradient(
-      165deg,
-      var(--nora-glass-highlight) 0%,
-      var(--nora-surface) 42%,
-      var(--nora-glass-shade) 100%
-    );
+    background:
+      radial-gradient(
+        130% 110% at 2% -18%,
+        color-mix(in srgb, var(--nora-liquid-specular) 88%, transparent) 0%,
+        transparent 46%
+      ),
+      radial-gradient(
+        100% 90% at 100% 120%,
+        color-mix(in srgb, var(--nora-liquid-tint) 26%, transparent) 0%,
+        transparent 52%
+      ),
+      linear-gradient(
+        168deg,
+        color-mix(in srgb, var(--nora-liquid-specular) 68%, var(--nora-surface)) 0%,
+        color-mix(in srgb, var(--nora-surface) 94%, transparent) 58%,
+        color-mix(in srgb, var(--nora-glass-shade) 66%, transparent) 100%
+      );
     box-shadow: var(--nora-shadow-glass);
-    backdrop-filter: blur(var(--nora-blur)) saturate(132%);
-    -webkit-backdrop-filter: blur(var(--nora-blur)) saturate(132%);
+    backdrop-filter: blur(calc(var(--nora-blur) + 8px)) saturate(152%) contrast(1.04);
+    -webkit-backdrop-filter: blur(calc(var(--nora-blur) + 8px)) saturate(152%) contrast(1.04);
     transition:
       background 0.35s ease,
       box-shadow 0.35s ease;
@@ -248,15 +265,26 @@
   .glass-panel-strong {
     border-radius: var(--nora-radius-lg);
     border: none;
-    background: linear-gradient(
-      168deg,
-      var(--nora-glass-highlight) 0%,
-      var(--nora-surface-strong) 50%,
-      var(--nora-glass-shade) 100%
-    );
+    background:
+      radial-gradient(
+        140% 105% at 10% -24%,
+        color-mix(in srgb, var(--nora-liquid-specular) 92%, transparent) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        92% 82% at 100% 120%,
+        color-mix(in srgb, var(--nora-liquid-tint) 24%, transparent) 0%,
+        transparent 58%
+      ),
+      linear-gradient(
+        170deg,
+        color-mix(in srgb, var(--nora-liquid-specular) 58%, var(--nora-surface-strong)) 0%,
+        color-mix(in srgb, var(--nora-surface-strong) 94%, transparent) 62%,
+        color-mix(in srgb, var(--nora-glass-shade) 68%, transparent) 100%
+      );
     box-shadow: var(--nora-shadow-glass-lg);
-    backdrop-filter: blur(var(--nora-blur-strong)) saturate(138%);
-    -webkit-backdrop-filter: blur(var(--nora-blur-strong)) saturate(138%);
+    backdrop-filter: blur(calc(var(--nora-blur-strong) + 8px)) saturate(156%) contrast(1.04);
+    -webkit-backdrop-filter: blur(calc(var(--nora-blur-strong) + 8px)) saturate(156%) contrast(1.04);
   }
 
   .glass-nav {
@@ -275,24 +303,43 @@
   .glass-chip {
     border-radius: 0.8125rem;
     border: none;
-    background: var(--nora-surface);
-    backdrop-filter: blur(16px) saturate(128%);
-    -webkit-backdrop-filter: blur(16px) saturate(128%);
+    background:
+      radial-gradient(
+        105% 90% at 8% -20%,
+        color-mix(in srgb, var(--nora-liquid-specular) 86%, transparent) 0%,
+        transparent 58%
+      ),
+      linear-gradient(
+        170deg,
+        color-mix(in srgb, var(--nora-liquid-specular) 42%, var(--nora-surface)) 0%,
+        color-mix(in srgb, var(--nora-surface) 92%, transparent) 58%,
+        color-mix(in srgb, var(--nora-glass-shade) 78%, transparent) 100%
+      );
+    backdrop-filter: blur(20px) saturate(142%);
+    -webkit-backdrop-filter: blur(20px) saturate(142%);
     box-shadow:
-      inset 0 1px 0 var(--nora-glass-highlight),
-      0 1px 3px rgba(42, 40, 38, 0.05);
+      inset 0 1px 0 color-mix(in srgb, var(--nora-glass-highlight) 85%, transparent),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.28),
+      0 8px 18px -12px rgba(42, 40, 38, 0.2);
   }
 
   .glass-input {
     border-radius: 0.8125rem;
     border: none;
-    background: var(--nora-surface-strong);
+    background:
+      radial-gradient(
+        115% 88% at 8% -22%,
+        color-mix(in srgb, var(--nora-liquid-specular) 72%, transparent) 0%,
+        transparent 58%
+      ),
+      color-mix(in srgb, var(--nora-surface-strong) 94%, transparent);
     color: var(--nora-text);
-    backdrop-filter: blur(18px) saturate(128%);
-    -webkit-backdrop-filter: blur(18px) saturate(128%);
+    backdrop-filter: blur(20px) saturate(130%);
+    -webkit-backdrop-filter: blur(20px) saturate(130%);
     box-shadow:
-      inset 0 1px 2px rgba(42, 40, 38, 0.05),
-      0 1px 2px rgba(42, 40, 38, 0.03);
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.22),
+      0 10px 22px -18px rgba(42, 40, 38, 0.22);
     transition:
       box-shadow 0.2s ease,
       background 0.2s ease;
@@ -320,9 +367,20 @@
   /** Кнопки выбора (вайб, район, время…) — без рамок */
   .nora-choice {
     border: none;
-    background: var(--nora-surface-veil);
+    background:
+      radial-gradient(
+        112% 90% at 8% -24%,
+        color-mix(in srgb, var(--nora-liquid-specular) 74%, transparent) 0%,
+        transparent 55%
+      ),
+      linear-gradient(
+        170deg,
+        color-mix(in srgb, var(--nora-liquid-specular) 40%, var(--nora-surface-veil)) 0%,
+        color-mix(in srgb, var(--nora-surface-veil) 92%, transparent) 62%,
+        color-mix(in srgb, var(--nora-glass-shade) 44%, transparent) 100%
+      );
     box-shadow:
-      inset 0 1px 0 var(--nora-glass-highlight),
+      inset 0 1px 0 color-mix(in srgb, var(--nora-glass-highlight) 82%, transparent),
       0 1px 2px rgba(42, 40, 38, 0.04);
     transition:
       background 0.2s ease,
@@ -336,7 +394,18 @@
 
   .nora-choice-active {
     border: none;
-    background: color-mix(in srgb, var(--nora-accent) 14%, var(--nora-surface-strong));
+    background:
+      radial-gradient(
+        118% 95% at 10% -26%,
+        color-mix(in srgb, var(--nora-liquid-specular) 72%, transparent) 0%,
+        transparent 54%
+      ),
+      linear-gradient(
+        170deg,
+        color-mix(in srgb, var(--nora-liquid-specular) 36%, var(--nora-surface-strong)) 0%,
+        color-mix(in srgb, var(--nora-accent) 10%, var(--nora-surface-strong)) 58%,
+        color-mix(in srgb, var(--nora-glass-shade) 58%, transparent) 100%
+      );
     color: var(--nora-text);
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--nora-accent) 22%, transparent),
@@ -359,10 +428,21 @@
 
   .nora-surface-card {
     border: none;
-    background: var(--nora-surface-veil);
+    background:
+      radial-gradient(
+        112% 100% at 8% -20%,
+        color-mix(in srgb, var(--nora-liquid-specular) 62%, transparent) 0%,
+        transparent 58%
+      ),
+      linear-gradient(
+        172deg,
+        color-mix(in srgb, var(--nora-liquid-specular) 26%, var(--nora-surface-veil)) 0%,
+        color-mix(in srgb, var(--nora-surface-veil) 90%, transparent) 62%,
+        color-mix(in srgb, var(--nora-glass-shade) 48%, transparent) 100%
+      );
     box-shadow:
-      inset 0 1px 0 var(--nora-glass-highlight),
-      0 2px 10px -4px rgba(42, 40, 38, 0.06);
+      inset 0 1px 0 color-mix(in srgb, var(--nora-glass-highlight) 80%, transparent),
+      0 2px 10px -4px rgba(42, 40, 38, 0.05);
   }
 
   .chat-bubble-mine {
@@ -407,7 +487,12 @@
   }
 
   .pb-island-dock {
-    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .island-dock-bar.glass-panel {
+    border-radius: 9999px;
+    overflow: hidden;
   }
 }
 
@@ -423,8 +508,8 @@
   border-radius: var(--nora-radius) !important;
   background: linear-gradient(
     145deg,
-    var(--nora-glass-highlight),
-    var(--nora-surface-strong)
+    color-mix(in srgb, var(--nora-glass-highlight) 88%, transparent),
+    color-mix(in srgb, var(--nora-surface-strong) 92%, transparent)
   ) !important;
   color: var(--nora-text) !important;
   border: 1px solid var(--nora-border-strong) !important;
@@ -597,9 +682,9 @@
 .nora-map-dark {
   background: linear-gradient(
     165deg,
-    #1e1a2c 0%,
-    #16141e 45%,
-    #0e141c 100%
+    #2e2848 0%,
+    #221e34 42%,
+    #121c2c 100%
   );
 }
 
@@ -612,12 +697,12 @@
   background:
     radial-gradient(
       ellipse 100% 70% at 0% 0%,
-      rgba(212, 196, 168, 0.07) 0%,
+      rgba(228, 188, 148, 0.14) 0%,
       transparent 50%
     ),
     radial-gradient(
       ellipse 90% 60% at 100% 15%,
-      rgba(148, 172, 210, 0.08) 0%,
+      rgba(148, 172, 228, 0.2) 0%,
       transparent 48%
     ),
     radial-gradient(
@@ -635,7 +720,7 @@
 }
 
 .nora-map-dark .maplibregl-canvas {
-  filter: brightness(1.02) contrast(1.04) saturate(0.88) sepia(0.06) hue-rotate(8deg);
+  filter: brightness(1.04) contrast(1.08) saturate(1.12) sepia(0.06) hue-rotate(4deg);
 }
 
 .nora-map-light {
@@ -643,7 +728,7 @@
 }
 
 .nora-map-light .maplibregl-canvas {
-  filter: saturate(1.02) contrast(0.99) brightness(1);
+  filter: saturate(1.18) contrast(1.03) brightness(1.02);
 }
 
 .nora-map-light::after {
@@ -654,7 +739,7 @@
   z-index: 1;
   background: radial-gradient(
       ellipse 95% 65% at 50% 100%,
-      rgba(196, 181, 160, 0.05) 0%,
+      rgba(196, 181, 160, 0.09) 0%,
       transparent 52%
     ),
     radial-gradient(

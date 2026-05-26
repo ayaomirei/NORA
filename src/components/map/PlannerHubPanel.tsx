@@ -44,7 +44,7 @@ type PlannerHubPanelProps = {
 const PLANNER_TOP =
   'top-[max(4.5rem,calc(env(safe-area-inset-top)+20vh))]' as const
 const PLANNER_PANEL_BOTTOM =
-  'bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))]' as const
+  'bottom-[calc(5.25rem+env(safe-area-inset-bottom,0px))]' as const
 
 export function PlannerHubPanel({
   mood,

@@ -18,7 +18,7 @@ export async function aiRoutes(app: FastifyInstance) {
       })
     }
 
-    const { text, locale } = parsed.data
+    const { text, locale, context } = parsed.data
 
     if (!isLlmConfigured()) {
       return reply.code(503).send({
@@ -28,7 +28,7 @@ export async function aiRoutes(app: FastifyInstance) {
       })
     }
 
-    const result = await parseDayIntentWithLlm(text, locale)
+    const result = await parseDayIntentWithLlm(text, locale, context)
     if (!result) {
       return reply.code(502).send({
         code: 'AI_PARSE_FAILED',

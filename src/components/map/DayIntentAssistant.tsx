@@ -11,9 +11,15 @@ import { cn } from '@/lib/utils'
 
 type DayIntentAssistantProps = {
   onApply: (intent: DayIntentParseResult) => void
+  parseContext?: {
+    mbti?: string
+    groupSize?: number
+    currentVibe?: string
+    profileMood?: string
+  }
 }
 
-export function DayIntentAssistant({ onApply }: DayIntentAssistantProps) {
+export function DayIntentAssistant({ onApply, parseContext }: DayIntentAssistantProps) {
   const { locale, t } = useI18n()
   const [text, setText] = useState('')
   const [pending, setPending] = useState(false)
@@ -30,7 +36,11 @@ export function DayIntentAssistant({ onApply }: DayIntentAssistantProps) {
     setError(null)
     setPending(true)
     try {
-      const { usedFallback, ...intent } = await fetchDayIntent(trimmed, locale)
+      const { usedFallback, ...intent } = await fetchDayIntent(
+        trimmed,
+        locale,
+        parseContext,
+      )
       setPreview(intent)
       setUsedLlmFallback(usedFallback)
       if (usedFallback && isApiEnabled()) {

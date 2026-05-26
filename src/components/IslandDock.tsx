@@ -21,16 +21,16 @@ export function IslandDock() {
 
   return (
     <nav
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-3 pb-[max(0.65rem,env(safe-area-inset-bottom,0px))] pt-2"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center px-4 pb-[max(0.65rem,env(safe-area-inset-bottom,0px))] pt-2"
       aria-label={t('nav.aria')}
     >
       <div
         className={cn(
-          'pointer-events-auto flex w-full max-w-md items-stretch',
-          'rounded-[1.375rem] glass-panel p-1 shadow-glass-lg backdrop-blur-xl',
+          'pointer-events-auto flex w-[16.25rem] max-w-[min(16.25rem,92vw)] items-stretch',
+          'island-dock-bar glass-panel p-1.5 shadow-glass-lg backdrop-blur-xl',
         )}
       >
-        {tabKeys.map(({ href, key, icon: Icon }, index) => {
+        {tabKeys.map(({ href, key, icon: Icon }) => {
           const active =
             href === '/'
               ? pathname === '/' || pathname === ''
@@ -44,8 +44,7 @@ export function IslandDock() {
               key={href}
               href={href}
               className={cn(
-                'relative flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-[1.1rem] py-2 transition-smooth',
-                index > 0 && 'shadow-[inset_1px_0_0_var(--nora-border-subtle)]',
+                'relative flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-full px-1.5 py-2.5 transition-smooth',
                 active
                   ? 'bg-[color-mix(in_srgb,var(--nora-accent-2)_14%,transparent)] text-[var(--nora-text)]'
                   : 'text-[var(--nora-text-muted)] hover:bg-[var(--nora-surface-veil)] hover:text-[var(--nora-text)]',
@@ -56,7 +55,7 @@ export function IslandDock() {
                 <motion.span
                   layoutId="island-tab-glow"
                   className={cn(
-                    'absolute inset-0.5 rounded-[1rem] bg-[color-mix(in_srgb,var(--nora-accent-2)_12%,transparent)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)] motion-gpu',
+                    'absolute inset-1 rounded-full bg-[color-mix(in_srgb,var(--nora-accent-2)_12%,transparent)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)] motion-gpu',
                     motionGpuClass,
                   )}
                   aria-hidden
@@ -64,7 +63,7 @@ export function IslandDock() {
                 />
               ) : active ? (
                 <span
-                  className="absolute inset-0.5 rounded-[1rem] bg-[color-mix(in_srgb,var(--nora-accent-2)_12%,transparent)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)]"
+                  className="absolute inset-1 rounded-full bg-[color-mix(in_srgb,var(--nora-accent-2)_12%,transparent)] shadow-[inset_0_1px_0_var(--nora-glass-highlight)]"
                   aria-hidden
                 />
               ) : null}
@@ -77,7 +76,7 @@ export function IslandDock() {
               />
               <span
                 className={cn(
-                  'relative max-w-full truncate px-0.5 text-[9px] font-medium',
+                  'relative max-w-full truncate px-0.5 text-[10px] font-medium leading-tight',
                   active && 'text-[var(--nora-text)]',
                 )}
               >

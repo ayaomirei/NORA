@@ -3,6 +3,16 @@ import { z } from 'zod'
 export const dayIntentBodySchema = z.object({
   text: z.string().min(3).max(600),
   locale: z.enum(['ru', 'en', 'ky', 'ko']).default('ru'),
+  context: z
+    .object({
+      mbti: z.string().max(4).optional(),
+      groupSize: z.number().int().min(1).max(12).optional(),
+      currentVibe: z
+        .enum(['calm', 'social', 'romantic', 'family', 'active', 'cozy'])
+        .optional(),
+      profileMood: z.enum(['calm', 'energy', 'tired', 'anxious']).optional(),
+    })
+    .optional(),
 })
 
 export const dayIntentResponseSchema = z.object({
@@ -10,6 +20,7 @@ export const dayIntentResponseSchema = z.object({
   vibe: z.enum(['calm', 'social', 'romantic', 'family', 'active', 'cozy']),
   dayPeriod: z.enum(['morning', 'afternoon', 'evening', 'night']),
   stopCount: z.number().int().min(1).max(5),
+  groupSize: z.number().int().min(1).max(8).optional(),
   areaKey: z.enum([
     'center',
     'osh',

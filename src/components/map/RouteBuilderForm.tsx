@@ -80,24 +80,18 @@ export function RouteBuilderForm({
     })
   }, [user, organizerBudgetIdx, friendParticipantIds, groupSize])
 
-  function applyDayIntent(intent: DayIntentParseResult) {
-    setVibe(intent.vibe)
-    setDayPeriod(intent.dayPeriod)
-    setStopCount(intent.stopCount)
-    setAreaKey(intent.areaKey)
-    setAreaCustom(intent.areaCustom)
-    if (intent.budgetIdx !== undefined) {
-      setOrganizerBudgetIdx(intent.budgetIdx)
-    }
-    if (intent.routeName) {
-      setRouteName(intent.routeName)
-    }
-    setError(null)
-  }
-
-  function handleBuild() {
+  function buildRouteWithParams(params: {
+    vibe: RouteVibe
+    dayPeriod: RouteDayPeriod
+    stopCount: number
+    areaKey: RouteAreaKey
+    areaCustom: string
+    budgetIdx?: number
+    routeName?: string
+  }) {
     if (!user) return
-    if (areaKey === 'custom' && !areaCustom.trim()) {
+    const selectedAreaCustom = params.areaCustom ?? ''
+    if (params.areaKey === 'custom' && !selectedAreaCustom.trim()) {
       setError(t('routeBuilder.areaRequired'))
       return
     }
@@ -114,7 +108,7 @@ export function RouteBuilderForm({
     const effectiveBudget =
       groupSize > 1
         ? analysis.effectiveBudgetIdx
-        : organizerBudgetIdx
+        : (params.budgetIdx ?? organizerBudgetIdx)
 
     const dislikeUserIds = [user.id, ...friendParticipantIds]
     const birthDate = strictestBirthDateForRouteGroup(
@@ -128,13 +122,13 @@ export function RouteBuilderForm({
 
     const route = buildDayRoute(
       {
-        vibe,
+        vibe: params.vibe,
         budgetIdx: effectiveBudget,
-        dayPeriod,
-        stopCount,
-        areaKey,
-        areaCustom,
-        name: routeName,
+        dayPeriod: params.dayPeriod,
+        stopCount: params.stopCount,
+        areaKey: params.areaKey,
+        areaCustom: selectedAreaCustom,
+        name: params.routeName,
         mbti,
         birthDate,
         userId: user.id,
@@ -153,6 +147,38 @@ export function RouteBuilderForm({
     }
     setError(null)
     onBuilt(route)
+  }
+
+  function applyDayIntent(intent: DayIntentParseResult) {
+    setVibe(intent.vibe)
+    setDayPeriod(intent.dayPeriod)
+    setStopCount(intent.stopCount)
+    setAreaKey(intent.areaKey)
+    setAreaCustom(intent.areaCustom)
+    if (intent.groupSize !== undefined) {
+      const nextGroup = Math.max(1, Math.min(8, intent.groupSize))
+      setGroupSize(nextGroup)
+      if (nextGroup === 1) setParticipantIds([])
+      else setParticipantIds((prev) => prev.slice(0, nextGroup - 1))
+    }
+    if (intent.budgetIdx !== undefined) {
+      setOrganizerBudgetIdx(intent.budgetIdx)
+    }
+    if (intent.routeName) {
+      setRouteName(intent.routeName)
+    }
+    setError(null)
+  }
+
+  function handleBuild() {
+    buildRouteWithParams({
+      vibe,
+      dayPeriod,
+      stopCount,
+      areaKey,
+      areaCustom,
+      routeName,
+    })
   }
 
   if (!user) {
@@ -174,69 +200,83 @@ export function RouteBuilderForm({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-3 pb-3 pt-2">
-      <DayIntentAssistant onApply={applyDayIntent} />
-
-      <label className="nora-divider mt-3 block pb-2">
-        <span className="text-[10px] font-semibold uppercase tracking-wide text-sky-500 dark:text-sky-400">
-          {t('routeBuilder.routeNameLabel')}
-        </span>
-        <input
-          type="text"
-          value={routeName}
-          onChange={(e) => setRouteName(e.target.value)}
-          placeholder={t('routeBuilder.routeNamePlaceholder')}
-          className="glass-input mt-1.5 w-full px-3 py-2.5 text-sm"
+      <section className="nora-surface-card mt-2 rounded-xl p-2.5">
+        <DayIntentAssistant
+          onApply={applyDayIntent}
+          parseContext={{
+            mbti: mbti || undefined,
+            groupSize,
+            currentVibe: vibe,
+            profileMood: profileMood || undefined,
+          }}
         />
-      </label>
-
-      <section className="mt-3">
-        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
-          {t('routeBuilder.vibeTitle')}
+        <p className="pt-2 text-[11px] text-[var(--nora-text-muted)]">
+          {t('ai.intentHint')}
         </p>
-        <ul className="grid grid-cols-2 gap-1.5">
-          {ROUTE_VIBES.map((id) => (
-            <li key={id}>
-              <button
-                type="button"
-                onClick={() => {
-                  setVibe(id)
-                  setError(null)
-                }}
-                className={cn(
-                  'nora-choice flex w-full flex-col items-center gap-0.5 rounded-xl px-1 py-2 text-center',
-                  vibe === id && 'nora-choice-active',
-                )}
-              >
-                <span className="text-xl leading-none" aria-hidden>
-                  {vibeMeta[id].emoji}
-                </span>
-                <span className="text-[10px] font-medium leading-tight text-[var(--nora-text)]">
-                  {vibeMeta[id].label}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
       </section>
 
-      <RouteGroupSection
-        organizerId={user.id}
-        organizerBudgetIdx={organizerBudgetIdx}
-        onOrganizerBudgetChange={setOrganizerBudgetIdx}
-        groupSize={groupSize}
-        onGroupSizeChange={setGroupSize}
-        participantIds={participantIds}
-        onParticipantIdsChange={setParticipantIds}
-      />
+      <div className="mt-3 space-y-3">
+          <label className="nora-divider block pb-2">
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-sky-500 dark:text-sky-400">
+              {t('routeBuilder.routeNameLabel')}
+            </span>
+            <input
+              type="text"
+              value={routeName}
+              onChange={(e) => setRouteName(e.target.value)}
+              placeholder={t('routeBuilder.routeNamePlaceholder')}
+              className="glass-input mt-1.5 w-full px-3 py-2.5 text-sm"
+            />
+          </label>
 
-      <section className="mt-3">
-        <div className="mb-1.5 flex items-center gap-1.5">
+          <section className="mt-0">
+            <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
+              {t('routeBuilder.vibeTitle')}
+            </p>
+            <ul className="grid grid-cols-2 gap-2">
+              {ROUTE_VIBES.map((id) => (
+                <li key={id}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setVibe(id)
+                      setError(null)
+                    }}
+                    className={cn(
+                      'nora-choice flex w-full flex-col items-center gap-0.5 rounded-xl px-1 py-2 text-center',
+                      vibe === id && 'nora-choice-active',
+                    )}
+                  >
+                    <span className="text-xl leading-none" aria-hidden>
+                      {vibeMeta[id].emoji}
+                    </span>
+                    <span className="text-[10px] font-medium leading-tight text-[var(--nora-text)]">
+                      {vibeMeta[id].label}
+                    </span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <RouteGroupSection
+            organizerId={user.id}
+            organizerBudgetIdx={organizerBudgetIdx}
+            onOrganizerBudgetChange={setOrganizerBudgetIdx}
+            groupSize={groupSize}
+            onGroupSizeChange={setGroupSize}
+            participantIds={participantIds}
+            onParticipantIdsChange={setParticipantIds}
+          />
+
+          <section className="mt-0">
+        <div className="mb-2 flex items-center gap-2">
           <Clock className="h-3.5 w-3.5 text-sky-500 dark:text-sky-400" aria-hidden />
           <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
             {t('routeBuilder.whenTitle')}
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-1.5">
+        <div className="grid grid-cols-2 gap-2">
           {ROUTE_DAY_PERIODS.map((period) => (
             <button
               key={period}
@@ -255,13 +295,13 @@ export function RouteBuilderForm({
             </button>
           ))}
         </div>
-      </section>
+          </section>
 
-      <section className="mt-3">
-        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
+          <section className="mt-0">
+        <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
           {t('routeBuilder.placesCount')}
         </p>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {ROUTE_STOP_COUNTS.map((n) => (
             <button
               key={n}
@@ -276,16 +316,16 @@ export function RouteBuilderForm({
             </button>
           ))}
         </div>
-      </section>
+          </section>
 
-      <section className="mt-3">
-        <div className="mb-1.5 flex items-center gap-1.5">
+          <section className="mt-0">
+        <div className="mb-2 flex items-center gap-2">
           <MapPin className="h-3.5 w-3.5 text-sky-500 dark:text-sky-400" aria-hidden />
           <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--nora-text-muted)]">
             {t('routeBuilder.areaTitle')}
           </p>
         </div>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {presetAreas.map((key) => (
             <button
               key={key}
@@ -325,7 +365,8 @@ export function RouteBuilderForm({
             className="glass-input mt-2 w-full px-3 py-2.5 text-sm"
           />
         ) : null}
-      </section>
+          </section>
+        </div>
 
       {error ? (
         <p className="mt-2 text-center text-xs text-amber-600 dark:text-amber-300">

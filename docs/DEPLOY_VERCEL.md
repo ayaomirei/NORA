@@ -34,10 +34,16 @@ npx prisma db push
 
 ## 3. Деплой
 
+**Org-репозиторий `Ayaopakana/NORA` не цепляется в Vercel UI?** → см. [VERCEL_GITHUB_ORG.md](./VERCEL_GITHUB_ORG.md) (GitHub App + CI через Actions).
+
+**Обычный путь (если Git в Vercel подключился):**
+
 1. Подключите репозиторий GitHub к [Vercel](https://vercel.com).
 2. Root Directory: корень репо (где `package.json` NORA).
 3. Framework Preset: **Next.js** (подхватит `vercel.json`).
 4. Deploy.
+
+**Без Git в Vercel:** `git push` в `main` запускает `.github/workflows/vercel-production.yml` (нужны секреты `VERCEL_*` в GitHub).
 
 Проверка после деплоя:
 

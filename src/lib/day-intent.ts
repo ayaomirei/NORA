@@ -20,6 +20,7 @@ export type DayIntentParseResult = {
   vibe: RouteVibe
   dayPeriod: RouteDayPeriod
   stopCount: number
+  groupSize?: number
   areaKey: RouteAreaKey
   areaCustom: string
   budgetIdx?: number
@@ -172,6 +173,17 @@ function parseStopCount(text: string): number {
   return 3
 }
 
+function parseGroupSize(text: string): number | undefined {
+  const digit = text.match(/\b([1-8])\s*(?:чел|человек|people|person|pax|гост|participants?)\b/)
+  if (digit) return Number(digit[1])
+
+  if (/\b(вдво[её]м|нас двое|two of us|couple)\b/.test(text)) return 2
+  if (/\b(втро[её]м|нас трое|three of us)\b/.test(text)) return 3
+  if (/\b(вчетвером|нас четверо|four of us)\b/.test(text)) return 4
+  if (/\b(семь[её]й|family|с детьми|with kids)\b/.test(text)) return 3
+  return undefined
+}
+
 function parseBudget(text: string): number | undefined {
   if (/\b(дешев|эконом|cheap|budget|low)\b/.test(text)) return 0
   if (/\b(умерен|moderate|mid)\b/.test(text)) return 1
@@ -267,6 +279,7 @@ export function parseDayIntentRules(
   }
 
   const budgetIdx = parseBudget(text)
+  const groupSize = parseGroupSize(text)
   const routeName = parseRouteName(raw)
   const hits = (vibePick?.score ?? 0) + (periodPick?.score ?? 0) + (areaPick?.score ?? 0)
   const confidence = Math.min(1, 0.35 + hits * 0.12)
@@ -276,6 +289,7 @@ export function parseDayIntentRules(
     vibe,
     dayPeriod,
     stopCount,
+    ...(groupSize ? { groupSize } : {}),
     areaKey,
     areaCustom,
     budgetIdx,
@@ -317,11 +331,18 @@ export function clampDayIntent(
   const source: DayIntentSource =
     partial.source === 'llm' ? 'llm' : fallback.source
 
+  const groupSizeRaw = partial.groupSize ?? fallback.groupSize
+  const groupSize =
+    groupSizeRaw !== undefined
+      ? Math.max(1, Math.min(8, Math.round(Number(groupSizeRaw))))
+      : undefined
+
   return {
     source,
     vibe,
     dayPeriod,
     stopCount,
+    ...(groupSize ? { groupSize } : {}),
     areaKey,
     areaCustom,
     budgetIdx,
@@ -341,6 +362,7 @@ const LLM_NEUTRAL_DEFAULTS: Omit<DayIntentParseResult, 'summary'> = {
   vibe: 'calm',
   dayPeriod: 'afternoon',
   stopCount: 3,
+  groupSize: 1,
   areaKey: 'center',
   areaCustom: '',
   confidence: 0.85,
@@ -406,6 +428,10 @@ export function isValidDayIntentPayload(
     const n = Number(o.stopCount)
     if (!ROUTE_STOP_COUNTS.includes(n as (typeof ROUTE_STOP_COUNTS)[number]))
       return false
+  }
+  if (o.groupSize !== undefined) {
+    const n = Number(o.groupSize)
+    if (!Number.isFinite(n) || n < 1 || n > 8) return false
   }
   if (o.budgetIdx !== undefined) {
     const b = Number(o.budgetIdx)

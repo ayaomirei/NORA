@@ -544,7 +544,7 @@ export default function MapHubClient() {
               statePanelOpen
                 ? 'left-[max(0.5rem,env(safe-area-inset-left))] right-[max(calc(min(20rem,92vw)+0.75rem),env(safe-area-inset-right))]'
                 : 'inset-x-[max(0.5rem,env(safe-area-inset-left))] mx-auto',
-              'bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))]',
+              'bottom-[calc(5.25rem+env(safe-area-inset-bottom,0px))]',
             )}
           />
         ) : focusPlace ? (
@@ -561,7 +561,7 @@ export default function MapHubClient() {
               statePanelOpen
                 ? 'left-[max(0.5rem,env(safe-area-inset-left))] right-[max(calc(min(20rem,92vw)+0.75rem),env(safe-area-inset-right))]'
                 : 'inset-x-[max(0.5rem,env(safe-area-inset-left))] mx-auto',
-              'bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))]',
+              'bottom-[calc(5.25rem+env(safe-area-inset-bottom,0px))]',
             )}
           >
             <div className="rounded-2xl border border-amber-400/40 bg-[var(--nora-surface-strong)] p-3 shadow-glass-lg backdrop-blur-xl">

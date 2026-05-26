@@ -174,7 +174,7 @@ function ChatContent() {
         </div>
 
         <form
-          className="nora-divider fixed inset-x-0 bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] z-20 mx-auto flex max-w-lg gap-2 glass-panel-strong px-4 py-3"
+          className="nora-divider fixed inset-x-0 bottom-[calc(5.25rem+env(safe-area-inset-bottom,0px))] z-20 mx-auto flex max-w-lg gap-2 glass-panel-strong px-4 py-3"
           onSubmit={(e) => {
             e.preventDefault()
             handleSend()

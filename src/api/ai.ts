@@ -11,10 +11,18 @@ export type DayIntentFetchMeta = {
   usedFallback: boolean
 }
 
+export type DayIntentContext = {
+  mbti?: string
+  groupSize?: number
+  currentVibe?: string
+  profileMood?: string
+}
+
 /** Сначала Gemini (API), при ошибке или недоступности — правила в браузере. */
 export async function fetchDayIntent(
   text: string,
   locale: Locale,
+  context?: DayIntentContext,
 ): Promise<DayIntentParseResult & DayIntentFetchMeta> {
   const trimmed = text.trim()
   if (!trimmed) {
@@ -26,7 +34,7 @@ export async function fetchDayIntent(
       const res = await apiFetch('/ai/parse-day-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: trimmed, locale }),
+        body: JSON.stringify({ text: trimmed, locale, context }),
       })
       if (res.ok) {
         const data: unknown = await res.json()

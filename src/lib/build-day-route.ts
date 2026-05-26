@@ -36,6 +36,11 @@ import {
 import { optimizeWalkingOrder } from '@/lib/optimize-route-order'
 import { withPlaceCoordinates } from '@/lib/place-coordinates'
 import { getPopularForMoodAndBudget } from '@/lib/venue-catalog'
+import { getNoraUserProfileSync } from '@/lib/nora-users'
+import {
+  getRecentRouteStopStats,
+  rememberRecentRouteStops,
+} from '@/lib/recent-route-memory'
 import type { MoodPreset } from '@/types/user'
 
 /** @deprecated используйте dayPeriod + stopCount */
@@ -204,12 +209,25 @@ export function buildDayRoute(
   candidates = filterByRouteArea(candidates, areaKey, input.areaCustom)
   if (!candidates.length) return null
 
+  const groupMbti = [
+    input.mbti,
+    ...(input.participantIds ?? []).map((id) => getNoraUserProfileSync(id)?.mbti ?? ''),
+  ].filter((id): id is MbtiId => Boolean(id))
+  const recentStops = getRecentRouteStopStats()
+  const variationSeed = `${Date.now()}:${vibe}:${input.dayPeriod}:${input.areaKey}:${input.groupSize ?? 1}`
+
   const ranked = rankPlacesForRoute(
     candidates,
     profile,
     input.mbti,
     input.userId,
     birthDate,
+    {
+      groupSize: input.groupSize,
+      groupMbti,
+      recentStops,
+      variationSeed,
+    },
   )
   const shortlist = ranked.slice(0, Math.max(resolvedStopCount * 8, 24))
   const areaCenter = routeAreaSeed(areaKey)
@@ -223,6 +241,12 @@ export function buildDayRoute(
     input.mbti,
     input.userId,
     birthDate,
+    {
+      groupSize: input.groupSize,
+      groupMbti,
+      recentStops,
+      variationSeed,
+    },
   ).map(withPlaceCoordinates)
 
   if (!picked.length) return null
@@ -236,6 +260,9 @@ export function buildDayRoute(
   const participantIds = input.participantIds ?? []
 
   const routeName = input.name?.trim()
+  if (input.userId && stops.length) {
+    rememberRecentRouteStops(stops.map((s) => s.id))
+  }
 
   return {
     id: `route-${Date.now()}`,

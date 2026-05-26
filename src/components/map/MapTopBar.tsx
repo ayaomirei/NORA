@@ -196,7 +196,7 @@ export function MapTopBar({
                 searchExpanded && PANEL_MAX_H,
                 searchOpen
                   ? 'nora-surface-active glass-panel-strong'
-                  : 'glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_38%,transparent)]',
+                  : 'glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_28%,transparent)]',
               )}
             >
               <div className="flex min-w-0 shrink-0 items-center gap-2.5 px-3.5 py-2.5">
@@ -280,7 +280,7 @@ export function MapTopBar({
                 'flex h-[2.75rem] w-[2.75rem] shrink-0 items-center justify-center rounded-2xl shadow-glass backdrop-blur-xl transition-colors',
                 routeOpen
                   ? 'nora-surface-active text-[var(--nora-accent)]'
-                  : 'glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_38%,transparent)] text-[var(--nora-text-muted)] hover:bg-[var(--nora-surface-veil)] hover:text-[var(--nora-text)]',
+                  : 'glass-panel bg-[color-mix(in_srgb,var(--nora-surface)_28%,transparent)] text-[var(--nora-text-muted)] hover:bg-[var(--nora-surface-veil)] hover:text-[var(--nora-text)]',
               )}
             >
               {routeOpen ? (

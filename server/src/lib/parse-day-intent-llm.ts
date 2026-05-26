@@ -10,7 +10,7 @@ export { isLlmConfigured, resolveLlmProvider, getLlmModel }
 
 const SYSTEM = `You extract a day-route plan for the NORA city app (Bishkek area).
 Return ONLY valid JSON with keys:
-source ("llm"), vibe, dayPeriod, stopCount, areaKey, areaCustom, budgetIdx (0-3 optional), routeName (short optional), summary (one sentence in user's locale), confidence (0-1).
+source ("llm"), vibe, dayPeriod, stopCount, groupSize (1-8 optional), areaKey, areaCustom, budgetIdx (0-3 optional), routeName (short optional), summary (one sentence in user's locale), confidence (0-1).
 
 vibe: calm | social | romantic | family | active | cozy
 dayPeriod: morning | afternoon | evening | night
@@ -19,6 +19,32 @@ areaKey: center | osh | countryside | parks | north | south | custom
 If user names a district not in the list, use areaKey "custom" and areaCustom.
 
 Budget tiers: 0=economy, 1=moderate, 2=flexible, 3=premium.`
+
+type DayIntentLlmContext = {
+  mbti?: string
+  groupSize?: number
+  currentVibe?: string
+  profileMood?: string
+}
+
+function contextPrompt(
+  locale: string,
+  text: string,
+  context?: DayIntentLlmContext,
+) {
+  return [
+    `locale: ${locale}`,
+    `request: ${text}`,
+    `context.mbti: ${context?.mbti ?? ''}`,
+    `context.groupSize: ${context?.groupSize ?? ''}`,
+    `context.currentVibe: ${context?.currentVibe ?? ''}`,
+    `context.profileMood: ${context?.profileMood ?? ''}`,
+    'Rules:',
+    '- groupSize >= 4: avoid intimate-only plan and prefer family/social-friendly pace.',
+    '- Use mbti/profileMood as soft guidance for vibe/dayPeriod/stopCount.',
+    '- Prefer varied plans and avoid repetitive outputs.',
+  ].join('\n')
+}
 
 function normalizeLlmJson(parsed: unknown): DayIntentResponse | null {
   const withSource = {
@@ -42,6 +68,7 @@ function normalizeLlmJson(parsed: unknown): DayIntentResponse | null {
 async function parseDayIntentWithOpenAi(
   text: string,
   locale: string,
+  context?: DayIntentLlmContext,
 ): Promise<DayIntentResponse | null> {
   const apiKey = process.env.OPENAI_API_KEY?.trim()
   if (!apiKey) return null
@@ -66,7 +93,7 @@ async function parseDayIntentWithOpenAi(
         { role: 'system', content: SYSTEM },
         {
           role: 'user',
-          content: `locale: ${locale}\nrequest: ${text}`,
+          content: contextPrompt(locale, text, context),
         },
       ],
     }),
@@ -94,6 +121,7 @@ async function parseDayIntentWithOpenAi(
 async function parseDayIntentWithGemini(
   text: string,
   locale: string,
+  context?: DayIntentLlmContext,
 ): Promise<DayIntentResponse | null> {
   const apiKey = process.env.GEMINI_API_KEY?.trim()
   if (!apiKey) return null
@@ -113,7 +141,7 @@ async function parseDayIntentWithGemini(
       contents: [
         {
           role: 'user',
-          parts: [{ text: `locale: ${locale}\nrequest: ${text}` }],
+          parts: [{ text: contextPrompt(locale, text, context) }],
         },
       ],
       generationConfig: {
@@ -145,14 +173,15 @@ async function parseDayIntentWithGemini(
 export async function parseDayIntentWithLlm(
   text: string,
   locale: string,
+  context?: DayIntentLlmContext,
 ): Promise<DayIntentResponse | null> {
   const provider = resolveLlmProvider()
   if (!provider) return null
 
   if (provider === 'gemini') {
-    return parseDayIntentWithGemini(text, locale)
+    return parseDayIntentWithGemini(text, locale, context)
   }
-  return parseDayIntentWithOpenAi(text, locale)
+  return parseDayIntentWithOpenAi(text, locale, context)
 }
 
 export function getLlmStatus(): {
