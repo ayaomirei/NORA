@@ -8,9 +8,9 @@ import {
 
 export { isLlmConfigured, resolveLlmProvider, getLlmModel }
 
-const SYSTEM = `You extract a day-route plan for the NORA city app (Bishkek area).
+const SYSTEM = `You are NORA's day-route planner for Bishkek (Kyrgyzstan).
 Return ONLY valid JSON with keys:
-source ("llm"), vibe, dayPeriod, stopCount, groupSize (1-8 optional), areaKey, areaCustom, budgetIdx (0-3 optional), routeName (short optional), summary (one sentence in user's locale), confidence (0-1).
+source ("llm"), vibe, dayPeriod, stopCount, groupSize (1-8 optional), areaKey, areaCustom, budgetIdx (0-3 optional), routeName (short optional), summary, reasoning, confidence (0-1).
 
 vibe: calm | social | romantic | family | active | cozy
 dayPeriod: morning | afternoon | evening | night
@@ -18,13 +18,18 @@ stopCount: 1-5
 areaKey: center | osh | countryside | parks | north | south | custom
 If user names a district not in the list, use areaKey "custom" and areaCustom.
 
-Budget tiers: 0=economy, 1=moderate, 2=flexible, 3=premium.`
+Budget tiers: 0=economy, 1=moderate, 2=flexible, 3=premium.
+
+summary: one short sentence describing the planned day (user's locale).
+
+reasoning: 1-2 short sentences in the user's locale (max ~120 chars). Explain why these settings fit the request; mention MBTI or mood only when provided. No fluff.`
 
 type DayIntentLlmContext = {
   mbti?: string
   groupSize?: number
   currentVibe?: string
   profileMood?: string
+  budgetIdx?: number
 }
 
 function contextPrompt(
@@ -34,15 +39,17 @@ function contextPrompt(
 ) {
   return [
     `locale: ${locale}`,
-    `request: ${text}`,
-    `context.mbti: ${context?.mbti ?? ''}`,
-    `context.groupSize: ${context?.groupSize ?? ''}`,
+    `user_request: ${text}`,
+    `context.mbti: ${context?.mbti ?? 'unknown'}`,
+    `context.groupSize: ${context?.groupSize ?? 1}`,
     `context.currentVibe: ${context?.currentVibe ?? ''}`,
     `context.profileMood: ${context?.profileMood ?? ''}`,
+    `context.budgetIdx: ${context?.budgetIdx ?? ''}`,
     'Rules:',
-    '- groupSize >= 4: avoid intimate-only plan and prefer family/social-friendly pace.',
-    '- Use mbti/profileMood as soft guidance for vibe/dayPeriod/stopCount.',
-    '- Prefer varied plans and avoid repetitive outputs.',
+    '- Align vibe/dayPeriod/stopCount/area/budget with the request first, then refine with MBTI and mood.',
+    '- groupSize >= 4: prefer family or social vibe, 3-4 stops, public-friendly areas.',
+    '- If request conflicts with MBTI, prefer the explicit request but explain the balance in reasoning.',
+    '- Prefer varied plans; avoid repeating generic advice.',
   ].join('\n')
 }
 
@@ -87,7 +94,7 @@ async function parseDayIntentWithOpenAi(
     },
     body: JSON.stringify({
       model,
-      temperature: 0.2,
+      temperature: 0.35,
       response_format: { type: 'json_object' },
       messages: [
         { role: 'system', content: SYSTEM },
@@ -145,7 +152,7 @@ async function parseDayIntentWithGemini(
         },
       ],
       generationConfig: {
-        temperature: 0.2,
+        temperature: 0.35,
         responseMimeType: 'application/json',
       },
     }),

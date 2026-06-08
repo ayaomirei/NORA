@@ -11,6 +11,7 @@ export const en: Messages = {
     passport: 'Passport',
     online: 'online',
     demoChat: 'demo chat',
+    optional: 'optional',
   },
   nav: {
     aria: 'Main navigation',
@@ -43,19 +44,22 @@ export const en: Messages = {
   },
   ai: {
     intentTitle: 'Describe your day',
-    intentHint:
-      'NORA fills in vibe, time, area and budget. The route is still built by your rules — predictable and safe.',
-    intentPlaceholder:
-      'e.g. quiet evening downtown, 2 places, budget-friendly, no crowds',
+    intentHint: 'AI picks a route from your request and personality.',
+    intentPlaceholder: 'e.g. quiet evening downtown, 2 places',
     intentParse: 'Understand',
+    intentBuild: 'Build route',
     intentApply: 'Apply to form',
+    intentWhy: 'Why this works',
+    intentFormPreview: 'Settings',
+    intentStopsShort: 'stops',
+    intentPeopleShort: 'people',
     intentTooShort: 'Write at least a few words',
     intentFailed: 'Could not parse your request',
-    intentSourceLlm: 'Refined with AI (Gemini)',
+    intentSourceLlm: 'Gemini',
     intentSourceRules: 'Keyword rules',
-    intentLlmFallback: 'AI did not respond — filled in using keyword rules.',
+    intentLlmFallback: 'AI did not respond — using fallback parse.',
     intentLlmFallbackShort: 'fallback parse',
-    intentOfflineNote: 'no server — rules only',
+    intentOfflineNote: 'no server',
   },
   planner: {
     open: 'Open planner: mood and routes',

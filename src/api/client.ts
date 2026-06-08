@@ -1,12 +1,12 @@
-import { isApiEnabled, isSameOriginApi } from '@/api/config'
+import { isApiEnabled, shouldUseSameOriginApi } from '@/api/config'
 import { translateKey } from '@/i18n/locale-storage'
 
 export const SESSION_KEY = 'nora_session'
 
 export function getApiBaseUrl(): string {
+  if (shouldUseSameOriginApi()) return ''
   const explicit = process.env.NEXT_PUBLIC_API_URL?.trim()
   if (explicit) return explicit.replace(/\/$/, '')
-  if (isSameOriginApi()) return ''
   return ''
 }
 
@@ -14,7 +14,7 @@ function resolveUrl(path: string): string {
   if (path.startsWith('http')) return path
   const p = path.startsWith('/') ? path : `/${path}`
   const base = getApiBaseUrl()
-  if (!base && isSameOriginApi()) return `/api${p}`
+  if (!base && shouldUseSameOriginApi()) return `/api${p}`
   if (!base) return p
   return `${base}${p}`
 }

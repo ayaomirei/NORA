@@ -11,6 +11,7 @@ export const ky: Messages = {
     passport: 'Паспорт',
     online: 'онлайн',
     demoChat: 'демо-чат',
+    optional: 'милдеттүү эмес',
   },
   nav: {
     aria: 'Негизги навигация',
@@ -42,21 +43,23 @@ export const ky: Messages = {
     invalid: 'Туура датаны көрсөтүңүз (13–100 жаш)',
   },
   ai: {
-    intentTitle: 'Күнү сөз менен сүрөттөңүз',
-    intentHint:
-      'NORA формат, убакыт, аймак жана бюджетти толтурат. Маршрут эски эрежелер менен түзүлөт.',
-    intentPlaceholder:
-      'Мисалы: тынч кечки борбор, 2 жай, арзан, ызы-чуу жок',
+    intentTitle: 'Күнү сүрөттөңүз',
+    intentHint: 'ИИ сурамыңыз жана мүнөз типи боюнча маршрут тандайт.',
+    intentPlaceholder: 'Мисалы: тынч кечки борбор, 2 жай',
     intentParse: 'Түшүнүү',
+    intentBuild: 'Маршрут түзүү',
     intentApply: 'Формага колдонуу',
+    intentWhy: 'Эмне үчүн ылайык',
+    intentFormPreview: 'Параметрлер',
+    intentStopsShort: 'жай',
+    intentPeopleShort: 'адам',
     intentTooShort: 'Бир нече сөз жазыңыз',
     intentFailed: 'Сурамды түшүнбөй калдык',
-    intentSourceLlm: 'ИИ менен такталды (Gemini)',
+    intentSourceLlm: 'Gemini',
     intentSourceRules: 'Ачкыч сөздөр',
-    intentLlmFallback:
-      'ИИ жооп берген жок — ачкыч сөздөр боюнча толтурулду.',
+    intentLlmFallback: 'ИИ жооп берген жок — запасной вариант.',
     intentLlmFallbackShort: 'запасной вариант',
-    intentOfflineNote: 'серверсиз — эрежелер гана',
+    intentOfflineNote: 'серверсиз',
   },
   planner: {
     open: 'Планерди ачуу: абал жана маршруттар',

@@ -4,6 +4,7 @@ import type { Locale } from '@/i18n/config'
 import {
   dayIntentFromLlm,
   parseDayIntentRules,
+  type DayIntentParseContext,
   type DayIntentParseResult,
 } from '@/lib/day-intent'
 
@@ -11,12 +12,7 @@ export type DayIntentFetchMeta = {
   usedFallback: boolean
 }
 
-export type DayIntentContext = {
-  mbti?: string
-  groupSize?: number
-  currentVibe?: string
-  profileMood?: string
-}
+export type DayIntentContext = DayIntentParseContext
 
 /** Сначала Gemini (API), при ошибке или недоступности — правила в браузере. */
 export async function fetchDayIntent(
@@ -26,7 +22,7 @@ export async function fetchDayIntent(
 ): Promise<DayIntentParseResult & DayIntentFetchMeta> {
   const trimmed = text.trim()
   if (!trimmed) {
-    return { ...parseDayIntentRules(text, locale), usedFallback: true }
+    return { ...parseDayIntentRules(text, locale, context), usedFallback: true }
   }
 
   if (isApiEnabled()) {
@@ -38,7 +34,7 @@ export async function fetchDayIntent(
       })
       if (res.ok) {
         const data: unknown = await res.json()
-        const fromLlm = dayIntentFromLlm(data, locale)
+        const fromLlm = dayIntentFromLlm(data, locale, context)
         if (fromLlm) {
           return { ...fromLlm, usedFallback: false }
         }
@@ -49,7 +45,7 @@ export async function fetchDayIntent(
   }
 
   return {
-    ...parseDayIntentRules(trimmed, locale),
+    ...parseDayIntentRules(trimmed, locale, context),
     usedFallback: true,
   }
 }

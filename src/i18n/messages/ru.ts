@@ -9,6 +9,7 @@ export const ru = {
     passport: 'Паспорт',
     online: 'онлайн',
     demoChat: 'демо-чат',
+    optional: 'необязательно',
   },
   nav: {
     aria: 'Основная навигация',
@@ -40,21 +41,23 @@ export const ru = {
     invalid: 'Укажите корректную дату (возраст 13–100 лет)',
   },
   ai: {
-    intentTitle: 'Опишите день словами',
-    intentHint:
-      'NORA подставит формат дня, время, район и бюджет. Маршрут по-прежнему собирается вашими правилами — без сюрпризов.',
-    intentPlaceholder:
-      'Например: спокойный вечер в центре, 2 места, недорого, без шума',
-    intentParse: 'Понять запрос',
+    intentTitle: 'Опишите день',
+    intentHint: 'ИИ подберёт маршрут под ваш запрос и тип личности.',
+    intentPlaceholder: 'Например: спокойный вечер в центре, 2 места',
+    intentParse: 'Понять',
+    intentBuild: 'Собрать маршрут',
     intentApply: 'Применить к форме',
+    intentWhy: 'Почему это подходит',
+    intentFormPreview: 'Настройки',
+    intentStopsShort: 'мест',
+    intentPeopleShort: 'чел.',
     intentTooShort: 'Напишите хотя бы несколько слов',
     intentFailed: 'Не удалось разобрать запрос',
-    intentSourceLlm: 'Уточнено с помощью ИИ (Gemini)',
+    intentSourceLlm: 'Gemini',
     intentSourceRules: 'По ключевым словам',
-    intentLlmFallback:
-      'ИИ не ответил — подставлены настройки по ключевым словам.',
+    intentLlmFallback: 'ИИ не ответил — подставлен запасной разбор.',
     intentLlmFallbackShort: 'запасной разбор',
-    intentOfflineNote: 'без сервера — только правила',
+    intentOfflineNote: 'без сервера',
   },
   planner: {
     open: 'Открыть планер: состояние и маршруты',

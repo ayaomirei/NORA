@@ -21,7 +21,7 @@ import { BirthDateFields } from '@/components/BirthDateFields'
 import { isValidBirthDate } from '@/lib/age-policy'
 import { motionGpuClass, spring, tween } from '@/lib/motion'
 import { cn } from '@/lib/utils'
-import type { MoodPreset, UserStatus } from '@/types/user'
+import type { MoodPreset } from '@/types/user'
 
 const MOOD_IDS: PlannerMood[] = ['energy', 'calm', 'tired', 'anxious']
 
@@ -48,12 +48,6 @@ export function RegisterWizard() {
   const { locale, t } = useI18n()
   const router = useRouter()
   const moodMeta = getPlannerMoodMeta(locale)
-  const statuses: { id: UserStatus; label: string }[] = [
-    { id: 'student', label: t('status.student') },
-    { id: 'tourist', label: t('status.tourist') },
-    { id: 'expat', label: t('status.expat') },
-    { id: 'local', label: t('status.local') },
-  ]
   const moods = MOOD_IDS.map((id) => ({
     id,
     emoji: moodMeta[id].emoji,
@@ -73,7 +67,6 @@ export function RegisterWizard() {
   const [origin, setOrigin] = useState('')
   const [current, setCurrent] = useState('')
   const [city, setCity] = useState('')
-  const [status, setStatus] = useState<UserStatus>('')
   const [birthDay, setBirthDay] = useState('')
   const [birthMonth, setBirthMonth] = useState('')
   const [birthYear, setBirthYear] = useState('')
@@ -94,9 +87,6 @@ export function RegisterWizard() {
     emailOk(email) &&
     password.length >= 4 &&
     password === confirm &&
-    origin.length > 0 &&
-    current.length > 0 &&
-    status !== '' &&
     isValidBirthDate(birthDayNum, birthMonthNum, birthYearNum)
 
   const canNext1 = mbti !== ''
@@ -109,10 +99,9 @@ export function RegisterWizard() {
     try {
       const name = nickname.trim()
       const extras = {
-        countryOrigin: origin,
-        countryCurrent: current,
-        cityIntent: city,
-        userStatus: status,
+        countryOrigin: origin.trim() || undefined,
+        countryCurrent: current.trim() || undefined,
+        cityIntent: city.trim() || undefined,
         mbti: mbti || undefined,
         birthDay: birthDayNum,
         birthMonth: birthMonthNum,
@@ -204,10 +193,9 @@ export function RegisterWizard() {
             {step === 0 ? (
               <div className="space-y-4">
                 <div>
-                  <h1 className="text-xl font-semibold">Шаг 1 — контекст</h1>
+                  <h1 className="text-xl font-semibold">Шаг 1 — аккаунт</h1>
                   <p className="mt-1 text-sm text-[var(--nora-text-muted)]">
-                    Как к тебе обращаться и где ты находишься в жизненной
-                    траектории.
+                    Никнейм, почта и пароль. Страну и город можно указать позже.
                   </p>
                 </div>
                 <label className="block text-sm font-medium">Никнейм</label>
@@ -255,7 +243,7 @@ export function RegisterWizard() {
                 </div>
                 <div>
                   <span className="mb-1 block text-sm font-medium">
-                    Откуда ты?
+                    {t('passportForm.countryOrigin')} ({t('common.optional')})
                   </span>
                   <CountryCombobox
                     countries={countries}
@@ -267,7 +255,7 @@ export function RegisterWizard() {
                 </div>
                 <div>
                   <span className="mb-1 block text-sm font-medium">
-                    Где ты сейчас?
+                    {t('passportForm.countryCurrent')} ({t('common.optional')})
                   </span>
                   <CountryCombobox
                     countries={countries}
@@ -278,16 +266,15 @@ export function RegisterWizard() {
                   />
                 </div>
                 <div>
-                  <span className="mb-1 block text-sm font-medium">Город</span>
+                  <span className="mb-1 block text-sm font-medium">
+                    {t('passportForm.cityLabel')} ({t('common.optional')})
+                  </span>
                   <CityCombobox
                     value={city}
                     onChange={setCity}
                     placeholder={t('passportForm.cityPlaceholder')}
                     label={t('passportForm.cityLabel')}
                   />
-                  <p className="mt-1 text-[11px] text-[var(--nora-text-muted)]">
-                    Выберите из списка, введите свой и нажмите Enter
-                  </p>
                 </div>
                 <BirthDateFields
                   day={birthDay}
@@ -297,26 +284,6 @@ export function RegisterWizard() {
                   onMonthChange={setBirthMonth}
                   onYearChange={setBirthYear}
                 />
-                <div>
-                  <span className="mb-1 block text-sm font-medium">Статус</span>
-                  <div className="flex flex-wrap gap-2">
-                    {statuses.map((s) => (
-                      <button
-                        key={s.id}
-                        type="button"
-                        onClick={() => setStatus(s.id)}
-                        className={cn(
-                          'rounded-full px-3 py-1.5 text-sm transition-colors',
-                          status === s.id
-                            ? 'nora-choice-active shadow-neon'
-                            : 'nora-choice text-[var(--nora-text-muted)]',
-                        )}
-                      >
-                        {s.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
               </div>
             ) : null}
 

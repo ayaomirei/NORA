@@ -26,6 +26,10 @@ const withPWA = withPWAInit({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  /** В клиентский бандл — иначе на Vercel isApiEnabled() false и ИИ не вызывается */
+  env: {
+    NEXT_PUBLIC_API_SAME_ORIGIN: process.env.NEXT_PUBLIC_API_SAME_ORIGIN ?? '1',
+  },
   transpilePackages: ['maplibre-gl'],
   experimental: {
     externalDir: true,

@@ -11,6 +11,7 @@ export const ko: Messages = {
     passport: '패스포트',
     online: '온라인',
     demoChat: '데모 채팅',
+    optional: '선택',
   },
   nav: {
     aria: '주요 탐색',
@@ -42,21 +43,23 @@ export const ko: Messages = {
     invalid: '올바른 날짜를 입력하세요 (13–100세)',
   },
   ai: {
-    intentTitle: '하루를 말로 설명',
-    intentHint:
-      'NORA가 분위기, 시간, 지역, 예산을 채웁니다. 경로는 기존 규칙으로 조립됩니다.',
-    intentPlaceholder:
-      '예: 조용한 저녁 도심, 장소 2곳, 저렴하게, 붐비지 않게',
+    intentTitle: '하루 설명',
+    intentHint: 'AI가 요청과 성향에 맞는 경로를 제안합니다.',
+    intentPlaceholder: '예: 조용한 저녁 도심, 장소 2곳',
     intentParse: '이해하기',
+    intentBuild: '경로 만들기',
     intentApply: '폼에 적용',
+    intentWhy: '왜 이 설정인지',
+    intentFormPreview: '설정',
+    intentStopsShort: '곳',
+    intentPeopleShort: '명',
     intentTooShort: '몇 마디 이상 적어 주세요',
     intentFailed: '요청을 이해하지 못했습니다',
-    intentSourceLlm: 'AI로 다듬음 (Gemini)',
+    intentSourceLlm: 'Gemini',
     intentSourceRules: '키워드 규칙',
-    intentLlmFallback:
-      'AI가 응답하지 않아 키워드 규칙으로 채웠습니다.',
+    intentLlmFallback: 'AI가 응답하지 않아 대체 분석을 사용했습니다.',
     intentLlmFallbackShort: '대체 분석',
-    intentOfflineNote: '서버 없음 — 규칙만',
+    intentOfflineNote: '서버 없음',
   },
   planner: {
     open: '플래너 열기: 기분과 경로',

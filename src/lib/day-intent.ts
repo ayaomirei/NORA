@@ -1,5 +1,8 @@
 import type { Locale } from '@/i18n/config'
 import {
+  getRouteAreaMeta,
+  getRoutePeriodMeta,
+  getRouteVibeMeta,
   isRouteAreaKey,
   isRouteDayPeriod,
   isRouteVibe,
@@ -15,6 +18,14 @@ import { normalizeBudgetIndex } from '@/lib/daily-budget'
 
 export type DayIntentSource = 'rules' | 'llm'
 
+export type DayIntentParseContext = {
+  mbti?: string
+  groupSize?: number
+  currentVibe?: string
+  profileMood?: string
+  budgetIdx?: number
+}
+
 export type DayIntentParseResult = {
   source: DayIntentSource
   vibe: RouteVibe
@@ -26,6 +37,8 @@ export type DayIntentParseResult = {
   budgetIdx?: number
   routeName?: string
   summary: string
+  /** Почему такой набор настроек подходит (ИИ или шаблон). */
+  reasoning: string
   confidence: number
 }
 
@@ -252,10 +265,75 @@ function summaryFor(
   return `${vibeLabel[vibe]}, ${periodLabel[period]}, ${stops} stops · ${area}`
 }
 
+/** Краткое объяснение без ИИ — для офлайн/запасного разбора. */
+export function buildDayIntentReasoning(
+  intent: Pick<
+    DayIntentParseResult,
+    | 'vibe'
+    | 'dayPeriod'
+    | 'stopCount'
+    | 'areaKey'
+    | 'areaCustom'
+    | 'groupSize'
+    | 'budgetIdx'
+  >,
+  context: DayIntentParseContext | undefined,
+  locale: Locale,
+): string {
+  const vibeMeta = getRouteVibeMeta(locale)
+  const periodMeta = getRoutePeriodMeta(locale)
+  const areaMeta = getRouteAreaMeta(locale)
+  const vibeLabel = vibeMeta[intent.vibe].label
+  const periodLabel = periodMeta[intent.dayPeriod].label
+  const areaLabel =
+    intent.areaKey === 'custom' && intent.areaCustom.trim()
+      ? intent.areaCustom.trim()
+      : areaMeta[intent.areaKey]
+  const stops = intent.stopCount
+  const group = intent.groupSize ?? context?.groupSize ?? 1
+  const mbti = context?.mbti?.trim()
+  const mood = context?.profileMood
+
+  if (locale === 'ru') {
+    const parts = [
+      `Формат «${vibeLabel}» и ${periodLabel.toLowerCase()} с ${stops} остановками в ${areaLabel} совпадает с вашим запросом.`,
+    ]
+    if (mbti) {
+      parts.push(
+        `Тип ${mbti}: темп и число остановок подобраны так, чтобы день не перегружал.`,
+      )
+    }
+    if (mood === 'tired' || mood === 'anxious') {
+      parts.push('Учли спокойное настроение — без суеты и длинных переходов.')
+    } else if (mood === 'energy') {
+      parts.push('Есть запас активности — можно добавить движение между точками.')
+    }
+    if (group > 1) {
+      parts.push(
+        group >= 4
+          ? 'Компания из нескольких человек — формат удобен для общих мест.'
+          : 'Небольшая компания — баланс между уютом и возможностью поговорить.',
+      )
+    }
+    return parts.join(' ')
+  }
+
+  if (locale === 'ky') {
+    return `${vibeLabel}, ${periodLabel}, ${stops} токтоо · ${areaLabel} — сурамыңызга ылайык.${mbti ? ` ${mbti} типи эске алынды.` : ''}`
+  }
+
+  if (locale === 'ko') {
+    return `${vibeLabel}, ${periodLabel}, ${stops}곳 · ${areaLabel} — 요청에 맞춘 설정입니다.${mbti ? ` ${mbti} 성향을 반영했습니다.` : ''}`
+  }
+
+  return `${vibeLabel}, ${periodLabel}, ${stops} stops in ${areaLabel} match your request.${mbti ? ` Adjusted for ${mbti}.` : ''}${group > 1 ? ` Group of ${group} considered.` : ''}`
+}
+
 /** Правила без сети — всегда доступны в браузере. */
 export function parseDayIntentRules(
   raw: string,
   locale: Locale = 'ru',
+  context?: DayIntentParseContext,
 ): DayIntentParseResult {
   const text = norm(raw)
   const vibePick = scoreRules(text, VIBE_RULES)
@@ -284,8 +362,8 @@ export function parseDayIntentRules(
   const hits = (vibePick?.score ?? 0) + (periodPick?.score ?? 0) + (areaPick?.score ?? 0)
   const confidence = Math.min(1, 0.35 + hits * 0.12)
 
-  return {
-    source: 'rules',
+  const base = {
+    source: 'rules' as const,
     vibe,
     dayPeriod,
     stopCount,
@@ -296,6 +374,11 @@ export function parseDayIntentRules(
     routeName,
     summary: summaryFor(locale, vibe, dayPeriod, stopCount, areaKey, areaCustom),
     confidence,
+  }
+
+  return {
+    ...base,
+    reasoning: buildDayIntentReasoning(base, context, locale),
   }
 }
 
@@ -337,6 +420,21 @@ export function clampDayIntent(
       ? Math.max(1, Math.min(8, Math.round(Number(groupSizeRaw))))
       : undefined
 
+  const mergedForReasoning = {
+    vibe,
+    dayPeriod,
+    stopCount,
+    areaKey,
+    areaCustom,
+    groupSize,
+    budgetIdx,
+  }
+
+  const reasoning =
+    partial.reasoning?.trim().slice(0, 520) ||
+    fallback.reasoning ||
+    buildDayIntentReasoning(mergedForReasoning, undefined, locale)
+
   return {
     source,
     vibe,
@@ -350,6 +448,7 @@ export function clampDayIntent(
     summary:
       partial.summary?.trim().slice(0, 200) ||
       summaryFor(locale, vibe, dayPeriod, stopCount, areaKey, areaCustom),
+    reasoning,
     confidence: Math.min(
       1,
       Math.max(0, partial.confidence ?? fallback.confidence),
@@ -357,7 +456,7 @@ export function clampDayIntent(
   }
 }
 
-const LLM_NEUTRAL_DEFAULTS: Omit<DayIntentParseResult, 'summary'> = {
+const LLM_NEUTRAL_DEFAULTS: Omit<DayIntentParseResult, 'summary' | 'reasoning'> = {
   source: 'llm',
   vibe: 'calm',
   dayPeriod: 'afternoon',
@@ -372,9 +471,42 @@ const LLM_NEUTRAL_DEFAULTS: Omit<DayIntentParseResult, 'summary'> = {
 export function dayIntentFromLlm(
   data: unknown,
   locale: Locale,
+  context?: DayIntentParseContext,
 ): DayIntentParseResult | null {
-  if (!isValidDayIntentPayload(data)) return null
-  const partial = data as Partial<DayIntentParseResult>
+  if (!data || typeof data !== 'object') return null
+
+  const raw = data as Record<string, unknown>
+  if (typeof raw.vibe !== 'string' || !isRouteVibe(raw.vibe)) return null
+  if (typeof raw.dayPeriod !== 'string' || !isRouteDayPeriod(raw.dayPeriod)) {
+    return null
+  }
+
+  const partial: Partial<DayIntentParseResult> = {
+    source: 'llm',
+    vibe: raw.vibe,
+    dayPeriod: raw.dayPeriod,
+    summary: typeof raw.summary === 'string' ? raw.summary : undefined,
+    reasoning: typeof raw.reasoning === 'string' ? raw.reasoning : undefined,
+    routeName: typeof raw.routeName === 'string' ? raw.routeName : undefined,
+    areaCustom: typeof raw.areaCustom === 'string' ? raw.areaCustom : undefined,
+    confidence:
+      typeof raw.confidence === 'number' ? raw.confidence : undefined,
+  }
+
+  if (typeof raw.areaKey === 'string' && isRouteAreaKey(raw.areaKey)) {
+    partial.areaKey = raw.areaKey
+  }
+  if (raw.stopCount !== undefined) {
+    partial.stopCount = Math.round(Number(raw.stopCount))
+  }
+  if (raw.groupSize !== undefined) {
+    partial.groupSize = Math.round(Number(raw.groupSize))
+  }
+  if (raw.budgetIdx !== undefined) {
+    partial.budgetIdx = normalizeBudgetIndex(Number(raw.budgetIdx))
+  }
+
+  const fallbackRules = parseDayIntentRules('', locale, context)
   const fallback: DayIntentParseResult = {
     ...LLM_NEUTRAL_DEFAULTS,
     summary: summaryFor(
@@ -385,8 +517,15 @@ export function dayIntentFromLlm(
       LLM_NEUTRAL_DEFAULTS.areaKey,
       '',
     ),
+    reasoning: fallbackRules.reasoning,
   }
-  return clampDayIntent({ ...partial, source: 'llm' }, fallback, locale)
+
+  const merged = clampDayIntent({ ...partial, source: 'llm' }, fallback, locale)
+  merged.source = 'llm'
+  if (!merged.reasoning?.trim()) {
+    merged.reasoning = buildDayIntentReasoning(merged, context, locale)
+  }
+  return merged
 }
 
 export function mergeDayIntent(
@@ -437,6 +576,7 @@ export function isValidDayIntentPayload(
     const b = Number(o.budgetIdx)
     if (b < 0 || b > 3) return false
   }
+  if (o.reasoning !== undefined && typeof o.reasoning !== 'string') return false
   return true
 }
 
