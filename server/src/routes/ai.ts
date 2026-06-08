@@ -1,6 +1,7 @@
 import type { FastifyInstance } from 'fastify'
 import { dayIntentBodySchema } from '../lib/day-intent-schema.js'
 import {
+  consumeLastAiFailure,
   getLlmStatus,
   isLlmConfigured,
   parseDayIntentWithLlm,
@@ -30,10 +31,14 @@ export async function aiRoutes(app: FastifyInstance) {
 
     const result = await parseDayIntentWithLlm(text, locale, context)
     if (!result) {
-      return reply.code(502).send({
-        code: 'AI_PARSE_FAILED',
-        message: 'Could not parse intent',
-      })
+      const code = consumeLastAiFailure()
+      const message =
+        code === 'AI_QUOTA_EXCEEDED'
+          ? 'Gemini API quota exceeded — check billing or set OPENAI_API_KEY'
+          : code === 'AI_RATE_LIMITED'
+            ? 'AI is temporarily overloaded — try again shortly'
+            : 'Could not parse intent'
+      return reply.code(502).send({ code, message })
     }
 
     return result

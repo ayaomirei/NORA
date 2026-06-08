@@ -248,8 +248,8 @@ export default function MapHubClient() {
       if (!map) return
       map.flyTo({
         center: [rec.lng, rec.lat],
-        zoom: routeNavActive ? 17.5 : 15.5,
-        pitch: routeNavActive ? 62 : 52,
+        zoom: routeNavActive ? 17.25 : 15.5,
+        pitch: routeNavActive ? 58 : 52,
         bearing: map.getBearing(),
         duration: 1200,
       })
@@ -331,8 +331,8 @@ export default function MapHubClient() {
     }
     if (!geo.snapshot || routeNavEnteredRef.current) return
     routeNavEnteredRef.current = true
-    geo.recenter()
-  }, [routeNavActive, geo.snapshot, geo.recenter])
+    geo.enterNavigation()
+  }, [routeNavActive, geo.snapshot, geo.enterNavigation])
 
   const handleSelectPlace = useCallback(
     (rec: PlannerRecommendation) => {

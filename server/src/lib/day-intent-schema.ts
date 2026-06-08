@@ -35,7 +35,7 @@ export const dayIntentResponseSchema = z.object({
   budgetIdx: z.number().int().min(0).max(3).optional(),
   routeName: z.string().max(80).optional(),
   summary: z.string().max(240),
-  reasoning: z.string().max(520),
+  reasoning: z.string().max(520).optional().default(''),
   confidence: z.number().min(0).max(1).optional().default(0.8),
 })
 

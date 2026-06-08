@@ -1,6 +1,9 @@
 import { dayIntentResponseSchema, type DayIntentResponse } from './day-intent-schema.js'
 import {
+  getGeminiModelCandidates,
   getLlmModel,
+  hasGeminiKey,
+  hasOpenAiKey,
   isLlmConfigured,
   resolveLlmProvider,
   type LlmProvider,
@@ -53,9 +56,23 @@ function contextPrompt(
   ].join('\n')
 }
 
+function stripNullFields(
+  obj: Record<string, unknown>,
+): Record<string, unknown> {
+  const out: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(obj)) {
+    if (value !== null) out[key] = value
+  }
+  return out
+}
+
 function normalizeLlmJson(parsed: unknown): DayIntentResponse | null {
+  const raw =
+    typeof parsed === 'object' && parsed !== null
+      ? stripNullFields(parsed as Record<string, unknown>)
+      : {}
   const withSource = {
-    ...(typeof parsed === 'object' && parsed !== null ? parsed : {}),
+    ...raw,
     source: 'llm' as const,
   }
 
@@ -69,7 +86,41 @@ function normalizeLlmJson(parsed: unknown): DayIntentResponse | null {
     result.data.areaCustom = ''
   }
 
+  if (!result.data.reasoning?.trim()) {
+    result.data.reasoning = result.data.summary
+  }
+
   return result.data
+}
+
+const TRANSIENT_LLM_STATUSES = new Set([429, 500, 502, 503])
+
+export type AiFailureCode =
+  | 'AI_PARSE_FAILED'
+  | 'AI_QUOTA_EXCEEDED'
+  | 'AI_RATE_LIMITED'
+
+let lastAiFailure: AiFailureCode = 'AI_PARSE_FAILED'
+
+export function consumeLastAiFailure(): AiFailureCode {
+  const code = lastAiFailure
+  lastAiFailure = 'AI_PARSE_FAILED'
+  return code
+}
+
+function noteAiFailure(status: number, body: string) {
+  const lower = body.toLowerCase()
+  if (status === 429 && lower.includes('quota')) {
+    lastAiFailure = 'AI_QUOTA_EXCEEDED'
+    return
+  }
+  if (status === 429 || status === 503) {
+    lastAiFailure = 'AI_RATE_LIMITED'
+  }
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 async function parseDayIntentWithOpenAi(
@@ -125,19 +176,14 @@ async function parseDayIntentWithOpenAi(
   }
 }
 
-async function parseDayIntentWithGemini(
+async function callGeminiModelOnce(
+  model: string,
   text: string,
   locale: string,
-  context?: DayIntentLlmContext,
-): Promise<DayIntentResponse | null> {
-  const apiKey = process.env.GEMINI_API_KEY?.trim()
-  if (!apiKey) return null
-
-  const model = getLlmModel('gemini')
-  const baseUrl = (
-    process.env.GEMINI_BASE_URL ?? 'https://generativelanguage.googleapis.com/v1beta'
-  ).replace(/\/$/, '')
-
+  context: DayIntentLlmContext | undefined,
+  apiKey: string,
+  baseUrl: string,
+): Promise<{ ok: true; data: DayIntentResponse } | { ok: false; transient: boolean }> {
   const url = `${baseUrl}/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`
 
   const res = await fetch(url, {
@@ -160,21 +206,78 @@ async function parseDayIntentWithGemini(
 
   if (!res.ok) {
     const err = await res.text().catch(() => '')
-    console.warn('[ai] Gemini parse failed', res.status, err.slice(0, 200))
-    return null
+    console.warn(`[ai] Gemini ${model} failed`, res.status, err.slice(0, 200))
+    noteAiFailure(res.status, err)
+    return { ok: false, transient: TRANSIENT_LLM_STATUSES.has(res.status) }
   }
 
   const json = (await res.json()) as {
     candidates?: { content?: { parts?: { text?: string }[] } }[]
   }
   const content = json.candidates?.[0]?.content?.parts?.[0]?.text
-  if (!content) return null
+  if (!content) return { ok: false, transient: true }
 
   try {
-    return normalizeLlmJson(JSON.parse(content))
+    const data = normalizeLlmJson(JSON.parse(content))
+    if (!data) return { ok: false, transient: false }
+    return { ok: true, data }
   } catch {
-    return null
+    return { ok: false, transient: false }
   }
+}
+
+async function callGeminiModel(
+  model: string,
+  text: string,
+  locale: string,
+  context?: DayIntentLlmContext,
+): Promise<DayIntentResponse | null> {
+  const apiKey = process.env.GEMINI_API_KEY?.trim()
+  if (!apiKey) return null
+
+  const baseUrl = (
+    process.env.GEMINI_BASE_URL ?? 'https://generativelanguage.googleapis.com/v1beta'
+  ).replace(/\/$/, '')
+
+  const retryDelays = [0, 600, 1400]
+  for (let attempt = 0; attempt < retryDelays.length; attempt++) {
+    if (retryDelays[attempt]! > 0) {
+      await sleep(retryDelays[attempt]!)
+    }
+    const result = await callGeminiModelOnce(
+      model,
+      text,
+      locale,
+      context,
+      apiKey,
+      baseUrl,
+    )
+    if (result.ok) return result.data
+    if (!result.transient) break
+  }
+
+  return null
+}
+
+async function parseDayIntentWithGemini(
+  text: string,
+  locale: string,
+  context?: DayIntentLlmContext,
+): Promise<DayIntentResponse | null> {
+  if (!hasGeminiKey()) return null
+
+  for (const model of getGeminiModelCandidates()) {
+    const result = await callGeminiModel(model, text, locale, context)
+    if (result) {
+      if (model !== getGeminiModelCandidates()[0]) {
+        console.info(`[ai] Gemini fallback model ok: ${model}`)
+      }
+      return result
+    }
+    await sleep(500)
+  }
+
+  return null
 }
 
 export async function parseDayIntentWithLlm(
@@ -182,13 +285,25 @@ export async function parseDayIntentWithLlm(
   locale: string,
   context?: DayIntentLlmContext,
 ): Promise<DayIntentResponse | null> {
+  lastAiFailure = 'AI_PARSE_FAILED'
   const provider = resolveLlmProvider()
   if (!provider) return null
 
   if (provider === 'gemini') {
+    const gemini = await parseDayIntentWithGemini(text, locale, context)
+    if (gemini) return gemini
+    if (hasOpenAiKey()) {
+      return parseDayIntentWithOpenAi(text, locale, context)
+    }
+    return null
+  }
+
+  const openAi = await parseDayIntentWithOpenAi(text, locale, context)
+  if (openAi) return openAi
+  if (hasGeminiKey()) {
     return parseDayIntentWithGemini(text, locale, context)
   }
-  return parseDayIntentWithOpenAi(text, locale, context)
+  return null
 }
 
 export function getLlmStatus(): {

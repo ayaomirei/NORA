@@ -38,22 +38,91 @@ export function pickNavigationTarget(
 }
 
 export const NAV_CAMERA = {
-  pitch: 62,
-  zoom: 17.5,
-  padding: { top: 100, bottom: 200, left: 48, right: 48 },
+  /** Наклон как в навигаторе: дорога впереди, горизонт ровный */
+  pitch: 58,
+  zoom: 17.25,
+  /** Центр камеры смещён вперёд по курсу — маркер пользователя внизу экрана */
+  forwardOffsetM: 70,
+  padding: { top: 108, bottom: 148, left: 0, right: 0 },
 } as const
 
+export type NavigationCameraView = {
+  center: [number, number]
+  zoom: number
+  pitch: number
+  bearing: number
+  padding: { top: number; bottom: number; left: number; right: number }
+}
+
+/** Сдвиг точки вперёд по азимуту (bearing 0 = север). */
+export function offsetAlongBearing(
+  point: { lng: number; lat: number },
+  bearingDeg: number,
+  distanceM: number,
+): { lng: number; lat: number } {
+  const R = 6_371_000
+  const br = (bearingDeg * Math.PI) / 180
+  const latRad = (point.lat * Math.PI) / 180
+  const d = distanceM / R
+  const lat2 = Math.asin(
+    Math.sin(latRad) * Math.cos(d) +
+      Math.cos(latRad) * Math.sin(d) * Math.cos(br),
+  )
+  const lng2 =
+    (point.lng * Math.PI) / 180 +
+    Math.atan2(
+      Math.sin(br) * Math.sin(d) * Math.cos(latRad),
+      Math.cos(d) - Math.sin(latRad) * Math.sin(lat2),
+    )
+  return {
+    lat: (lat2 * 180) / Math.PI,
+    lng: (((lng2 * 180) / Math.PI + 540) % 360) - 180,
+  }
+}
+
 export function resolveNavigationBearing(
-  user: { lng: number; lat: number; heading?: number | null },
+  user: {
+    lng: number
+    lat: number
+    heading?: number | null
+    speed?: number | null
+  },
   target: { lng: number; lat: number },
   fallbackBearing: number,
 ): number {
+  const routeBearing = bearingDegrees(user, target)
+  const speed = user.speed ?? 0
   if (
+    speed > 0.8 &&
     user.heading != null &&
     Number.isFinite(user.heading) &&
     user.heading >= 0
   ) {
     return user.heading
   }
-  return bearingDegrees(user, target)
+  return routeBearing || fallbackBearing
+}
+
+/** Вид от 3-го лица: курс по маршруту, пользователь внизу, дорога впереди. */
+export function buildNavigationCameraView(
+  user: {
+    lng: number
+    lat: number
+    heading?: number | null
+    speed?: number | null
+  },
+  target: { lng: number; lat: number } | null,
+  fallbackBearing: number,
+): NavigationCameraView {
+  const bearing = target
+    ? resolveNavigationBearing(user, target, fallbackBearing)
+    : fallbackBearing
+  const forward = offsetAlongBearing(user, bearing, NAV_CAMERA.forwardOffsetM)
+  return {
+    center: [forward.lng, forward.lat],
+    zoom: NAV_CAMERA.zoom,
+    pitch: NAV_CAMERA.pitch,
+    bearing,
+    padding: { ...NAV_CAMERA.padding },
+  }
 }

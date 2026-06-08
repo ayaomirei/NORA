@@ -58,6 +58,18 @@ export const ru = {
     intentLlmFallback: 'ИИ не ответил — подставлен запасной разбор.',
     intentLlmFallbackShort: 'запасной разбор',
     intentOfflineNote: 'без сервера',
+    intentError: {
+      AI_UNAVAILABLE:
+        'ИИ недоступен — добавьте GEMINI_API_KEY или OPENAI_API_KEY в server/.env',
+      AI_PARSE_FAILED: 'ИИ не смог разобрать запрос — попробуйте ещё раз через пару секунд',
+      AI_QUOTA_EXCEEDED:
+        'Квота Gemini исчерпана — обновите ключ в Google AI Studio или добавьте OPENAI_API_KEY в server/.env',
+      AI_RATE_LIMITED: 'ИИ перегружен — подождите несколько секунд и попробуйте снова',
+      AI_NETWORK_ERROR: 'Нет связи с сервером — проверьте, что npm run dev запущен',
+      AI_INVALID_RESPONSE: 'ИИ вернул некорректный ответ — попробуйте переформулировать',
+      AI_REQUEST_FAILED: 'Ошибка запроса к ИИ',
+      AI_EMPTY_REQUEST: 'Напишите, какой день вы хотите',
+    },
   },
   planner: {
     open: 'Открыть планер: состояние и маршруты',

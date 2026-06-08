@@ -2,7 +2,7 @@
 
 import { Loader2, Sparkles, Wand2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { fetchDayIntent } from '@/api/ai'
+import { DayIntentError, fetchDayIntent } from '@/api/ai'
 import { isApiEnabled } from '@/api/config'
 import { Button } from '@/components/ui/button'
 import { useI18n } from '@/hooks/useI18n'
@@ -37,6 +37,12 @@ export function DayIntentAssistant({ onBuild, parseContext }: DayIntentAssistant
   const periodMeta = useMemo(() => getRoutePeriodMeta(locale), [locale])
   const areaMeta = useMemo(() => getRouteAreaMeta(locale), [locale])
 
+  function aiErrorMessage(code: string): string {
+    const key = `ai.intentError.${code}` as const
+    const translated = t(key)
+    return translated !== key ? translated : t('ai.intentFailed')
+  }
+
   async function handleParse() {
     const trimmed = text.trim()
     if (trimmed.length < 3) {
@@ -44,6 +50,7 @@ export function DayIntentAssistant({ onBuild, parseContext }: DayIntentAssistant
       return
     }
     setError(null)
+    setPreview(null)
     setPending(true)
     try {
       const { usedFallback, ...intent } = await fetchDayIntent(
@@ -53,13 +60,14 @@ export function DayIntentAssistant({ onBuild, parseContext }: DayIntentAssistant
       )
       setPreview(intent)
       setUsedLlmFallback(usedFallback)
-      if (usedFallback && isApiEnabled()) {
-        setError(t('ai.intentLlmFallback'))
-      } else {
-        setError(null)
-      }
-    } catch {
-      setError(t('ai.intentFailed'))
+    } catch (err) {
+      setPreview(null)
+      setUsedLlmFallback(false)
+      setError(
+        err instanceof DayIntentError
+          ? aiErrorMessage(err.code)
+          : t('ai.intentFailed'),
+      )
     } finally {
       setPending(false)
     }
@@ -149,11 +157,11 @@ export function DayIntentAssistant({ onBuild, parseContext }: DayIntentAssistant
               {previewAreaLabel}
             </span>
           </div>
-          {!usedLlmFallback ? (
-            <p className="text-[10px] text-violet-500/80 dark:text-violet-300/80">
-              {t('ai.intentSourceLlm')}
-            </p>
-          ) : null}
+          <p className="text-[10px] text-violet-500/80 dark:text-violet-300/80">
+            {!usedLlmFallback
+              ? t('ai.intentSourceLlm')
+              : `${t('ai.intentSourceRules')} · ${t('ai.intentOfflineNote')}`}
+          </p>
         </div>
       ) : null}
       {error ? (

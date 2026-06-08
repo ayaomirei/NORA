@@ -9,9 +9,8 @@ import {
 } from 'react'
 import type { Map as MapLibreMap } from 'maplibre-gl'
 import {
-  NAV_CAMERA,
+  buildNavigationCameraView,
   pickNavigationTarget,
-  resolveNavigationBearing,
 } from '@/lib/navigation-camera'
 import { isGeoAllowed, subscribeGeoPermission } from '@/lib/geo-permission'
 
@@ -162,19 +161,7 @@ export function useUserGeolocation({
           : null
 
       const camera = navigationMode
-        ? {
-            center: [next.lng, next.lat] as [number, number],
-            zoom: NAV_CAMERA.zoom,
-            pitch: NAV_CAMERA.pitch,
-            bearing: navTarget
-              ? resolveNavigationBearing(
-                  next,
-                  navTarget,
-                  map.getBearing(),
-                )
-              : map.getBearing(),
-            padding: NAV_CAMERA.padding,
-          }
+        ? buildNavigationCameraView(next, navTarget, map.getBearing())
         : {
             center: [next.lng, next.lat] as [number, number],
             zoom: Math.max(map.getZoom(), 18),
@@ -338,6 +325,21 @@ export function useUserGeolocation({
     requestPosition(GET_HIGH_ACCURACY)
   }, [clearRetry, clearWatch, requestPosition, stopTracking])
 
+  const enterNavigation = useCallback(() => {
+    const next = snapshotRef.current
+    const map = mapRef.current
+    if (!next || !map) return
+    const navTarget =
+      navigationStops?.length
+        ? pickNavigationTarget(next, navigationStops)
+        : null
+    map.flyTo({
+      ...buildNavigationCameraView(next, navTarget, map.getBearing()),
+      duration: 1400,
+      essential: true,
+    })
+  }, [mapRef, navigationStops])
+
   const recenter = useCallback((): RecenterResult => {
     const current = snapshotRef.current
     if (current) {
@@ -386,6 +388,7 @@ export function useUserGeolocation({
     isLocating: status === 'locating',
     hasLocation: snapshot != null,
     recenter,
+    enterNavigation,
     startTracking,
     stopTracking,
     flushInitialCenter,

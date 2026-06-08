@@ -60,6 +60,18 @@ export const en: Messages = {
     intentLlmFallback: 'AI did not respond — using fallback parse.',
     intentLlmFallbackShort: 'fallback parse',
     intentOfflineNote: 'no server',
+    intentError: {
+      AI_UNAVAILABLE:
+        'AI unavailable — set GEMINI_API_KEY or OPENAI_API_KEY in server/.env',
+      AI_PARSE_FAILED: 'AI could not parse your request — try again in a few seconds',
+      AI_QUOTA_EXCEEDED:
+        'Gemini quota exceeded — renew your key in Google AI Studio or add OPENAI_API_KEY to server/.env',
+      AI_RATE_LIMITED: 'AI is overloaded — wait a few seconds and try again',
+      AI_NETWORK_ERROR: 'Cannot reach the server — make sure npm run dev is running',
+      AI_INVALID_RESPONSE: 'AI returned an invalid response — try rephrasing',
+      AI_REQUEST_FAILED: 'AI request failed',
+      AI_EMPTY_REQUEST: 'Describe the day you want',
+    },
   },
   planner: {
     open: 'Open planner: mood and routes',

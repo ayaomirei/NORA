@@ -60,6 +60,18 @@ export const ky: Messages = {
     intentLlmFallback: 'ИИ жооп берген жок — запасной вариант.',
     intentLlmFallbackShort: 'запасной вариант',
     intentOfflineNote: 'серверсиз',
+    intentError: {
+      AI_UNAVAILABLE:
+        'ИИ иштебейт — server/.env файлына GEMINI_API_KEY кошуңуз',
+      AI_PARSE_FAILED: 'ИИ сурамды түшүнбөй калды — бир аздан кийин кайра аракет кылыңыз',
+      AI_QUOTA_EXCEEDED:
+        'Gemini квотасы бүттү — Google AI Studioда ачкычты жаңылаңыз же OPENAI_API_KEY кошуңуз',
+      AI_RATE_LIMITED: 'ИИ жүктөлгөн — бир аз күтө туруңуз',
+      AI_NETWORK_ERROR: 'Серверге туташпай жатат — npm run dev иштеп жатканын текшериңиз',
+      AI_INVALID_RESPONSE: 'ИИ туура эмес жооп берди — сурамды өзгөртүп көрүңүз',
+      AI_REQUEST_FAILED: 'ИИ суроосу ишке ашкан жок',
+      AI_EMPTY_REQUEST: 'Кандай күн керек экенин жазыңыз',
+    },
   },
   planner: {
     open: 'Планерди ачуу: абал жана маршруттар',

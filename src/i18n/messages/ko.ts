@@ -60,6 +60,18 @@ export const ko: Messages = {
     intentLlmFallback: 'AI가 응답하지 않아 대체 분석을 사용했습니다.',
     intentLlmFallbackShort: '대체 분석',
     intentOfflineNote: '서버 없음',
+    intentError: {
+      AI_UNAVAILABLE:
+        'AI를 사용할 수 없습니다 — server/.env에 GEMINI_API_KEY를 설정하세요',
+      AI_PARSE_FAILED: 'AI가 요청을 처리하지 못했습니다 — 잠시 후 다시 시도하세요',
+      AI_QUOTA_EXCEEDED:
+        'Gemini 할당량 초과 — Google AI Studio에서 키를 갱신하거나 OPENAI_API_KEY를 추가하세요',
+      AI_RATE_LIMITED: 'AI가 과부하 상태입니다 — 잠시 후 다시 시도하세요',
+      AI_NETWORK_ERROR: '서버에 연결할 수 없습니다 — npm run dev가 실행 중인지 확인하세요',
+      AI_INVALID_RESPONSE: 'AI 응답이 올바르지 않습니다 — 다시 입력해 보세요',
+      AI_REQUEST_FAILED: 'AI 요청에 실패했습니다',
+      AI_EMPTY_REQUEST: '원하는 하루를 설명해 주세요',
+    },
   },
   planner: {
     open: '플래너 열기: 기분과 경로',
